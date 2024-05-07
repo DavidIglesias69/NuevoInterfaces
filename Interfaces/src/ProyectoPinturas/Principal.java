@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class Principal {
 
@@ -65,16 +67,18 @@ public class Principal {
 		frmPrimerInterface.getContentPane().setLayout(null);
 
 		UsuarioTextField = new JTextField();
-		UsuarioTextField.setBounds(23, 82, 232, 20);
+		UsuarioTextField.setBounds(336, 92, 232, 20);
 		frmPrimerInterface.getContentPane().add(UsuarioTextField);
 		UsuarioTextField.setColumns(10);
 
 		usuarioPasswordField = new JPasswordField();
-		usuarioPasswordField.setBounds(23, 140, 232, 20);
+		usuarioPasswordField.setBounds(336, 154, 232, 20);
 		frmPrimerInterface.getContentPane().add(usuarioPasswordField);
 
 		JButton boton1 = new JButton("ACEPTAR");
-		boton1.setIcon(new ImageIcon(Principal.class.getResource("/resources/BOTONaCEPTAR.jpg")));
+		boton1.setToolTipText("ftfjfjf");
+		boton1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		boton1.setIcon(new ImageIcon(Principal.class.getResource("/resources/si.png")));
 		boton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String usuario= UsuarioTextField.getText();
@@ -99,22 +103,27 @@ public class Principal {
 
 			}
 		});
-		boton1.setBounds(187, 189, 152, 49);
+		boton1.setBounds(613, 101, 191, 73);
 		frmPrimerInterface.getContentPane().add(boton1);
 
 		JLabel textoUsuario = new JLabel("Usuario:");
+		textoUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textoUsuario.setLabelFor(UsuarioTextField);
 		textoUsuario.setForeground(new Color(255, 0, 0));
-		textoUsuario.setBounds(23, 54, 74, 14);
+		textoUsuario.setBounds(336, 60, 232, 31);
 		frmPrimerInterface.getContentPane().add(textoUsuario);
 
 		JLabel lblNewLabel = new JLabel("Contraseña:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setForeground(new Color(255, 0, 0));
 		lblNewLabel.setLabelFor(usuarioPasswordField);
-		lblNewLabel.setBounds(23, 115, 91, 14);
+		lblNewLabel.setBounds(336, 119, 117, 37);
 		frmPrimerInterface.getContentPane().add(lblNewLabel);
 		
-		JButton registro = new JButton("registro");
+		JButton registro = new JButton("   Registro");
+		registro.setHorizontalAlignment(SwingConstants.LEFT);
+		registro.setIcon(new ImageIcon(Principal.class.getResource("/resources/nota.png")));
+		registro.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		registro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -127,12 +136,12 @@ public class Principal {
 		});
 				
 			
-		registro.setBounds(214, 249, 89, 23);
+		registro.setBounds(623, 185, 181, 51);
 		frmPrimerInterface.getContentPane().add(registro);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Principal.class.getResource("/resources/LOGO.jpg")));
-		lblNewLabel_1.setBounds(10, 0, 842, 564);
+		lblNewLabel_1.setBounds(-257, 11, 756, 601);
 		frmPrimerInterface.getContentPane().add(lblNewLabel_1);
 	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class Registrado extends JFrame {
 
@@ -56,49 +57,51 @@ public class Registrado extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Insertar Nuevo Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 37, 480, 195);
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Insertar Nuevo Usuario", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBounds(10, 37, 649, 313);
 		contentPane.add(panel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre Usuario:");
-		lblNewLabel_1.setBounds(45, 32, 97, 14);
+		lblNewLabel_1.setBounds(137, 94, 97, 14);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Contraseña:");
-		lblNewLabel_1_1.setBounds(45, 57, 93, 14);
+		lblNewLabel_1_1.setBounds(137, 119, 93, 14);
 		panel.add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("Nombre:");
 		lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNewLabel_1_3.setBounds(45, 88, 59, 14);
+		lblNewLabel_1_3.setBounds(137, 150, 59, 14);
 		panel.add(lblNewLabel_1_3);
 		
 		JLabel lblNewLabel_1_4 = new JLabel("Email:");
 		lblNewLabel_1_4.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNewLabel_1_4.setBounds(45, 122, 59, 14);
+		lblNewLabel_1_4.setBounds(137, 184, 59, 14);
 		panel.add(lblNewLabel_1_4);
 		
 		nombreUsuario = new JTextField();
 		nombreUsuario.setColumns(10);
-		nombreUsuario.setBounds(152, 29, 275, 20);
+		nombreUsuario.setBounds(244, 91, 275, 20);
 		panel.add(nombreUsuario);
 		
 		pass = new JTextField();
 		pass.setColumns(10);
-		pass.setBounds(152, 57, 275, 20);
+		pass.setBounds(244, 119, 275, 20);
 		panel.add(pass);
 		
 		nombre = new JTextField();
 		nombre.setColumns(10);
-		nombre.setBounds(152, 85, 275, 20);
+		nombre.setBounds(244, 147, 275, 20);
 		panel.add(nombre);
 		
 		email = new JTextField();
 		email.setColumns(10);
-		email.setBounds(152, 116, 275, 20);
+		email.setBounds(244, 178, 275, 20);
 		panel.add(email);
 		
 		JButton btnNewButton = new JButton("Registrarse");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton.setIcon(new ImageIcon(Registrado.class.getResource("/resources/nota.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String usuario= nombreUsuario.getText();
@@ -115,7 +118,7 @@ public class Registrado extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(311, 161, 116, 23);
+		btnNewButton.setBounds(403, 223, 163, 39);
 		panel.add(btnNewButton);
 	}
 }

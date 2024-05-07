@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 import ProyectoPinturas.Conexion;
 
-public class MetodosDB {
+public class RegistroDB {
 
 	public static Usuario doLogin(String usuario, String pass) throws SQLException  {
 		Conexion cone = new Conexion();
