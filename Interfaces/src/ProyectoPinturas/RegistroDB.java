@@ -31,7 +31,7 @@ public class RegistroDB {
 				String nombre = rs.getString(4);
 				String email = rs.getString(5);
 
-				nuevo= new Usuario (id_usuario,usuar,"",nombre, email);
+				nuevo= new Usuario (usuar,"",nombre, email);
 				return nuevo;
 			}
 

@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class Conexion {
 
-	private final String database = "jdbc:mysql://92.222.10.128/davidiglesias";
+	private final String database = "jdbc:mysql://92.222.10.128/DavidIglesias";
 	private final String usuario = "davidiglesias";
 	private final String password = "Clave123!";
 	

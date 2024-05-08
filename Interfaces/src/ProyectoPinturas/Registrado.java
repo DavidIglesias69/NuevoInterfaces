@@ -17,16 +17,18 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.SystemColor;
 
 public class Registrado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	Usuario usuario_logueado;
-	private JTextField nombreUsuario;
-	private JTextField pass;
+	private JTextField DNI;	
 	private JTextField nombre;
+	private JTextField pass;
 	private JTextField email;
+	private JTextField textField;
 	/**
 	 * Launch the application.
 	 */
@@ -56,17 +58,18 @@ public class Registrado extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(191, 205, 219));
 		panel.setLayout(null);
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Insertar Nuevo Usuario", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Insertar Nuevo Usuario", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 37, 649, 313);
 		contentPane.add(panel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nombre Usuario:");
+		JLabel lblNewLabel_1 = new JLabel("Contraseña:");
 		lblNewLabel_1.setBounds(137, 94, 97, 14);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Contraseña:");
-		lblNewLabel_1_1.setBounds(137, 119, 93, 14);
+		JLabel lblNewLabel_1_1 = new JLabel("Repetir Contraseña:");
+		lblNewLabel_1_1.setBounds(137, 119, 129, 14);
 		panel.add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("Nombre:");
@@ -79,24 +82,24 @@ public class Registrado extends JFrame {
 		lblNewLabel_1_4.setBounds(137, 184, 59, 14);
 		panel.add(lblNewLabel_1_4);
 		
-		nombreUsuario = new JTextField();
-		nombreUsuario.setColumns(10);
-		nombreUsuario.setBounds(244, 91, 275, 20);
-		panel.add(nombreUsuario);
+		DNI = new JTextField();
+		DNI.setColumns(10);
+		DNI.setBounds(291, 94, 275, 20);
+		panel.add(DNI);
 		
 		pass = new JTextField();
 		pass.setColumns(10);
-		pass.setBounds(244, 119, 275, 20);
+		pass.setBounds(291, 122, 275, 20);
 		panel.add(pass);
 		
 		nombre = new JTextField();
 		nombre.setColumns(10);
-		nombre.setBounds(244, 147, 275, 20);
+		nombre.setBounds(291, 150, 275, 20);
 		panel.add(nombre);
 		
 		email = new JTextField();
 		email.setColumns(10);
-		email.setBounds(244, 178, 275, 20);
+		email.setBounds(291, 181, 275, 20);
 		panel.add(email);
 		
 		JButton btnNewButton = new JButton("Registrarse");
@@ -104,12 +107,12 @@ public class Registrado extends JFrame {
 		btnNewButton.setIcon(new ImageIcon(Registrado.class.getResource("/resources/nota.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String usuario= nombreUsuario.getText();
+				String DNI1= DNI.getText();
 				String pass1= pass.getText();
 				String nombre1= nombre.getText();
 				String email1= email.getText();
 				try {
-					MetodosDB.añadirUsuario(usuario, pass1, nombre1, email1);
+					RegistroDB.añadirUsuario(DNI1, pass1, nombre1, email1);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -120,5 +123,19 @@ public class Registrado extends JFrame {
 		});
 		btnNewButton.setBounds(403, 223, 163, 39);
 		panel.add(btnNewButton);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("DNI Usuario:");
+		lblNewLabel_1_2.setBounds(137, 65, 97, 14);
+		panel.add(lblNewLabel_1_2);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(291, 65, 275, 20);
+		panel.add(textField);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(Registrado.class.getResource("/resources/mancha arcoirirs.jpg")));
+		lblNewLabel.setBounds(0, 0, 669, 361);
+		contentPane.add(lblNewLabel);
 	}
 }

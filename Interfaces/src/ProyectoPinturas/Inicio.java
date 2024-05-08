@@ -41,7 +41,7 @@ public class Inicio extends JFrame {
 		contentPane.setLayout(null);
 		this.usuario_logueado=usuario_logueado;
 		
-		JComboBox desplegable = new JComboBox();
+		/*JComboBox desplegable = new JComboBox();
 		String [] nombre = RegistroDB.getEditoriales();
 		desplegable.setModel(new DefaultComboBoxModel(nombre));
 	
@@ -70,7 +70,7 @@ public class Inicio extends JFrame {
 			}
 		});
 		btnNewButton.setBounds(184, 48, 89, 23);
-		contentPane.add(btnNewButton);
+		contentPane.add(btnNewButton);*/
 		
 		
 	}

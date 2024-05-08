@@ -62,7 +62,7 @@ public class Principal {
 	private void initialize() {
 		frmPrimerInterface = new JFrame();
 		frmPrimerInterface.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/resources/descargar.jpg")));
-		frmPrimerInterface.setTitle("primer interface");
+		frmPrimerInterface.setTitle("Pinturas ArcoIrirs");
 		frmPrimerInterface.getContentPane().setForeground(new Color(0, 128, 64));
 		frmPrimerInterface.setBounds(100, 100, 868, 614);
 		frmPrimerInterface.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
