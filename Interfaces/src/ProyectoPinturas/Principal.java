@@ -2,6 +2,7 @@ package ProyectoPinturas;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -24,6 +25,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import PinturasDB.*;
 
 public class Principal {
 
@@ -84,7 +86,7 @@ public class Principal {
 				String usuario= UsuarioTextField.getText();
 				String password =usuarioPasswordField.getText();
 				try {
-					Usuario logeado = MetodosDB.doLogin(usuario,password);
+					Usuario logeado = RegistroDB.doLogin(usuario,password);
 					System.out.println(logeado);
 
 					if(logeado != null) {
@@ -141,7 +143,7 @@ public class Principal {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Principal.class.getResource("/resources/LOGO.jpg")));
-		lblNewLabel_1.setBounds(-257, 11, 756, 601);
+		lblNewLabel_1.setBounds(10, 11, 832, 553);
 		frmPrimerInterface.getContentPane().add(lblNewLabel_1);
 	}
 }

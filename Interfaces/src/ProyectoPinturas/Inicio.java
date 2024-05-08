@@ -1,6 +1,7 @@
 package ProyectoPinturas;
 
 import java.awt.EventQueue;
+
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
+import PinturasDB.RegistroDB;
 
 public class Inicio extends JFrame {
 
@@ -40,7 +42,7 @@ public class Inicio extends JFrame {
 		this.usuario_logueado=usuario_logueado;
 		
 		JComboBox desplegable = new JComboBox();
-		String [] nombre = MetodosDB.getEditoriales();
+		String [] nombre = RegistroDB.getEditoriales();
 		desplegable.setModel(new DefaultComboBoxModel(nombre));
 	
 		// hacer llamada a base de datos para descargar nombre de editoriales
@@ -58,7 +60,7 @@ public class Inicio extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String str= desplegable.getSelectedItem().toString();
 				try {
-					Editorial ed = MetodosDB.getEditorial(str);
+					Editorial ed = RegistroDB.getEditoriales(str);
 					lblNewLabel.setText(ed.toString());
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

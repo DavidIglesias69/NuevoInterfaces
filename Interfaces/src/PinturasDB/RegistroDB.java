@@ -1,4 +1,4 @@
-package interfaceGraficas;
+package PinturasDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import ProyectoPinturas.Conexion;
+import ProyectoPinturas.Usuario;
 
-public class MetodosDB {
+public class RegistroDB {
 
 	public static Usuario doLogin(String usuario, String pass) throws SQLException  {
 		Conexion cone = new Conexion();

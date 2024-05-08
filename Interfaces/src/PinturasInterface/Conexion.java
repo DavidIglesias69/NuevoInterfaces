@@ -1,4 +1,4 @@
-package practica34;
+package PinturasInterface;
 
 import java.sql.*;
 
