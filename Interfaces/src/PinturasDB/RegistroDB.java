@@ -41,26 +41,36 @@ public class RegistroDB {
 		return null;
 	}
 
-	public static void añadirUsuario(String DNI, String nombre, String pass,String pass1, String email) throws SQLException {
-		Conexion cone = new Conexion();
-		Connection link = cone.abrirConsulta() ;
-		if (pass==pass1) {		
+	public static void añadirUsuario(String DNI, String nombre, String pass,String pass1, String email) {
+	    Conexion cone = new Conexion();
+	    Connection link = null;
+	    try {
+	        link = cone.abrirConsulta();
+	        if (pass.equals(pass1)) {
+	            String query= "INSERT INTO Usuario (DNI,Nombre,Contraseña, Email) VALUES (?,?,?,?)";
+	            PreparedStatement llamada= link.prepareStatement(query);
+	            llamada.setString(1,DNI);
+	            llamada.setString(2,nombre);
+	            llamada.setString(3,pass);
+	            llamada.setString(4,email);
 
-		String query= "INSERT INTO Usuario (DNI,nombre,password, email) VALUES (?,?,?,?)";
-		PreparedStatement llamada= link.prepareStatement(query);
-		llamada.setString(1,DNI);
-		llamada.setString(2,nombre);
-		llamada.setString(3,pass);
-		llamada.setString(4,email);
-		
-
-		llamada.executeUpdate();
-
-		}
-		
-		else {
-			System.out.println("Debe poner la misma contraseña");
-		}
+	            llamada.executeUpdate();
+	        } else {
+	            System.out.println("Debe poner la misma contraseña");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // Manejar la excepción apropiadamente
+	    } finally {
+	        if (link != null) {
+	            try {
+	                link.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	                // Manejar la excepción apropiadamente
+	            }
+	        }
+	    }
 	}
 	/*public static String[] getEditoriales () throws SQLException{
 

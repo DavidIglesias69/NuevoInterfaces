@@ -86,7 +86,7 @@ public class Principal {
 				String usuario= UsuarioTextField.getText();
 				String password =usuarioPasswordField.getText();
 				try {
-					Usuario logeado = RegistroDB.doLogin(usuario,password);
+					Usuario logeado = RegistroDB.doLogin(usuario, password);
 					System.out.println(logeado);
 
 					if(logeado != null) {
