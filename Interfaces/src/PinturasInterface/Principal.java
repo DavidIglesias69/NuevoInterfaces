@@ -1,4 +1,4 @@
-package ProyectoPinturas;
+package PinturasInterface;
 
 import java.awt.EventQueue;
 

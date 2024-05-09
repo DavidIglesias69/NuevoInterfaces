@@ -1,4 +1,4 @@
-package ProyectoPinturas;
+package PinturasInterface;
 
 import java.awt.EventQueue;
 
@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import PinturasDB.RegistroDB;
+import ProyectoPinturas.Usuario;
 
 import javax.swing.JLabel;
 import java.awt.Font;

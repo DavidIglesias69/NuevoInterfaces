@@ -1,4 +1,4 @@
-package ProyectoPinturas;
+ package ProyectoPinturas;
 
 public class Producto {
 
