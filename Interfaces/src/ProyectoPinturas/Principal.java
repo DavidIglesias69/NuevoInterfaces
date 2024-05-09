@@ -30,7 +30,7 @@ import PinturasDB.*;
 public class Principal {
 
 	private JFrame frmPrimerInterface;
-	private JTextField UsuarioTextField;
+	private JTextField usuarioTextField;
 	private JPasswordField usuarioPasswordField;
 
 	/**
@@ -68,10 +68,10 @@ public class Principal {
 		frmPrimerInterface.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmPrimerInterface.getContentPane().setLayout(null);
 
-		UsuarioTextField = new JTextField();
-		UsuarioTextField.setBounds(336, 92, 232, 20);
-		frmPrimerInterface.getContentPane().add(UsuarioTextField);
-		UsuarioTextField.setColumns(10);
+		usuarioTextField = new JTextField();
+		usuarioTextField.setBounds(336, 92, 232, 20);
+		frmPrimerInterface.getContentPane().add(usuarioTextField);
+		usuarioTextField.setColumns(10);
 
 		usuarioPasswordField = new JPasswordField();
 		usuarioPasswordField.setBounds(336, 154, 232, 20);
@@ -83,7 +83,7 @@ public class Principal {
 		boton1.setIcon(new ImageIcon(Principal.class.getResource("/resources/si.png")));
 		boton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String usuario= UsuarioTextField.getText();
+				String usuario= usuarioTextField.getText();
 				String password =usuarioPasswordField.getText();
 				try {
 					Usuario logeado = RegistroDB.doLogin(usuario, password);
@@ -110,7 +110,7 @@ public class Principal {
 
 		JLabel textoUsuario = new JLabel("Usuario:");
 		textoUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textoUsuario.setLabelFor(UsuarioTextField);
+		textoUsuario.setLabelFor(usuarioTextField);
 		textoUsuario.setForeground(new Color(255, 0, 0));
 		textoUsuario.setBounds(336, 60, 232, 31);
 		frmPrimerInterface.getContentPane().add(textoUsuario);

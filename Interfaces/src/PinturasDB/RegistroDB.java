@@ -9,10 +9,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JFrame;
+
 import ProyectoPinturas.Conexion;
 import ProyectoPinturas.Usuario;
 
-public class RegistroDB {
+public class RegistroDB extends JFrame{
+	public RegistroDB() {
+	}
 
 	public static Usuario doLogin(String usuario, String pass) throws SQLException  {
 		Conexion cone = new Conexion();
@@ -31,7 +35,7 @@ public class RegistroDB {
 				//String password = rs.getString(3); me salto la contraseña no la almaceno no es recomandable				
 				String email = rs.getString(4);
 
-				nuevo= new Usuario (DNI,"",nombre, email);
+				nuevo= new Usuario (DNI,nombre,"", email);
 				return nuevo;
 			}
 
