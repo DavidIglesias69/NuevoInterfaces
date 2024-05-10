@@ -50,17 +50,7 @@ public class Inicio extends JFrame {
 	private JCheckBox BoxPlasticos;
 	private JCheckBox BoxDecapante;
 	private JCheckBox BoxEspatula;
-	private JSpinner spinner;
-	private JSpinner spinner_1;
-	private JSpinner spinner_2;
-	private JSpinner spinner_3;
-	private JSpinner spinner_4;
-	private JSpinner spinner_5;
-	private JSpinner spinner_1_1;
-	private JSpinner spinner_2_1;
-	private JSpinner spinner_3_1;
-	private JSpinner spinner_4_1;
-	private double totalPrecio = 0.0;
+	
 
 	/**
 	 * Launch the application.
@@ -400,13 +390,7 @@ public class Inicio extends JFrame {
 		lblNewLabel_2_1_1.setBounds(629, 360, 80, 72);
 		contentPane.add(lblNewLabel_2_1_1);
 
-		JLabel PrecioPintura1;
-		try {
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
 		JButton btnNewButton = new JButton("COMPRAR");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
