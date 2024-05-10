@@ -15,7 +15,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
+
+import PinturasDB.ProductoDB;
 import PinturasDB.RegistroDB;
+import ProyectoPinturas.Producto;
 import ProyectoPinturas.Usuario;
 
 import java.awt.Color;
@@ -26,12 +29,37 @@ import javax.swing.UIManager;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JEditorPane;
+import javax.swing.Box;
+import java.awt.Component;
+import java.awt.Dimension;
 
 public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	Usuario usuario_logueado;
+    private JCheckBox BoxPintura;
+    private JCheckBox BoxRodillo;
+    private JCheckBox BoxPapel;
+    private JCheckBox BoxBrocha;
+    private JCheckBox BoxEscalera;
+    private JCheckBox BoxBarniz;
+    private JCheckBox BoxDisolvente;
+    private JCheckBox BoxPlasticos;
+    private JCheckBox BoxDecapante;
+    private JCheckBox BoxEspatula;
+    private JSpinner spinner;
+    private JSpinner spinner_1;
+    private JSpinner spinner_2;
+    private JSpinner spinner_3;
+    private JSpinner spinner_4;
+    private JSpinner spinner_5;
+    private JSpinner spinner_1_1;
+    private JSpinner spinner_2_1;
+    private JSpinner spinner_3_1;
+    private JSpinner spinner_4_1;
+    private JEditorPane PanelTotal;
+    private double totalPrecio = 0.0;
 
 	/**
 	 * Launch the application.
@@ -42,67 +70,139 @@ public class Inicio extends JFrame {
 	 * @throws SQLException 
 	 */
 	public Inicio (Usuario usuario_logueado) throws SQLException {
-		setTitle("Panel de Productos ");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 882, 573);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	    setTitle("Panel de Productos ");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 882, 573);
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(128, 128, 255));
+        contentPane.setForeground(new Color(255, 128, 255));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        this.usuario_logueado = usuario_logueado;
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		this.usuario_logueado=usuario_logueado;
-		
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBackground(Color.YELLOW);
-		lblNewLabel.setFont(UIManager.getFont("Button.font"));
-		lblNewLabel.setForeground(new Color(51, 255, 255));
-		lblNewLabel.setBounds(93, 409, 298, 72);
-		contentPane.add(lblNewLabel);
-		
-		JCheckBox BoxPintura = new JCheckBox("Pintura");
-		BoxPintura.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxPintura.setBounds(16, 54, 97, 23);
-		contentPane.add(BoxPintura);
-		
-		JCheckBox BoxRodillo = new JCheckBox("Rodillo");
-		BoxRodillo.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxRodillo.setBounds(16, 126, 97, 23);
-		contentPane.add(BoxRodillo);
-		
-		JCheckBox BoxPapel = new JCheckBox("Papel");
-		BoxPapel.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxPapel.setBounds(16, 230, 97, 23);
-		contentPane.add(BoxPapel);
-		
-		JCheckBox BoxBrocha = new JCheckBox("Brocha");
-		BoxBrocha.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxBrocha.setBounds(16, 307, 97, 23);
-		contentPane.add(BoxBrocha);
-		
-		JCheckBox BoxEscalera = new JCheckBox("Escalera");
-		BoxEscalera.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxEscalera.setBounds(16, 394, 113, 23);
-		contentPane.add(BoxEscalera);
-		
+        JLabel PrecioPintura = new JLabel();
+        PrecioPintura.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        PrecioPintura.setHorizontalAlignment(SwingConstants.CENTER);
+        PrecioPintura.setBounds(119, 57, 57, 14);
+        contentPane.add(PrecioPintura);
+
+        JLabel PrecioRodillo = new JLabel();
+        PrecioRodillo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        PrecioRodillo.setHorizontalAlignment(SwingConstants.CENTER);
+        PrecioRodillo.setBounds(119, 129, 57, 14);
+        contentPane.add(PrecioRodillo);
+
+        JLabel PrecioPapel = new JLabel();
+        PrecioPapel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        PrecioPapel.setHorizontalAlignment(SwingConstants.CENTER);
+        PrecioPapel.setBounds(119, 233, 57, 14);
+        contentPane.add(PrecioPapel);
+
+        JLabel PrecioBrocha = new JLabel();
+        PrecioBrocha.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        PrecioBrocha.setHorizontalAlignment(SwingConstants.CENTER);
+        PrecioBrocha.setBounds(119, 310, 57, 14);
+        contentPane.add(PrecioBrocha);
+
+        JLabel Precioescalera = new JLabel();
+        Precioescalera.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        Precioescalera.setHorizontalAlignment(SwingConstants.CENTER);
+        Precioescalera.setBounds(134, 397, 57, 14);
+        contentPane.add(Precioescalera);
+       
+        JLabel PrecioBarniz = new JLabel();    
+        PrecioBarniz.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        PrecioBarniz.setHorizontalAlignment(SwingConstants.CENTER);
+        PrecioBarniz.setBounds(519, 57, 57, 14);
+        contentPane.add(PrecioBarniz);
+        
+        JLabel PrecioDisolvente = new JLabel();
+        PrecioDisolvente.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        PrecioDisolvente.setHorizontalAlignment(SwingConstants.CENTER);
+        PrecioDisolvente.setBounds(519, 129, 57, 14);
+        contentPane.add(PrecioDisolvente);
+        
+        JLabel PrecioPlasticos = new JLabel();
+        PrecioPlasticos.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        PrecioPlasticos.setHorizontalAlignment(SwingConstants.CENTER);
+        PrecioPlasticos.setBounds(519, 233, 57, 14);
+        contentPane.add(PrecioPlasticos);
+        
+        JLabel PrecioDecapante = new JLabel();    
+        PrecioDecapante.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        PrecioDecapante.setHorizontalAlignment(SwingConstants.CENTER);
+        PrecioDecapante.setBounds(519, 310, 57, 14);
+        contentPane.add(PrecioDecapante);
+        
+        JLabel PrecioEspatula = new JLabel();    
+        PrecioEspatula.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        PrecioEspatula.setHorizontalAlignment(SwingConstants.CENTER);
+        PrecioEspatula.setBounds(519, 397, 57, 14);
+        contentPane.add(PrecioEspatula);
+
+        try {
+            ProductoDB productoDB = new ProductoDB();
+            // Obtener y mostrar el precio de la pintura
+            double precioPintura = ProductoDB.obtenerPrecio("pintura");
+            PrecioPintura.setText(String.valueOf(precioPintura) + "€");
+
+            // Obtener y mostrar el precio del rodillo
+            double precioRodillo = ProductoDB.obtenerPrecio("rodillo");
+            PrecioRodillo.setText(String.valueOf(precioRodillo) + "€");
+
+            // Obtener y mostrar el precio del papel
+            double precioPapel = ProductoDB.obtenerPrecio("papel");
+            PrecioPapel.setText(String.valueOf(precioPapel) + "€");
+
+            // Obtener y mostrar el precio de la brocha
+            double precioBrocha = ProductoDB.obtenerPrecio("brocha");
+            PrecioBrocha.setText(String.valueOf(precioBrocha) + "€");
+
+            // Obtener y mostrar el precio de la escalera
+            double precioEscalera = ProductoDB.obtenerPrecio("escalera");
+            Precioescalera.setText(String.valueOf(precioEscalera) + "€");
+            
+            double precioBarniz = ProductoDB.obtenerPrecio("barniz");
+            PrecioBarniz.setText(String.valueOf(precioBarniz) + "€");
+
+            // Obtener y mostrar el precio del disolvente
+            double precioDisolvente = ProductoDB.obtenerPrecio("disolvente");
+            PrecioDisolvente.setText(String.valueOf(precioDisolvente) + "€");
+
+            // Obtener y mostrar el precio de los plasticos
+            double precioPlasticos = ProductoDB.obtenerPrecio("plasticos");
+            PrecioPlasticos.setText(String.valueOf(precioPlasticos) + "€");
+
+            // Obtener y mostrar el precio del decapante
+            double precioDecapante = ProductoDB.obtenerPrecio("decapante");
+            PrecioDecapante.setText(String.valueOf(precioDecapante) + "€");
+
+            // Obtener y mostrar el precio de la espatula
+            double precioEspatula = ProductoDB.obtenerPrecio("espatula");
+            PrecioEspatula.setText(String.valueOf(precioEspatula) + "€");
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 		JSpinner spinner = new JSpinner();
-		spinner.setBounds(187, 54, 30, 20);
+		spinner.setBounds(174, 54, 43, 20);
 		contentPane.add(spinner);
 		
 		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setBounds(187, 126, 30, 20);
+		spinner_1.setBounds(174, 126, 43, 20);
 		contentPane.add(spinner_1);
 		
 		JSpinner spinner_2 = new JSpinner();
-		spinner_2.setBounds(187, 230, 30, 20);
+		spinner_2.setBounds(174, 230, 43, 20);
 		contentPane.add(spinner_2);
 		
 		JSpinner spinner_3 = new JSpinner();
-		spinner_3.setBounds(187, 307, 30, 20);
+		spinner_3.setBounds(174, 307, 43, 20);
 		contentPane.add(spinner_3);
 		
 		JSpinner spinner_4 = new JSpinner();
-		spinner_4.setBounds(187, 394, 30, 20);
+		spinner_4.setBounds(189, 394, 43, 20);
 		contentPane.add(spinner_4);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
@@ -127,7 +227,7 @@ public class Inicio extends JFrame {
 		
 		JLabel lblNewLabel_2_1 = new JLabel("");
 		lblNewLabel_2_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/escalera-de-mano.png")));
-		lblNewLabel_2_1.setBounds(227, 366, 80, 66);
+		lblNewLabel_2_1.setBounds(242, 366, 80, 66);
 		contentPane.add(lblNewLabel_2_1);
 		
 		JCheckBox BoxBarniz = new JCheckBox("Barniz");
@@ -136,7 +236,7 @@ public class Inicio extends JFrame {
 		contentPane.add(BoxBarniz);
 		
 		JSpinner spinner_5 = new JSpinner();
-		spinner_5.setBounds(589, 54, 30, 20);
+		spinner_5.setBounds(574, 54, 45, 20);
 		contentPane.add(spinner_5);
 		
 		JLabel lblNewLabel_2_2 = new JLabel("");
@@ -150,7 +250,7 @@ public class Inicio extends JFrame {
 		contentPane.add(BoxDisolvente);
 		
 		JSpinner spinner_1_1 = new JSpinner();
-		spinner_1_1.setBounds(589, 126, 30, 20);
+		spinner_1_1.setBounds(574, 126, 45, 20);
 		contentPane.add(spinner_1_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("");
@@ -164,7 +264,7 @@ public class Inicio extends JFrame {
 		contentPane.add(BoxPlasticos);
 		
 		JSpinner spinner_2_1 = new JSpinner();
-		spinner_2_1.setBounds(589, 230, 30, 20);
+		spinner_2_1.setBounds(574, 230, 45, 20);
 		contentPane.add(spinner_2_1);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
@@ -178,7 +278,7 @@ public class Inicio extends JFrame {
 		contentPane.add(BoxDecapante);
 		
 		JSpinner spinner_3_1 = new JSpinner();
-		spinner_3_1.setBounds(589, 307, 30, 20);
+		spinner_3_1.setBounds(574, 307, 45, 20);
 		contentPane.add(spinner_3_1);
 		
 		JLabel lblNewLabel_4_1 = new JLabel("");
@@ -188,11 +288,11 @@ public class Inicio extends JFrame {
 		
 		JCheckBox BoxEspatula = new JCheckBox("Espatula");
 		BoxEspatula.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxEspatula.setBounds(388, 394, 125, 23);
+		BoxEspatula.setBounds(388, 394, 110, 23);
 		contentPane.add(BoxEspatula);
 		
 		JSpinner spinner_4_1 = new JSpinner();
-		spinner_4_1.setBounds(589, 394, 30, 20);
+		spinner_4_1.setBounds(574, 394, 45, 20);
 		contentPane.add(spinner_4_1);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("");
@@ -200,55 +300,12 @@ public class Inicio extends JFrame {
 		lblNewLabel_2_1_1.setBounds(629, 360, 80, 72);
 		contentPane.add(lblNewLabel_2_1_1);
 		
-		JLabel PrecioPintura = new JLabel("15€ / L.");
-		PrecioPintura.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura.setBounds(119, 60, 57, 14);
-		contentPane.add(PrecioPintura);
-		
-		JLabel PrecioPintura_1 = new JLabel("33€ l.");
-		PrecioPintura_1.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura_1.setBounds(522, 60, 57, 14);
-		contentPane.add(PrecioPintura_1);
-		
-		JLabel PrecioPintura_2 = new JLabel("33€ l.");
-		PrecioPintura_2.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura_2.setBounds(522, 132, 57, 14);
-		contentPane.add(PrecioPintura_2);
-		
-		JLabel PrecioPintura_3 = new JLabel("33€ l.");
-		PrecioPintura_3.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura_3.setBounds(522, 236, 57, 14);
-		contentPane.add(PrecioPintura_3);
-		
-		JLabel PrecioPintura_4 = new JLabel("33€ l.");
-		PrecioPintura_4.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura_4.setBounds(522, 316, 57, 14);
-		contentPane.add(PrecioPintura_4);
-		
-		JLabel PrecioPintura_5 = new JLabel("33€ l.");
-		PrecioPintura_5.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura_5.setBounds(522, 400, 57, 14);
-		contentPane.add(PrecioPintura_5);
-		
-		JLabel PrecioPintura_6 = new JLabel("33€ l.");
-		PrecioPintura_6.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura_6.setBounds(119, 400, 57, 14);
-		contentPane.add(PrecioPintura_6);
-		
-		JLabel PrecioPintura_7 = new JLabel("33€ l.");
-		PrecioPintura_7.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura_7.setBounds(119, 313, 57, 14);
-		contentPane.add(PrecioPintura_7);
-		
-		JLabel PrecioPintura_8 = new JLabel("1,99 € / m.");
-		PrecioPintura_8.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura_8.setBounds(119, 236, 57, 14);
-		contentPane.add(PrecioPintura_8);
-		
-		JLabel PrecioPintura_9 = new JLabel("2,99€");
-		PrecioPintura_9.setHorizontalAlignment(SwingConstants.CENTER);
-		PrecioPintura_9.setBounds(119, 132, 57, 14);
-		contentPane.add(PrecioPintura_9);
+		JLabel PrecioPintura1;
+		try {
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		JButton btnNewButton = new JButton("COMPRAR");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -258,11 +315,46 @@ public class Inicio extends JFrame {
 		btnNewButton.setBounds(742, 469, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBackground(Color.ORANGE);
-		editorPane.setForeground(new Color(0, 0, 255));
-		editorPane.setBounds(406, 472, 272, 20);
-		contentPane.add(editorPane);
+		JEditorPane PanelTotal = new JEditorPane();
+		PanelTotal.setBackground(Color.ORANGE);
+		PanelTotal.setForeground(new Color(0, 0, 255));
+		PanelTotal.setBounds(406, 472, 272, 20);
+		contentPane.add(PanelTotal);
+		
+		Box horizontalBox = Box.createHorizontalBox();
+		horizontalBox.setBounds(128, 491, 125, -41);
+		contentPane.add(horizontalBox);
+		
+		JCheckBox BoxPintura = new JCheckBox("Pintura");
+		BoxPintura.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxPintura.setBounds(25, 51, 97, 23);
+		contentPane.add(BoxPintura);
+		
+		JCheckBox BoxRodillo = new JCheckBox("Rodillo");
+		BoxRodillo.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxRodillo.setBounds(25, 123, 101, 23);
+		contentPane.add(BoxRodillo);
+		
+		JCheckBox BoxPapel = new JCheckBox("Papel");
+		BoxPapel.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxPapel.setBounds(25, 227, 88, 23);
+		contentPane.add(BoxPapel);
+		
+		JCheckBox BoxBrocha = new JCheckBox("Brocha");
+		BoxBrocha.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxBrocha.setBounds(25, 304, 89, 23);
+		contentPane.add(BoxBrocha);
+		
+		JCheckBox BoxEscalera = new JCheckBox("Escalera");
+		BoxEscalera.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxEscalera.setBounds(21, 391, 110, 23);
+		contentPane.add(BoxEscalera);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		verticalStrut.setBounds(347, 39, 30, 393);
+		contentPane.add(verticalStrut);
+		
+		
 		
 		
 	}

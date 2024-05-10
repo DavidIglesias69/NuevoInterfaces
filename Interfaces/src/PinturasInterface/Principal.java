@@ -26,6 +26,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import PinturasDB.*;
+import ProyectoPinturas.Usuario;
 
 public class Principal {
 
@@ -83,7 +84,19 @@ public class Principal {
 		boton1.setIcon(new ImageIcon(Principal.class.getResource("/resources/si.png")));
 		boton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String usuario= usuarioTextField.getText();
+				
+				Usuario logeado = new Usuario("1212", "Hector", "1234", "");
+				try {
+					Inicio i = new Inicio(logeado);
+					i.show();
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				frmPrimerInterface.dispose();
+				
+				/*String usuario= usuarioTextField.getText();
 				String password =usuarioPasswordField.getText();
 				try {
 					Usuario logeado = RegistroDB.doLogin(usuario, password);
@@ -101,7 +114,7 @@ public class Principal {
 
 				} catch (SQLException e1) {
 					e1.printStackTrace();
-				}
+				}*/
 
 			}
 		});
