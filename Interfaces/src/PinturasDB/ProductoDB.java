@@ -34,6 +34,23 @@ public class ProductoDB {
 
 	        return precio;
 	    }
+	 
+	 public static double calcularPrecioTotal(int cantidadPintura, int cantidadRodillo, int cantidadPapel,
+             int cantidadBrocha, int cantidadEscalera, int cantidadBarniz,
+             int cantidadDisolvente, int cantidadPlasticos, int cantidadDecapante,
+             int cantidadEspatula, double precioPintura, double precioRodillo,
+             double precioPapel, double precioBrocha, double precioEscalera,
+             double precioBarniz, double precioDisolvente, double precioPlasticos,
+             double precioDecapante, double precioEspatula) {
+// Calcular el precio total sumando los precios individuales de los productos seleccionados
+double precioTotal = (precioPintura * cantidadPintura) + (precioRodillo * cantidadRodillo) +
+(precioPapel * cantidadPapel) + (precioBrocha * cantidadBrocha) +
+(precioEscalera * cantidadEscalera) + (precioBarniz * cantidadBarniz) +
+(precioDisolvente * cantidadDisolvente) + (precioPlasticos * cantidadPlasticos) +
+(precioDecapante * cantidadDecapante) + (precioEspatula * cantidadEspatula);
+
+return precioTotal;
+}
 
 
 }

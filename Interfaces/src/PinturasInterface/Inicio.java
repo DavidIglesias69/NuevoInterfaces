@@ -1,72 +1,37 @@
 package PinturasInterface;
 
-import java.awt.EventQueue;
-
+import java.awt.*;
+import java.awt.event.*;
 import java.sql.SQLException;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextPane;
-import javax.swing.JTextField;
 
 import PinturasDB.ProductoDB;
-import PinturasDB.RegistroDB;
-import ProyectoPinturas.Producto;
 import ProyectoPinturas.Usuario;
 
-import java.awt.Color;
-import javax.swing.JCheckBox;
-import javax.swing.JSpinner;
-import javax.swing.ImageIcon;
-import javax.swing.UIManager;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JEditorPane;
-import javax.swing.Box;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
 
 public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	Usuario usuario_logueado;
-	private JCheckBox BoxPintura;
-	private JCheckBox BoxRodillo;
-	private JCheckBox BoxPapel;
-	private JCheckBox BoxBrocha;
-	private JCheckBox BoxEscalera;
-	private JCheckBox BoxBarniz;
-	private JCheckBox BoxDisolvente;
-	private JCheckBox BoxPlasticos;
-	private JCheckBox BoxDecapante;
-	private JCheckBox BoxEspatula;
-	
+	 private JTextField PanelTotal;
+
 
 	/**
 	 * Launch the application.
 	 */
 
-	 /**
-	  * Create the frame.
-	  * @throws SQLException 
-	  */
+	/**
+	 * Create the frame.
+	 * @throws SQLException 
+	 */
 	public Inicio (Usuario usuario_logueado) throws SQLException {
 		setTitle("Panel de Productos ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 882, 573);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(128, 128, 255));
-		contentPane.setForeground(new Color(255, 128, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -172,6 +137,7 @@ public class Inicio extends JFrame {
 		// Obtener y mostrar el precio de la espatula
 		double precioEspatula = ProductoDB.obtenerPrecio("espatula");
 		PrecioEspatula.setText(String.valueOf(precioEspatula) + "€");
+			
 
 		JEditorPane PanelTotal = new JEditorPane();
 
@@ -241,7 +207,8 @@ public class Inicio extends JFrame {
 				PanelTotal.setVisible(false);
 				PanelTotal.setVisible(true);
 			}
-		});
+		});		
+		
 		spinnerEscalera.setBounds(189, 394, 43, 20);
 		contentPane.add(spinnerEscalera);
 
@@ -390,10 +357,45 @@ public class Inicio extends JFrame {
 		lblNewLabel_2_1_1.setBounds(629, 360, 80, 72);
 		contentPane.add(lblNewLabel_2_1_1);
 
-		
+
 		JButton btnNewButton = new JButton("COMPRAR");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				 // Recopilar información sobre los productos seleccionados y las cantidades
+		        int cantidadPintura = (int) spinnerPintura.getValue();
+		        int cantidadRodillo = (int) spinnerRodillo.getValue();
+		        int cantidadPapel = (int) spinnerPapel.getValue();
+		        int cantidadBrocha = (int) spinnerBrocha.getValue();
+		        int cantidadEscalera = (int) spinnerEscalera.getValue();
+		        int cantidadBarniz = (int) spinnerBarniz.getValue();
+		        int cantidadDisolvente = (int) spinnerDisolvente.getValue();
+		        int cantidadPlasticos = (int) spinnerPlasticos.getValue();
+		        int cantidadDecapante = (int) spinnerDecapante.getValue();
+		        int cantidadEspatula = (int) spinnerEspatula.getValue();
+
+		        // Obtener precios de los productos seleccionados
+		        double precioTotalPintura = precioPintura * cantidadPintura;
+		        double precioTotalRodillo = precioRodillo * cantidadRodillo;
+		        double precioTotalPapel = precioPapel * cantidadPapel;
+		        double precioTotalBrocha = precioBrocha * cantidadBrocha;
+		        double precioTotalEscalera = precioEscalera * cantidadEscalera;
+		        double precioTotalBarniz = precioBarniz * cantidadBarniz;
+		        double precioTotalDisolvente = precioDisolvente * cantidadDisolvente;
+		        double precioTotalPlasticos = precioPlasticos * cantidadPlasticos;
+		        double precioTotalDecapante = precioDecapante * cantidadDecapante;
+		        double precioTotalEspatula = precioEspatula * cantidadEspatula;
+
+		        // Calcular el precio total sumando los precios individuales de los productos seleccionados
+		        double precioTotal = precioTotalPintura + precioTotalRodillo + precioTotalPapel +
+		                             precioTotalBrocha + precioTotalEscalera + precioTotalBarniz +
+		                             precioTotalDisolvente + precioTotalPlasticos + precioTotalDecapante +
+		                             precioTotalEspatula;
+		        
+		        
+
+		        // Mostrar un mensaje de confirmación con el precio total
+		        JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal + "€", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnNewButton.setBounds(742, 469, 89, 23);
@@ -441,13 +443,47 @@ public class Inicio extends JFrame {
 		double totalProductos= precioPintura*i+precioRodillo*i+precioPapel*i+precioBrocha*i+precioEscalera*i+precioBarniz*i+precioDisolvente*i+precioPlasticos*i+precioDecapante*i+precioEspatula*i;
 		String valorTextonumerico = String.valueOf(totalProductos);
 
-		
+
 		PanelTotal.setText(valorTextonumerico);
 		PanelTotal.setEditable(false);
 		PanelTotal.setBackground(Color.ORANGE);
 		PanelTotal.setForeground(new Color(0, 0, 255));
 		PanelTotal.setBounds(406, 472, 272, 20);
 		contentPane.add(PanelTotal);
+		
+		// Recopilar información sobre los productos seleccionados y las cantidades
+				int cantidadPintura = (int) spinnerPintura.getValue();
+				int cantidadRodillo = (int) spinnerRodillo.getValue();
+				int cantidadPapel = (int) spinnerPapel.getValue();
+				int cantidadBrocha = (int) spinnerBrocha.getValue();
+				int cantidadEscalera = (int) spinnerEscalera.getValue();
+				int cantidadBarniz = (int) spinnerBarniz.getValue();
+				int cantidadDisolvente = (int) spinnerDisolvente.getValue();
+				int cantidadPlasticos = (int) spinnerPlasticos.getValue();
+				int cantidadDecapante = (int) spinnerDecapante.getValue();
+				int cantidadEspatula = (int) spinnerEspatula.getValue();
+
+				// Obtener precios de los productos seleccionados
+				double precioTotalPintura = precioPintura * cantidadPintura;
+				double precioTotalRodillo = precioRodillo * cantidadRodillo;
+				double precioTotalPapel = precioPapel * cantidadPapel;
+				double precioTotalBrocha = precioBrocha * cantidadBrocha;
+				double precioTotalEscalera = precioEscalera * cantidadEscalera;
+				double precioTotalBarniz = precioBarniz * cantidadBarniz;
+				double precioTotalDisolvente = precioDisolvente * cantidadDisolvente;
+				double precioTotalPlasticos = precioPlasticos * cantidadPlasticos;
+				double precioTotalDecapante = precioDecapante * cantidadDecapante;
+				double precioTotalEspatula = precioEspatula * cantidadEspatula;
+
+				// Calcular el precio total sumando los precios individuales de los productos seleccionados
+				double precioTotal = precioTotalPintura + precioTotalRodillo + precioTotalPapel +
+				                     precioTotalBrocha + precioTotalEscalera + precioTotalBarniz +
+				                     precioTotalDisolvente + precioTotalPlasticos + precioTotalDecapante +
+				                     precioTotalEspatula;
+				// Convertir el precio total a una cadena de texto
+				String precioTotalTexto = String.valueOf(precioTotal);
+				// Establecer el texto en el JEditorPane
+				PanelTotal.setText(precioTotalTexto);
 
 	}
 }
