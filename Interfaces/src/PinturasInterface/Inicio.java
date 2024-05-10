@@ -454,7 +454,7 @@ public class Inicio extends JFrame {
 
 		//---------------------------------------------------------------------------------//
 		Integer i =Integer.parseInt(spinnerPintura.getValue().toString());
-		double totalProductos= precioPintura*i;
+		double totalProductos= precioPintura*i+precioRodillo*i+precioPapel*i+precioBrocha*i+precioEscalera*i+precioBarniz*i+precioDisolvente*i+precioPlasticos*i+precioDecapante*i+precioEspatula*i;
 		String valorTextonumerico = String.valueOf(totalProductos);
 
 		
