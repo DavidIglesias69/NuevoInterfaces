@@ -52,8 +52,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return  ", usuario=" + DNI + ", password=" + password + ", nombre=" + nombre
-				+ ", email=" + email + "]";
+		return  ", usuario=" + DNI + "esta logueado correctamente :)";
 	}
 
 

@@ -15,7 +15,9 @@ public class Inicio extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	Usuario usuario_logueado;
-	 private JTextField PanelTotal;
+	
+	 // Declara los spinners fuera del constructor para que sean accesibles en todo el código
+	    
 
 
 	/**
@@ -96,6 +98,58 @@ public class Inicio extends JFrame {
 		PrecioEspatula.setHorizontalAlignment(SwingConstants.CENTER);
 		PrecioEspatula.setBounds(519, 397, 57, 14);
 		contentPane.add(PrecioEspatula);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(Inicio.class.getResource("/resources/bote-de-pintura (1).png")));
+		lblNewLabel_2.setBounds(227, 11, 73, 72);
+		contentPane.add(lblNewLabel_2);
+
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rodillo.png")));
+		lblNewLabel_1.setBounds(227, 105, 73, 66);
+		contentPane.add(lblNewLabel_1);
+
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(Inicio.class.getResource("/resources/toalla-de-papel (1).png")));
+		lblNewLabel_3.setBounds(227, 197, 73, 67);
+		contentPane.add(lblNewLabel_3);
+
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon(Inicio.class.getResource("/resources/construccion.png")));
+		lblNewLabel_4.setBounds(227, 275, 73, 66);
+		contentPane.add(lblNewLabel_4);
+
+		JLabel lblNewLabel_2_1 = new JLabel("");
+		lblNewLabel_2_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/escalera-de-mano.png")));
+		lblNewLabel_2_1.setBounds(242, 366, 80, 66);
+		contentPane.add(lblNewLabel_2_1);
+		
+		JLabel lblNewLabel_2_2 = new JLabel("");
+		lblNewLabel_2_2.setIcon(new ImageIcon(Inicio.class.getResource("/resources/barniz.png")));
+		lblNewLabel_2_2.setBounds(629, 24, 80, 64);
+		contentPane.add(lblNewLabel_2_2);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/sin-disolventes.png")));
+		lblNewLabel_1_1.setBounds(614, 99, 80, 72);
+		contentPane.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_3_1 = new JLabel("");
+		lblNewLabel_3_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rollos-de-papel.png")));
+		lblNewLabel_3_1.setBounds(629, 197, 80, 67);
+		contentPane.add(lblNewLabel_3_1);
+		
+		JLabel lblNewLabel_4_1 = new JLabel("");
+		lblNewLabel_4_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/aerosol.png")));
+		lblNewLabel_4_1.setBounds(629, 277, 65, 72);
+		contentPane.add(lblNewLabel_4_1);
+		
+		JLabel lblNewLabel_2_1_1 = new JLabel("");
+		lblNewLabel_2_1_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/espatula.png")));
+		lblNewLabel_2_1_1.setBounds(629, 360, 80, 72);
+		contentPane.add(lblNewLabel_2_1_1);
+
+
 
 
 		ProductoDB productoDB = new ProductoDB();
@@ -142,13 +196,16 @@ public class Inicio extends JFrame {
 		JEditorPane PanelTotal = new JEditorPane();
 
 		JSpinner spinnerPintura = new JSpinner();
+		spinnerPintura.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerPintura.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
-				spinnerPintura.setVisible(false);
-				spinnerPintura.setVisible(true);
+				 
+				
+				
 				
 			}
 			public void inputMethodTextChanged(InputMethodEvent event) {
+				spinnerPintura.setEnabled(false);
 				PanelTotal.setVisible(false);
 				PanelTotal.setVisible(true);
 			}
@@ -157,6 +214,7 @@ public class Inicio extends JFrame {
 		contentPane.add(spinnerPintura);
 
 		JSpinner spinnerRodillo = new JSpinner();
+		spinnerRodillo.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerRodillo.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -171,6 +229,7 @@ public class Inicio extends JFrame {
 		contentPane.add(spinnerRodillo);
 
 		JSpinner spinnerPapel = new JSpinner();
+		spinnerPapel.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerPapel.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -185,6 +244,7 @@ public class Inicio extends JFrame {
 		contentPane.add(spinnerPapel);
 
 		JSpinner spinnerBrocha = new JSpinner();
+		spinnerBrocha.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerBrocha.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -199,6 +259,7 @@ public class Inicio extends JFrame {
 		contentPane.add(spinnerBrocha);
 
 		JSpinner spinnerEscalera = new JSpinner();
+		spinnerEscalera.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerEscalera.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -213,30 +274,43 @@ public class Inicio extends JFrame {
 		spinnerEscalera.setBounds(189, 394, 43, 20);
 		contentPane.add(spinnerEscalera);
 
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(Inicio.class.getResource("/resources/bote-de-pintura (1).png")));
-		lblNewLabel_2.setBounds(227, 11, 73, 72);
-		contentPane.add(lblNewLabel_2);
+		JCheckBox BoxPintura = new JCheckBox("Pintura");
+		BoxPintura.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxPintura.setBounds(25, 51, 97, 23);
+		contentPane.add(BoxPintura);
+		BoxPintura.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxPintura.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerPintura.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerPintura.setEnabled(false);
+		        }
+		    }
+		});
+		
 
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rodillo.png")));
-		lblNewLabel_1.setBounds(227, 105, 73, 66);
-		contentPane.add(lblNewLabel_1);
+		JCheckBox BoxRodillo = new JCheckBox("Rodillo");
+		BoxRodillo.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxRodillo.setBounds(25, 123, 101, 23);
+		contentPane.add(BoxRodillo);
 
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon(Inicio.class.getResource("/resources/toalla-de-papel (1).png")));
-		lblNewLabel_3.setBounds(227, 197, 73, 67);
-		contentPane.add(lblNewLabel_3);
+		JCheckBox BoxPapel = new JCheckBox("Papel");
+		BoxPapel.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxPapel.setBounds(25, 227, 88, 23);
+		contentPane.add(BoxPapel);
 
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon(Inicio.class.getResource("/resources/construccion.png")));
-		lblNewLabel_4.setBounds(227, 275, 73, 66);
-		contentPane.add(lblNewLabel_4);
+		JCheckBox BoxBrocha = new JCheckBox("Brocha");
+		BoxBrocha.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxBrocha.setBounds(25, 304, 89, 23);
+		contentPane.add(BoxBrocha);
 
-		JLabel lblNewLabel_2_1 = new JLabel("");
-		lblNewLabel_2_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/escalera-de-mano.png")));
-		lblNewLabel_2_1.setBounds(242, 366, 80, 66);
-		contentPane.add(lblNewLabel_2_1);
+		JCheckBox BoxEscalera = new JCheckBox("Escalera");
+		BoxEscalera.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		BoxEscalera.setBounds(21, 391, 110, 23);
+		contentPane.add(BoxEscalera);
 
 		JCheckBox BoxBarniz = new JCheckBox("Barniz");
 		BoxBarniz.setFont(new Font("Monospaced", Font.PLAIN, 16));
@@ -244,6 +318,7 @@ public class Inicio extends JFrame {
 		contentPane.add(BoxBarniz);
 
 		JSpinner spinnerBarniz = new JSpinner();
+		spinnerBarniz.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerBarniz.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -257,17 +332,14 @@ public class Inicio extends JFrame {
 		spinnerBarniz.setBounds(574, 54, 45, 20);
 		contentPane.add(spinnerBarniz);
 
-		JLabel lblNewLabel_2_2 = new JLabel("");
-		lblNewLabel_2_2.setIcon(new ImageIcon(Inicio.class.getResource("/resources/barniz.png")));
-		lblNewLabel_2_2.setBounds(629, 24, 80, 64);
-		contentPane.add(lblNewLabel_2_2);
-
+		
 		JCheckBox BoxDisolvente = new JCheckBox("Disolvente");
 		BoxDisolvente.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxDisolvente.setBounds(388, 126, 125, 23);
 		contentPane.add(BoxDisolvente);
 
 		JSpinner spinnerDisolvente = new JSpinner();
+		spinnerDisolvente.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerDisolvente.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -281,17 +353,14 @@ public class Inicio extends JFrame {
 		spinnerDisolvente.setBounds(574, 126, 45, 20);
 		contentPane.add(spinnerDisolvente);
 
-		JLabel lblNewLabel_1_1 = new JLabel("");
-		lblNewLabel_1_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/sin-disolventes.png")));
-		lblNewLabel_1_1.setBounds(614, 99, 80, 72);
-		contentPane.add(lblNewLabel_1_1);
-
+		
 		JCheckBox BoxPlasticos = new JCheckBox("Plasticos");
 		BoxPlasticos.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxPlasticos.setBounds(388, 230, 125, 23);
 		contentPane.add(BoxPlasticos);
 
 		JSpinner spinnerPlasticos = new JSpinner();
+		spinnerPlasticos.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerPlasticos.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -305,10 +374,7 @@ public class Inicio extends JFrame {
 		spinnerPlasticos.setBounds(574, 230, 45, 20);
 		contentPane.add(spinnerPlasticos);
 
-		JLabel lblNewLabel_3_1 = new JLabel("");
-		lblNewLabel_3_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rollos-de-papel.png")));
-		lblNewLabel_3_1.setBounds(629, 197, 80, 67);
-		contentPane.add(lblNewLabel_3_1);
+		
 
 		JCheckBox BoxDecapante = new JCheckBox("Decapante");
 		BoxDecapante.setFont(new Font("Monospaced", Font.PLAIN, 16));
@@ -316,6 +382,7 @@ public class Inicio extends JFrame {
 		contentPane.add(BoxDecapante);
 
 		JSpinner spinnerDecapante = new JSpinner();
+		spinnerDecapante.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerDecapante.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -329,10 +396,6 @@ public class Inicio extends JFrame {
 		spinnerDecapante.setBounds(574, 307, 45, 20);
 		contentPane.add(spinnerDecapante);
 
-		JLabel lblNewLabel_4_1 = new JLabel("");
-		lblNewLabel_4_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/aerosol.png")));
-		lblNewLabel_4_1.setBounds(629, 277, 65, 72);
-		contentPane.add(lblNewLabel_4_1);
 
 		JCheckBox BoxEspatula = new JCheckBox("Espatula");
 		BoxEspatula.setFont(new Font("Monospaced", Font.PLAIN, 16));
@@ -340,6 +403,7 @@ public class Inicio extends JFrame {
 		contentPane.add(BoxEspatula);
 
 		JSpinner spinnerEspatula = new JSpinner();
+		spinnerEspatula.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerEspatula.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -352,11 +416,6 @@ public class Inicio extends JFrame {
 		});
 		spinnerEspatula.setBounds(574, 394, 45, 20);
 		contentPane.add(spinnerEspatula);
-
-		JLabel lblNewLabel_2_1_1 = new JLabel("");
-		lblNewLabel_2_1_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/espatula.png")));
-		lblNewLabel_2_1_1.setBounds(629, 360, 80, 72);
-		contentPane.add(lblNewLabel_2_1_1);
 
 
 		JButton btnNewButton = new JButton("COMPRAR");
@@ -411,31 +470,7 @@ public class Inicio extends JFrame {
 		horizontalBox.setBounds(128, 491, 125, -41);
 		contentPane.add(horizontalBox);
 
-		JCheckBox BoxPintura = new JCheckBox("Pintura");
-		BoxPintura.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxPintura.setBounds(25, 51, 97, 23);
-		contentPane.add(BoxPintura);
 		
-
-		JCheckBox BoxRodillo = new JCheckBox("Rodillo");
-		BoxRodillo.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxRodillo.setBounds(25, 123, 101, 23);
-		contentPane.add(BoxRodillo);
-
-		JCheckBox BoxPapel = new JCheckBox("Papel");
-		BoxPapel.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxPapel.setBounds(25, 227, 88, 23);
-		contentPane.add(BoxPapel);
-
-		JCheckBox BoxBrocha = new JCheckBox("Brocha");
-		BoxBrocha.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxBrocha.setBounds(25, 304, 89, 23);
-		contentPane.add(BoxBrocha);
-
-		JCheckBox BoxEscalera = new JCheckBox("Escalera");
-		BoxEscalera.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		BoxEscalera.setBounds(21, 391, 110, 23);
-		contentPane.add(BoxEscalera);
 
 		Component verticalStrut = Box.createVerticalStrut(20);
 		verticalStrut.setBounds(347, 39, 30, 393);
