@@ -135,7 +135,7 @@ public class Registrado extends JFrame {
 		btnNewButton.setBounds(403, 223, 163, 39);
 		panel.add(btnNewButton);
 
-		JLabel lblNewLabel_1_2 = new JLabel("DNI Usuario:");
+		JLabel lblNewLabel_1_2 = new JLabel("DNI:");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1_2.setBounds(137, 65, 129, 18);
 		panel.add(lblNewLabel_1_2);

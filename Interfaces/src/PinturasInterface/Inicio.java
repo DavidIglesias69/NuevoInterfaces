@@ -144,8 +144,9 @@ public class Inicio extends JFrame {
 		JSpinner spinnerPintura = new JSpinner();
 		spinnerPintura.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
+				spinnerPintura.setVisible(false);
+				spinnerPintura.setVisible(true);
+				
 			}
 			public void inputMethodTextChanged(InputMethodEvent event) {
 				PanelTotal.setVisible(false);
@@ -359,6 +360,7 @@ public class Inicio extends JFrame {
 
 
 		JButton btnNewButton = new JButton("COMPRAR");
+		btnNewButton.setIcon(new ImageIcon(Inicio.class.getResource("/resources/carrito-de-supermercado (1).png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -398,7 +400,7 @@ public class Inicio extends JFrame {
 		        JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal + "€", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnNewButton.setBounds(742, 469, 89, 23);
+		btnNewButton.setBounds(492, 486, 136, 37);
 		contentPane.add(btnNewButton);
 
 
@@ -413,6 +415,7 @@ public class Inicio extends JFrame {
 		BoxPintura.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxPintura.setBounds(25, 51, 97, 23);
 		contentPane.add(BoxPintura);
+		
 
 		JCheckBox BoxRodillo = new JCheckBox("Rodillo");
 		BoxRodillo.setFont(new Font("Monospaced", Font.PLAIN, 16));
@@ -448,7 +451,7 @@ public class Inicio extends JFrame {
 		PanelTotal.setEditable(false);
 		PanelTotal.setBackground(Color.ORANGE);
 		PanelTotal.setForeground(new Color(0, 0, 255));
-		PanelTotal.setBounds(406, 472, 272, 20);
+		PanelTotal.setBounds(210, 498, 272, 20);
 		contentPane.add(PanelTotal);
 		
 		// Recopilar información sobre los productos seleccionados y las cantidades
@@ -484,6 +487,33 @@ public class Inicio extends JFrame {
 				String precioTotalTexto = String.valueOf(precioTotal);
 				// Establecer el texto en el JEditorPane
 				PanelTotal.setText(precioTotalTexto);
+				
+				JButton historial = new JButton("Historial de Compras");
+				historial.setIcon(new ImageIcon(Inicio.class.getResource("/resources/historial-medico (1).png")));
+				historial.setBounds(10, 491, 190, 34);
+				contentPane.add(historial);
 
+				// Crear un ActionListener para el botón de historial de compras
+				historial.addActionListener(new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
+				    	 // Obtener el DNI del usuario actual
+				        String dniUsuario = usuario_logueado.getDNI();
+				        // Aquí debes verificar si el usuario logueado es responsable o no
+				        // Crear una instancia de HistorialCompras pasando el DNI del usuario como parámetro
+				        HistorialCompras historial = new HistorialCompras(dniUsuario);
+				        historial.setVisible(true);
+				        }
+				});
+				
+				
+				JButton btnSalir = new JButton("SALIR");
+				btnSalir.setIcon(new ImageIcon(Inicio.class.getResource("/resources/boton.png")));
+				btnSalir.setBounds(670, 486, 136, 37);
+				contentPane.add(btnSalir);
+				btnSalir.addActionListener(new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
+				        System.exit(0); // Cerrar la aplicación al hacer clic en el botón "Salir"
+				    }
+				});
 	}
 }

@@ -22,7 +22,7 @@ public class RegistroDB extends JFrame{
 		Conexion cone = new Conexion();
 		Connection link = cone.abrirConsulta();
 		Usuario nuevo= null;
-		String query= "SELECT * FROM Usuario where usuario = ? AND BINARY password = ?";
+		String query= "SELECT * FROM Usuario where DNI = ? AND BINARY Contraseña = ?";
 		PreparedStatement llamada= link.prepareStatement(query);
 		llamada.setString(1,usuario);
 		llamada.setString(2,pass);

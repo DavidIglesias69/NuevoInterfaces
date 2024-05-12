@@ -2,26 +2,33 @@ package ProyectoPinturas;
 
 public class Usuario {
 
-	
+
 	private String DNI;
 	private String nombre;
 	private String password;	
 	private String email;
-	
-	
-	
-	
-	public Usuario( String dNI, String password, String nombre, String email) {
-		
-		DNI = dNI;
+	private boolean responsable; //  atributo para indicar si el usuario es responsable
+
+	public Usuario(String DNI, String password, String nombre, String email) {
+		this.DNI = DNI;
 		this.password = password;
 		this.nombre = nombre;
 		this.email = email;
+		
 	}
-	public String getUsuario() {
+
+	
+	public boolean isResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(boolean responsable) {
+		this.responsable = responsable;
+	}
+	public String getDNI() {
 		return DNI;
 	}
-	public void setUsuario(String usuario) {
+	public void setDNI(String usuario) {
 		this.DNI = usuario;
 	}
 	public String getPassword() {
@@ -49,6 +56,6 @@ public class Usuario {
 				+ ", email=" + email + "]";
 	}
 
-	
-	
+
+
 }
