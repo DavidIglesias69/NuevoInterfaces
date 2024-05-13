@@ -2,12 +2,16 @@ package PinturasInterface;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Date;
 import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import PinturasDB.CompraDB;
 import PinturasDB.ProductoDB;
 import ProyectoPinturas.Usuario;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 
 public class Inicio extends JFrame {
@@ -15,7 +19,7 @@ public class Inicio extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	Usuario usuario_logueado;
-	
+	private Date fechaActual = new Date(System.currentTimeMillis());
 	 // Declara los spinners fuera del constructor para que sean accesibles en todo el código
 	    
 
@@ -196,6 +200,7 @@ public class Inicio extends JFrame {
 		JEditorPane PanelTotal = new JEditorPane();
 
 		JSpinner spinnerPintura = new JSpinner();
+		spinnerPintura.setEnabled(false);
 		spinnerPintura.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerPintura.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
@@ -214,6 +219,7 @@ public class Inicio extends JFrame {
 		contentPane.add(spinnerPintura);
 
 		JSpinner spinnerRodillo = new JSpinner();
+		spinnerRodillo.setEnabled(false);
 		spinnerRodillo.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerRodillo.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
@@ -229,6 +235,7 @@ public class Inicio extends JFrame {
 		contentPane.add(spinnerRodillo);
 
 		JSpinner spinnerPapel = new JSpinner();
+		spinnerPapel.setEnabled(false);
 		spinnerPapel.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerPapel.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
@@ -244,6 +251,7 @@ public class Inicio extends JFrame {
 		contentPane.add(spinnerPapel);
 
 		JSpinner spinnerBrocha = new JSpinner();
+		spinnerBrocha.setEnabled(false);
 		spinnerBrocha.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerBrocha.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
@@ -259,6 +267,7 @@ public class Inicio extends JFrame {
 		contentPane.add(spinnerBrocha);
 
 		JSpinner spinnerEscalera = new JSpinner();
+		spinnerEscalera.setEnabled(false);
 		spinnerEscalera.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		spinnerEscalera.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
@@ -273,6 +282,86 @@ public class Inicio extends JFrame {
 		
 		spinnerEscalera.setBounds(189, 394, 43, 20);
 		contentPane.add(spinnerEscalera);
+		
+		JSpinner spinnerBarniz = new JSpinner();
+		spinnerBarniz.setEnabled(false);
+		spinnerBarniz.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+		spinnerBarniz.addInputMethodListener(new InputMethodListener() {
+			public void caretPositionChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+			public void inputMethodTextChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+		});
+		spinnerBarniz.setBounds(574, 54, 45, 20);
+		contentPane.add(spinnerBarniz);
+		
+		JSpinner spinnerDisolvente = new JSpinner();
+		spinnerDisolvente.setEnabled(false);
+		spinnerDisolvente.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+		spinnerDisolvente.addInputMethodListener(new InputMethodListener() {
+			public void caretPositionChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+			public void inputMethodTextChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+		});
+		spinnerDisolvente.setBounds(574, 126, 45, 20);
+		contentPane.add(spinnerDisolvente);
+		
+		JSpinner spinnerPlasticos = new JSpinner();
+		spinnerPlasticos.setEnabled(false);
+		spinnerPlasticos.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+		spinnerPlasticos.addInputMethodListener(new InputMethodListener() {
+			public void caretPositionChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+			public void inputMethodTextChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+		});
+		spinnerPlasticos.setBounds(574, 230, 45, 20);
+		contentPane.add(spinnerPlasticos);
+		
+		JSpinner spinnerDecapante = new JSpinner();
+		spinnerDecapante.setEnabled(false);
+		spinnerDecapante.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+		spinnerDecapante.addInputMethodListener(new InputMethodListener() {
+			public void caretPositionChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+			public void inputMethodTextChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+		});
+		spinnerDecapante.setBounds(574, 307, 45, 20);
+		contentPane.add(spinnerDecapante);
+		
+		JSpinner spinnerEspatula = new JSpinner();
+		spinnerEspatula.setEnabled(false);
+		spinnerEspatula.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+		spinnerEspatula.addInputMethodListener(new InputMethodListener() {
+			public void caretPositionChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+			public void inputMethodTextChanged(InputMethodEvent event) {
+				PanelTotal.setVisible(false);
+				PanelTotal.setVisible(true);
+			}
+		});
+		spinnerEspatula.setBounds(574, 394, 45, 20);
+		contentPane.add(spinnerEspatula);
 
 		JCheckBox BoxPintura = new JCheckBox("Pintura");
 		BoxPintura.setFont(new Font("Monospaced", Font.PLAIN, 16));
@@ -296,83 +385,131 @@ public class Inicio extends JFrame {
 		BoxRodillo.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxRodillo.setBounds(25, 123, 101, 23);
 		contentPane.add(BoxRodillo);
+		BoxRodillo.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxRodillo.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerRodillo.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerRodillo.setEnabled(false);
+		        }
+		    }
+		});
 
 		JCheckBox BoxPapel = new JCheckBox("Papel");
 		BoxPapel.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxPapel.setBounds(25, 227, 88, 23);
 		contentPane.add(BoxPapel);
+		BoxPapel.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxPapel.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerPapel.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerPapel.setEnabled(false);
+		        }
+		    }
+		});
 
 		JCheckBox BoxBrocha = new JCheckBox("Brocha");
 		BoxBrocha.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxBrocha.setBounds(25, 304, 89, 23);
 		contentPane.add(BoxBrocha);
+		BoxBrocha.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxBrocha.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerBrocha.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerBrocha.setEnabled(false);
+		        }
+		    }
+		});
+
 
 		JCheckBox BoxEscalera = new JCheckBox("Escalera");
 		BoxEscalera.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxEscalera.setBounds(21, 391, 110, 23);
 		contentPane.add(BoxEscalera);
+		BoxEscalera.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxEscalera.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerEscalera.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerEscalera.setEnabled(false);
+		        }
+		    }
+		});
+
 
 		JCheckBox BoxBarniz = new JCheckBox("Barniz");
 		BoxBarniz.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxBarniz.setBounds(388, 54, 97, 23);
 		contentPane.add(BoxBarniz);
-
-		JSpinner spinnerBarniz = new JSpinner();
-		spinnerBarniz.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-		spinnerBarniz.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
-			public void inputMethodTextChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
+		BoxBarniz.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxBarniz.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerBarniz.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerBarniz.setEnabled(false);
+		        }
+		    }
 		});
-		spinnerBarniz.setBounds(574, 54, 45, 20);
-		contentPane.add(spinnerBarniz);
+
+
+		
 
 		
 		JCheckBox BoxDisolvente = new JCheckBox("Disolvente");
 		BoxDisolvente.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxDisolvente.setBounds(388, 126, 125, 23);
 		contentPane.add(BoxDisolvente);
-
-		JSpinner spinnerDisolvente = new JSpinner();
-		spinnerDisolvente.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-		spinnerDisolvente.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
-			public void inputMethodTextChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
+		BoxDisolvente.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxDisolvente.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerDisolvente.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerDisolvente.setEnabled(false);
+		        }
+		    }
 		});
-		spinnerDisolvente.setBounds(574, 126, 45, 20);
-		contentPane.add(spinnerDisolvente);
+
+
+		
 
 		
 		JCheckBox BoxPlasticos = new JCheckBox("Plasticos");
 		BoxPlasticos.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxPlasticos.setBounds(388, 230, 125, 23);
 		contentPane.add(BoxPlasticos);
-
-		JSpinner spinnerPlasticos = new JSpinner();
-		spinnerPlasticos.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-		spinnerPlasticos.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
-			public void inputMethodTextChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
+		BoxPlasticos.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxPlasticos.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerPlasticos.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerPlasticos.setEnabled(false);
+		        }
+		    }
 		});
-		spinnerPlasticos.setBounds(574, 230, 45, 20);
-		contentPane.add(spinnerPlasticos);
+		
 
 		
 
@@ -380,42 +517,40 @@ public class Inicio extends JFrame {
 		BoxDecapante.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxDecapante.setBounds(388, 307, 125, 23);
 		contentPane.add(BoxDecapante);
-
-		JSpinner spinnerDecapante = new JSpinner();
-		spinnerDecapante.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-		spinnerDecapante.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
-			public void inputMethodTextChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
+		BoxDecapante.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxDecapante.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerDecapante.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerDecapante.setEnabled(false);
+		        }
+		    }
 		});
-		spinnerDecapante.setBounds(574, 307, 45, 20);
-		contentPane.add(spinnerDecapante);
+		
 
 
 		JCheckBox BoxEspatula = new JCheckBox("Espatula");
 		BoxEspatula.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		BoxEspatula.setBounds(388, 394, 110, 23);
 		contentPane.add(BoxEspatula);
-
-		JSpinner spinnerEspatula = new JSpinner();
-		spinnerEspatula.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-		spinnerEspatula.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
-			public void inputMethodTextChanged(InputMethodEvent event) {
-				PanelTotal.setVisible(false);
-				PanelTotal.setVisible(true);
-			}
+		BoxEspatula.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Verificar si el checkbox está marcado
+		        if (BoxEspatula.isSelected()) {
+		            // Habilitar el spinner si el checkbox está marcado
+		            spinnerEspatula.setEnabled(true);
+		        } else {
+		            // Deshabilitar el spinner si el checkbox está desmarcado
+		            spinnerEspatula.setEnabled(false);
+		        }
+		    }
 		});
-		spinnerEspatula.setBounds(574, 394, 45, 20);
-		contentPane.add(spinnerEspatula);
+		
+		
+		
 
 
 		JButton btnNewButton = new JButton("COMPRAR");
@@ -453,28 +588,33 @@ public class Inicio extends JFrame {
 		                             precioTotalDisolvente + precioTotalPlasticos + precioTotalDecapante +
 		                             precioTotalEspatula;
 		        
-		        
-
+		        CompraDB compraDB = new CompraDB();
+				try {
+					CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 
+			       
+			        HistorialCompras historial = new HistorialCompras();
+				
+				try {
+					CompraDB.actulizarHistorial(cantidadPlasticos, cantidadDecapante, cantidadEspatula, precioTotal);;
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		        // Mostrar un mensaje de confirmación con el precio total
 		        JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal + "€", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnNewButton.setBounds(492, 486, 136, 37);
-		contentPane.add(btnNewButton);
-
-
-
-
-
-		Box horizontalBox = Box.createHorizontalBox();
-		horizontalBox.setBounds(128, 491, 125, -41);
-		contentPane.add(horizontalBox);
-
 		
 
-		Component verticalStrut = Box.createVerticalStrut(20);
-		verticalStrut.setBounds(347, 39, 30, 393);
-		contentPane.add(verticalStrut);
+
+
+
+
 
 		//---------------------------------------------------------------------------------//
 		Integer i =Integer.parseInt(spinnerPintura.getValue().toString());
@@ -549,6 +689,16 @@ public class Inicio extends JFrame {
 				    public void actionPerformed(ActionEvent e) {
 				        System.exit(0); // Cerrar la aplicación al hacer clic en el botón "Salir"
 				    }
+				    
+				    
 				});
+				
+			
+				// Crea un JLabel para mostrar la fecha actual
+				JLabel lblFecha = new JLabel("Fecha:  " + fechaActual);				
+				lblFecha.setBounds(719, 45, 124, 14);				
+				contentPane.add(lblFecha);
+				
 	}
+	
 }
