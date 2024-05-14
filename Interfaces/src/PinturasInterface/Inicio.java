@@ -517,15 +517,15 @@ public class Inicio extends JFrame {
 			}
 		});
 
-				/* HistorialCompras historial = new HistorialCompras(usuario_logueado.getDNI());
+				HistorialCompras historial = new HistorialCompras(usuario_logueado.getDNI());
 
 				try {
-					HistorialDB.actulizarHistorial(cantidadPlasticos, cantidadDecapante, cantidadEspatula, precioTotal);
+					HistorialDB.actulizarHistorial(, cantidadDecapante, cantidadEspatula, precioTotal);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				*/
+				
 
 
 
