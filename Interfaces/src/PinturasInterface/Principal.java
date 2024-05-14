@@ -65,7 +65,7 @@ public class Principal {
 		frmPrimerInterface.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/resources/descargar.jpg")));
 		frmPrimerInterface.setTitle("Pinturas ArcoIrirs");
 		frmPrimerInterface.getContentPane().setForeground(new Color(0, 128, 64));
-		frmPrimerInterface.setBounds(100, 100, 519, 614);
+		frmPrimerInterface.setBounds(100, 100, 519, 573);
 		frmPrimerInterface.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmPrimerInterface.getContentPane().setLayout(null);
 
@@ -147,7 +147,14 @@ public class Principal {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Principal.class.getResource("/resources/LOGO.jpg")));
-		lblNewLabel_1.setBounds(-339, 22, 832, 553);
+		lblNewLabel_1.setBounds(-288, -31, 872, 642);
 		frmPrimerInterface.getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("PINTURAS  ARCOIRIS");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setForeground(new Color(255, 0, 0));
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_2.setBounds(10, 11, 468, 30);
+		frmPrimerInterface.getContentPane().add(lblNewLabel_2);
 	}
 }

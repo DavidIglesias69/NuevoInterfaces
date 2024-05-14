@@ -20,18 +20,7 @@ public class Inicio extends JFrame {
 	private JPanel contentPane;
 	Usuario usuario_logueado;
 	private Date fechaActual = new Date(System.currentTimeMillis());
-	 // Declara los spinners fuera del constructor para que sean accesibles en todo el código
-	    
-
-
-	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the frame.
-	 * @throws SQLException 
-	 */
+	
 	public Inicio (Usuario usuario_logueado) throws SQLException {
 		setTitle("Panel de Productos ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -555,6 +544,8 @@ public class Inicio extends JFrame {
 
 		JButton btnNewButton = new JButton("COMPRAR");
 		btnNewButton.setIcon(new ImageIcon(Inicio.class.getResource("/resources/carrito-de-supermercado (1).png")));
+		btnNewButton.setBounds(506, 486, 151, 35);
+		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -597,7 +588,7 @@ public class Inicio extends JFrame {
 				}
 				 
 			       
-			        HistorialCompras historial = new HistorialCompras();
+			       // HistorialCompras historial = new HistorialCompras();
 				
 				try {
 					CompraDB.actulizarHistorial(cantidadPlasticos, cantidadDecapante, cantidadEspatula, precioTotal);;
