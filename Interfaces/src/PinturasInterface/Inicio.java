@@ -502,29 +502,22 @@ public class Inicio extends JFrame {
 		btnNewButton.setBounds(506, 486, 151, 35);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-
-				CompraDB compraDB = new CompraDB();
-				try {
-					CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				// Mostrar un mensaje de confirmación con el precio total
-				JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal() + "€", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            int idCompra = CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual);
+		            if (idCompra != -1) {
+		                HistorialDB.actualizarHistorial(idCompra, componentes, labels);
+		                JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal() + " €", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Error al guardar la compra.", "Error", JOptionPane.ERROR_MESSAGE);
+		            }
+		        } catch (SQLException e1) {
+		            JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		            e1.printStackTrace();
+		        }
+		    }
 		});
 
-				HistorialCompras historial = new HistorialCompras(usuario_logueado.getDNI());
-
-				try {
-					HistorialDB.actulizarHistorial(, cantidadDecapante, cantidadEspatula, precioTotal);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				
 
 

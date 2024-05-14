@@ -76,64 +76,7 @@ public class RegistroDB extends JFrame{
 	        }
 	    }
 	}
-	/*public static String[] getEditoriales () throws SQLException{
-
-		ArrayList<String> listado= new ArrayList<>();
-		Conexion cone = new Conexion();
-		Connection link = cone.abrirConsulta();
-		String select = "SELECT * FROM editorial";
-		PreparedStatement llamada= link.prepareStatement(select);
-		ResultSet rs= llamada.executeQuery();
-
-		if (rs != null) {
-			while (rs.next()) {
-
-				String nombre= rs.getString(2);
-				listado.add(nombre);
-
-			}
-
-		}
-
-		String[] resultado=new String [listado.size()];
-
-		for (int i = 0; i < resultado.length; i++) {
-			resultado [i]= listado.get(i);
-		}
-
-
-		return resultado;
-
-	}
-
-	public static Editorial getEditorial (String nombre) throws SQLException {
-
-		Conexion cone = new Conexion();
-		Connection link = cone.abrirConsulta();
-		Editorial nuevo= null;
-		String query= "SELECT * FROM editorial where nombre = ?";
-		PreparedStatement llamada= link.prepareStatement(query);
-
-		llamada.setString(1,nombre);
-		ResultSet rs = llamada.executeQuery();
-
-		if (rs != null) {
-			while (rs.next()) {
-				
-				String cif = rs.getString(1);
-				String nombre1 = rs.getString(2);
-
-
-				nuevo= new Editorial (cif,nombre1);
-				return nuevo;
-			}
-
-		}
-
-
-		return null;
-
-	}*/
+	
 }
 
 

@@ -5,42 +5,40 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement; // Importación correcta
 import PinturasInterface.Conexion;
 
 public class CompraDB {
-
-    public static void guardarCompra(String dniUsuario, Date fecha) throws SQLException {
+    public static int guardarCompra(String dniUsuario, Date fecha) throws SQLException {
         Conexion conexion = new Conexion();
         Connection conn = conexion.abrirConsulta();
-
+        ResultSet rs = null;
         try {
             // Preparar la consulta SQL para insertar una nueva compra
             String sql = "INSERT INTO Compra (DNI, Fecha) VALUES (?, ?)";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            ResultSet rs = null;
+            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);  // Uso correcto de Statement
             statement.setString(1, dniUsuario);
             statement.setDate(2, fecha);
-            System.out.println(statement.toString());
 
             // Ejecutar la consulta
             statement.executeUpdate();
-            
-            /*
-            rs = statement.getGeneratedKeys(); Consigue el dato que se inserta
-            int idCompra = 0;
-            if(rs.next()) {
-            	idCompra = rs.getInt(1); consigue el id del insert
+
+            // Obtener las claves generadas
+            rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1); // Devuelve el ID de la compra insertada
             }
-            */
         } catch (SQLException e) {
             e.printStackTrace();
-            // Manejar la excepción apropiadamente
         } finally {
-            // Cerrar la conexión
+            // Asegurarse de cerrar ResultSet y Connection
+            if (rs != null) {
+                rs.close();
+            }
             if (conn != null) {
                 conn.close();
             }
         }
+        return -1; // En caso de que algo salga mal
     }
-   
 }
