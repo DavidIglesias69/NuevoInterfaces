@@ -6,6 +6,7 @@ public class Producto {
 	private String nombre;
 	private int cantidad;
 	private double precio;
+	
 	public String getNombre() {
 		return nombre;
 	}
