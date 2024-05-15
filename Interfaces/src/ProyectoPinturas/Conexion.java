@@ -1,6 +1,5 @@
 package ProyectoPinturas;
 
-
 import java.sql.*;
 
 public class Conexion {

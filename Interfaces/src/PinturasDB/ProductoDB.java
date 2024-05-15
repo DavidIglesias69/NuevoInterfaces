@@ -46,4 +46,34 @@ public class ProductoDB {
         }
         return total;
     }
+    public static int obtenerCantidad(String nombreProducto) throws SQLException {
+        Conexion conexion = new Conexion();
+        Connection link = conexion.abrirConsulta();
+        int cantidad = 0;
+
+        try {
+            String query = "SELECT cantidad FROM Producto WHERE nombre = ?";
+            PreparedStatement preparedStatement = link.prepareStatement(query);
+            preparedStatement.setString(1, nombreProducto);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                cantidad = resultSet.getInt("cantidad");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;  // Propagar la excepción para manejarla en la capa superior
+        } finally {
+            if (link != null) {
+                try {
+                    link.close();  // Asegurarse de cerrar la conexión
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        return cantidad;
+    }
+
 }

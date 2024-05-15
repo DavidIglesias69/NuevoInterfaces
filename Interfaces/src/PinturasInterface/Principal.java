@@ -33,7 +33,7 @@ public class Principal {
 	private JFrame frmPrimerInterface;
 	private JTextField usuarioTextField;
 	private JPasswordField usuarioPasswordField;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -84,9 +84,9 @@ public class Principal {
 		boton1.setIcon(new ImageIcon(Principal.class.getResource("/resources/si.png")));
 		boton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			
-				
+
+
+
 				String DNI= usuarioTextField.getText();
 				String password =usuarioPasswordField.getText();
 				try {
@@ -94,10 +94,21 @@ public class Principal {
 					System.out.println(logeado);
 
 					if(logeado != null) {
-						Inicio ventanaNueva = new Inicio(logeado);
-						ventanaNueva.usuario_logueado=logeado;
-						ventanaNueva.show();
-						frmPrimerInterface.dispose();
+
+						if(logeado.isResponsable() != 1) {
+
+							Inicio ventanaNueva = new Inicio(logeado);
+							ventanaNueva.show();
+							frmPrimerInterface.dispose();
+
+						}else if(logeado.isResponsable() == 1) {
+							
+							Administrador ventanaNueva = new Administrador(logeado);
+							ventanaNueva.show();
+							frmPrimerInterface.dispose();
+							
+						}
+
 					}else {
 
 						JOptionPane.showMessageDialog(null, "ERROR, USUARIO INCORRECTO");
@@ -125,31 +136,31 @@ public class Principal {
 		lblNewLabel.setLabelFor(usuarioPasswordField);
 		lblNewLabel.setBounds(10, 111, 117, 37);
 		frmPrimerInterface.getContentPane().add(lblNewLabel);
-		
+
 		JButton registro = new JButton("   Registro");
 		registro.setHorizontalAlignment(SwingConstants.LEFT);
 		registro.setIcon(new ImageIcon(Principal.class.getResource("/resources/nota.png")));
 		registro.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		registro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				Registrado ventanaRegistro = new Registrado();
 				ventanaRegistro.show();
 				frmPrimerInterface.dispose();
-				
+
 
 			}
 		});
-				
-			
+
+
 		registro.setBounds(297, 177, 181, 51);
 		frmPrimerInterface.getContentPane().add(registro);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Principal.class.getResource("/resources/LOGO.jpg")));
 		lblNewLabel_1.setBounds(-288, -31, 872, 642);
 		frmPrimerInterface.getContentPane().add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("PINTURAS  ARCOIRIS");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setForeground(new Color(255, 0, 0));

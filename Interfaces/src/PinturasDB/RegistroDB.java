@@ -15,8 +15,6 @@ import ProyectoPinturas.Conexion;
 import ProyectoPinturas.Usuario;
 
 public class RegistroDB extends JFrame{
-	public RegistroDB() {
-	}
 
 	public static Usuario doLogin(String usuario, String pass) throws SQLException  {
 		Conexion cone = new Conexion();
@@ -34,8 +32,9 @@ public class RegistroDB extends JFrame{
 				String nombre = rs.getString(2);				
 				//String password = rs.getString(3); me salto la contraseña no la almaceno no es recomandable				
 				String email = rs.getString(4);
+				int resp = rs.getInt(5);
 
-				nuevo= new Usuario (DNI,nombre,"", email);
+				nuevo= new Usuario (DNI,nombre,"", email, resp);
 				return nuevo;
 			}
 

@@ -28,10 +28,8 @@ public class Registrado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	Usuario usuario_logueado;
-	private JTextField contrasena;	
+	Usuario usuario_logueado;	
 	private JTextField nombre;
-	private JTextField repetir_contrasena;
 	private JTextField email;
 	private JTextField dni_tex;
 	private JPasswordField _contraseña;

@@ -196,76 +196,77 @@ public class Inicio extends JFrame {
 
 
 
+		int cantStockPintura = ProductoDB.obtenerCantidad("pintura");
 		JSpinner spinnerPintura = new JSpinner();
 		spinnerPintura.setEnabled(false);
-		spinnerPintura.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
+		spinnerPintura.setModel(new SpinnerNumberModel(0, 0, cantStockPintura, 1));
 		spinnerPintura.setBounds(174, 54, 43, 20);
 		contentPane.add(spinnerPintura);
 
+		int cantStockRodillo = ProductoDB.obtenerCantidad("rodillo");
 		JSpinner spinnerRodillo = new JSpinner();
 		spinnerRodillo.setEnabled(false);
-		spinnerRodillo.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
+		spinnerRodillo.setModel(new SpinnerNumberModel(0, 0, cantStockRodillo, 1));
 		spinnerRodillo.setBounds(174, 126, 43, 20);
 		contentPane.add(spinnerRodillo);
 
+		int cantStockPapel = ProductoDB.obtenerCantidad("papel");
 		JSpinner spinnerPapel = new JSpinner();
 		spinnerPapel.setEnabled(false);
-		spinnerPapel.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
+		spinnerPapel.setModel(new SpinnerNumberModel(0, 0, cantStockPapel, 1));
 		spinnerPapel.setBounds(174, 230, 43, 20);
 		contentPane.add(spinnerPapel);
 
+		int cantStockBrocha = ProductoDB.obtenerCantidad("Brocha");
 		JSpinner spinnerBrocha = new JSpinner();
 		spinnerBrocha.setEnabled(false);
-		spinnerBrocha.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
+		spinnerBrocha.setModel(new SpinnerNumberModel(0, 0, cantStockBrocha, 1));
 		spinnerBrocha.setBounds(174, 307, 43, 20);
 		contentPane.add(spinnerBrocha);
-
-		JSpinner spinnerEscalera = new JSpinner();
+		
+		int cantStockEscalera = ProductoDB.obtenerCantidad("Escalera");
+		JSpinner spinnerEscalera = new JSpinner();		
 		spinnerEscalera.setEnabled(false);
-		spinnerEscalera.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
-
+		spinnerEscalera.setModel(new SpinnerNumberModel(0, 0, cantStockEscalera, 1));
 		spinnerEscalera.setBounds(189, 394, 43, 20);
 		contentPane.add(spinnerEscalera);
-
+		
+		int cantStockBarniz = ProductoDB.obtenerCantidad("barniz");
 		JSpinner spinnerBarniz = new JSpinner();
 		spinnerBarniz.setEnabled(false);
-		spinnerBarniz.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
+		spinnerBarniz.setModel(new SpinnerNumberModel(0, 0, cantStockBarniz, 1));
 		spinnerBarniz.setBounds(574, 54, 45, 20);
 		contentPane.add(spinnerBarniz);
-
+		
+		int cantStockDisolvente = ProductoDB.obtenerCantidad("disolvente");
 		JSpinner spinnerDisolvente = new JSpinner();
 		spinnerDisolvente.setEnabled(false);
-		spinnerDisolvente.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
+		spinnerDisolvente.setModel(new SpinnerNumberModel(0, 0, cantStockDisolvente, 1));
 		spinnerDisolvente.setBounds(574, 126, 45, 20);
 		contentPane.add(spinnerDisolvente);
 
+		int cantStockPlasticos = ProductoDB.obtenerCantidad("Plasticos");
 		JSpinner spinnerPlasticos = new JSpinner();
 		spinnerPlasticos.setEnabled(false);
-		spinnerPlasticos.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
+		spinnerPlasticos.setModel(new SpinnerNumberModel(0, 0, cantStockPlasticos, 1));
 		spinnerPlasticos.setBounds(574, 230, 45, 20);
 		contentPane.add(spinnerPlasticos);
 
+		int cantStockDecapante = ProductoDB.obtenerCantidad("Decapante");
 		JSpinner spinnerDecapante = new JSpinner();
 		spinnerDecapante.setEnabled(false);
-		spinnerDecapante.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
+		spinnerDecapante.setModel(new SpinnerNumberModel(0, 0, cantStockDecapante, 1));
 		spinnerDecapante.setBounds(574, 307, 45, 20);
 		contentPane.add(spinnerDecapante);
-
+		
+		int cantStockEspatula = ProductoDB.obtenerCantidad("Espatula");
 		JSpinner spinnerEspatula = new JSpinner();
 		spinnerEspatula.setEnabled(false);
-		spinnerEspatula.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-
+		spinnerEspatula.setModel(new SpinnerNumberModel(0, 0, cantStockEspatula, 1));
 		spinnerEspatula.setBounds(574, 394, 45, 20);
 		contentPane.add(spinnerEspatula);
+		
+		
 
 		JCheckBox BoxPintura = new JCheckBox("Pintura");
 		BoxPintura.setFont(new Font("Monospaced", Font.PLAIN, 16));
@@ -468,6 +469,8 @@ public class Inicio extends JFrame {
 		componentes.add(spinnerDecapante);
 		componentes.add(spinnerEspatula);
 
+		disableSpinnerEdit(componentes);
+		
 		labels.add(PrecioPintura);
 		labels.add(PrecioRodillo);
 		labels.add(PrecioPapel);
@@ -483,15 +486,15 @@ public class Inicio extends JFrame {
 
 
 		for (JSpinner componente : componentes) {
-			
+
 			componente.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
 					double precio = precioTotal();
 					PanelTotal.setText(""+precio+"€");
-					
+
 				}
 			});
-			
+
 		}
 
 
@@ -502,29 +505,21 @@ public class Inicio extends JFrame {
 		btnNewButton.setBounds(506, 486, 151, 35);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        try {
-		            int idCompra = CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual);
-		            if (idCompra != -1) {
-		                HistorialDB.actualizarHistorial(idCompra, componentes, labels);
-		                JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal() + " €", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
-		            } else {
-		                JOptionPane.showMessageDialog(null, "Error al guardar la compra.", "Error", JOptionPane.ERROR_MESSAGE);
-		            }
-		        } catch (SQLException e1) {
-		            JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-		            e1.printStackTrace();
-		        }
-		    }
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int idCompra = CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual);
+					if (idCompra != -1) {
+						HistorialDB.actualizarHistorial(idCompra, componentes, labels);
+						JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal() + " €", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "Error al guardar la compra.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				}
+			}
 		});
-
-				
-
-
-
-
-
-
 
 		//---------------------------------------------------------------------------------//
 		Integer i =Integer.parseInt(spinnerPintura.getValue().toString());
@@ -619,7 +614,7 @@ public class Inicio extends JFrame {
 
 			String text = labels.get(i).getText();
 			double precioLabel = Double.parseDouble(text.substring(0, text.length()-1));
-			
+
 			System.out.println(precioLabel);
 
 			int cantSpinner = Integer.parseInt(componentes.get(i).getValue().toString());
@@ -627,12 +622,27 @@ public class Inicio extends JFrame {
 
 
 			total += precioLabel*cantSpinner;
-			
-			
+
+
 		}	
 
-		
+
 		return total;
 	}
+
+	// Método para deshabilitar la edición del JSpinner
+	private void disableSpinnerEdit(ArrayList<JSpinner> comp) {
+
+		for (JSpinner spinner : comp) {
+			JComponent editor = spinner.getEditor();
+			if (editor instanceof JSpinner.DefaultEditor) {
+				JFormattedTextField textField = ((JSpinner.DefaultEditor) editor).getTextField();
+				textField.setEditable(false);
+			}
+		}
+
+	}
+
+
 
 }

@@ -7,22 +7,24 @@ public class Usuario {
 	private String nombre;
 	private String password;	
 	private String email;
-	private boolean responsable; //  atributo para indicar si el usuario es responsable
+	private int responsable; //  atributo para indicar si el usuario es responsable
 
-	public Usuario(String DNI, String password, String nombre, String email) {
+	public Usuario(String DNI, String password, String nombre, String email, int resp) {
+		
 		this.DNI = DNI;
 		this.password = password;
 		this.nombre = nombre;
 		this.email = email;
+		this.responsable = resp;
 		
 	}
 
 	
-	public boolean isResponsable() {
+	public int isResponsable() {
 		return responsable;
 	}
 
-	public void setResponsable(boolean responsable) {
+	public void setResponsable(int responsable) {
 		this.responsable = responsable;
 	}
 	public String getDNI() {
