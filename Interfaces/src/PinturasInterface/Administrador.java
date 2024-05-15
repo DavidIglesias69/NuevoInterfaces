@@ -54,15 +54,15 @@ public class Administrador extends JFrame {
         despegableProductos.add(precio);
 
         JButton btnNewButton = new JButton("Añadir");
-        btnNewButton.setBounds(507, 94, 89, 23);
+        btnNewButton.setBounds(507, 94, 105, 23);
         despegableProductos.add(btnNewButton);
 
         JButton btnNewButton_1 = new JButton("eliminar");
-        btnNewButton_1.setBounds(622, 94, 89, 23);
+        btnNewButton_1.setBounds(622, 94, 109, 23);
         despegableProductos.add(btnNewButton_1);
 
         JButton btnNewButton_2 = new JButton("cambiar precio");
-        btnNewButton_2.setBounds(741, 94, 114, 23);
+        btnNewButton_2.setBounds(741, 94, 134, 23);
         despegableProductos.add(btnNewButton_2);
 
         JSpinner spinner = new JSpinner();
@@ -76,10 +76,13 @@ public class Administrador extends JFrame {
 
         // Inicializa el precioDB que ya está declarado como atributo de la clase
         precioDB = new JLabel("");
-        precioDB.setBounds(275, 103, 100, 14); // Ajusta el tamaño según sea necesario
+        precioDB.setBackground(new Color(0, 255, 102));
+        precioDB.setForeground(new Color(204, 51, 102));
+        precioDB.setBounds(275, 103, 46, 14); // Ajusta el tamaño según sea necesario
         despegableProductos.add(precioDB);
 
         cantidadDB = new JLabel("");
+        cantidadDB.setBackground(Color.GREEN);
         cantidadDB.setBounds(351, 103, 46, 14);
         despegableProductos.add(cantidadDB);
 
