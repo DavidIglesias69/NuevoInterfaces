@@ -46,15 +46,15 @@ public class Administrador extends JFrame {
         despegableProductos.add(precio);
 
         JButton btnNewButton = new JButton("Añadir");
-        btnNewButton.setBounds(490, 94, 122, 23);
+        btnNewButton.setBounds(490, 94, 122, 28);
         despegableProductos.add(btnNewButton);
 
         JButton btnNewButton_1 = new JButton("Eliminar");
-        btnNewButton_1.setBounds(616, 94, 122, 23);
+        btnNewButton_1.setBounds(616, 94, 122, 28);
         despegableProductos.add(btnNewButton_1);
 
         JButton btnNewButton_2 = new JButton("Cambiar precio");
-        btnNewButton_2.setBounds(741, 94, 134, 23);
+        btnNewButton_2.setBounds(346, 135, 134, 23);
         despegableProductos.add(btnNewButton_2);
 
         txtNuevoPrecio = new JTextField();
@@ -66,27 +66,43 @@ public class Administrador extends JFrame {
         lblNuevoPrecio.setBounds(139, 136, 100, 20);
         despegableProductos.add(lblNuevoPrecio);
 
-        spinner = new JSpinner(new SpinnerNumberModel(0, 0, null, 1));
-        spinner.setBounds(432, 96, 48, 20);
+        spinner = new JSpinner(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spinner.setBounds(432, 96, 48, 26);
         despegableProductos.add(spinner);
 
         precioDB = new JLabel("");
-        precioDB.setBounds(275, 103, 46, 14);
+        precioDB.setBounds(258, 95, 63, 22);
         precioDB.setBackground(new Color(0, 255, 102));
         precioDB.setForeground(new Color(204, 51, 153));
         despegableProductos.add(precioDB);
 
         cantidadDB = new JLabel("");
-        cantidadDB.setBounds(351, 103, 46, 14);
+        cantidadDB.setBounds(351, 95, 63, 22);
         cantidadDB.setBackground(Color.GREEN);
         despegableProductos.add(cantidadDB);
 
-       
-        JLabel lblNewLabel = new JLabel(new ImageIcon(Administrador.class.getResource("/resources/aerosol.png")));
-        lblNewLabel.setBounds(0, 0, 885, 698);
-        despegableProductos.add(lblNewLabel);
-
         setupActionListeners(comboBox, btnNewButton, btnNewButton_1, btnNewButton_2);
+        
+        JButton btnNewButton_3 = new JButton("Salir");
+        btnNewButton_3.setIcon(new ImageIcon(Administrador.class.getResource("/resources/boton.png")));
+        btnNewButton_3.setBounds(753, 91, 122, 31);
+        btnNewButton_3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Cerrar el panel actual
+                dispose();
+               
+            }
+        });
+        despegableProductos.add(btnNewButton_3);
+                
+                JLabel lblCantidad = new JLabel("Cantidad");
+                lblCantidad.setBounds(361, 67, 46, 14);
+                despegableProductos.add(lblCantidad);
+        
+               
+                JLabel lblNewLabel = new JLabel(new ImageIcon(Administrador.class.getResource("/resources/mancha arcoirirs.jpg")));
+                lblNewLabel.setBounds(0, 0, 885, 698);
+                despegableProductos.add(lblNewLabel);
     }
 
     private void setupActionListeners(JComboBox<String> comboBox, JButton btnAdd, JButton btnRemove, JButton btnChangePrice) {
