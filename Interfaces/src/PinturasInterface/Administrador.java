@@ -28,21 +28,32 @@ public class Administrador extends JFrame {
         despegableProductos.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(despegableProductos);
         despegableProductos.setLayout(null);
+        
+        precioDB = new JLabel("");
+        precioDB.setBounds(211, 95, 100, 30);
+        precioDB.setBackground(new Color(34, 34, 34)); // Color oscuro de fondo
+        precioDB.setForeground(new Color(255, 255, 255)); // Letras claras
+        precioDB.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamaño de fuente 20
+        precioDB.setOpaque(true);
+        despegableProductos.add(precioDB);
 
         JComboBox<String> comboBox = new JComboBox<>();
         comboBox.setModel(new DefaultComboBoxModel<>(new String[]{
                 "", "Pintura", "Rodillo", "Papel", "Brocha", "Escalera", "Barniz", "Disolvente", "Plasticos", "Decapante", "Espatula"}));
-        comboBox.setBounds(80, 95, 168, 22);
+        comboBox.setBounds(10, 103, 168, 22);
         comboBox.setForeground(new Color(255, 128, 64));
         comboBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
         despegableProductos.add(comboBox);
 
         JLabel lblNewLabel_1 = new JLabel("Producto");
-        lblNewLabel_1.setBounds(139, 67, 46, 14);
+        lblNewLabel_1.setForeground(new Color(255, 0, 0));
+        lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
+        lblNewLabel_1.setBounds(16, 61, 153, 28);
         despegableProductos.add(lblNewLabel_1);
 
         JLabel precio = new JLabel("Precio");
-        precio.setBounds(276, 67, 46, 14);
+        precio.setBounds(229, 67, 46, 14);
         despegableProductos.add(precio);
 
         JButton btnNewButton = new JButton("Añadir");
@@ -70,14 +81,11 @@ public class Administrador extends JFrame {
         spinner.setBounds(432, 96, 48, 26);
         despegableProductos.add(spinner);
 
-        precioDB = new JLabel("");
-        precioDB.setBounds(258, 95, 63, 22);
-        precioDB.setBackground(new Color(0, 255, 102));
-        precioDB.setForeground(new Color(204, 51, 153));
-        despegableProductos.add(precioDB);
-
-        cantidadDB = new JLabel("");
-        cantidadDB.setBounds(351, 95, 63, 22);
+        cantidadDB = new JLabel(""); 
+        cantidadDB.setBackground(new Color(34, 34, 34)); // Color oscuro de fondo
+        cantidadDB.setForeground(new Color(255, 255, 255)); // Letras claras
+        cantidadDB.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamaño de fuente 20      
+        cantidadDB.setBounds(337, 103, 63, 22);
         cantidadDB.setBackground(Color.GREEN);
         despegableProductos.add(cantidadDB);
 
@@ -96,7 +104,7 @@ public class Administrador extends JFrame {
         despegableProductos.add(btnNewButton_3);
                 
                 JLabel lblCantidad = new JLabel("Cantidad");
-                lblCantidad.setBounds(361, 67, 46, 14);
+                lblCantidad.setBounds(347, 75, 46, 14);
                 despegableProductos.add(lblCantidad);
         
                
