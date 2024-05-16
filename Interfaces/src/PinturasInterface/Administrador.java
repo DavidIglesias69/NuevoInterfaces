@@ -19,6 +19,7 @@ public class Administrador extends JFrame {
     private JLabel cantidadDB;
     private JTextField txtNuevoPrecio;
     private JSpinner spinner;
+    private JCheckBox chkConfirmarCompra;
 
     public Administrador(Usuario user) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,6 +81,10 @@ public class Administrador extends JFrame {
         cantidadDB.setBackground(Color.GREEN);
         despegableProductos.add(cantidadDB);
 
+        chkConfirmarCompra = new JCheckBox("Confirmar Compra");
+        chkConfirmarCompra.setBounds(432, 136, 150, 20);
+        despegableProductos.add(chkConfirmarCompra);
+
         JLabel lblNewLabel = new JLabel(new ImageIcon(Administrador.class.getResource("/resources/aerosol.png")));
         lblNewLabel.setBounds(0, 0, 885, 698);
         despegableProductos.add(lblNewLabel);
@@ -101,11 +106,17 @@ public class Administrador extends JFrame {
         btnAdd.addActionListener(e -> {
             int cantidad = (Integer) spinner.getValue();
             String productoSeleccionado = comboBox.getSelectedItem().toString();
-            try {
-                AdministradorDB.añadirProducto(productoSeleccionado, cantidad);
-                actualizarPrecio(productoSeleccionado);
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al añadir producto: " + ex.getMessage());
+            if (chkConfirmarCompra.isSelected()) {
+                try {
+                    AdministradorDB.añadirProducto(productoSeleccionado, cantidad);
+                    AdministradorDB.eliminarProducto(productoSeleccionado, cantidad); // Restar la cantidad del stock
+                    actualizarPrecio(productoSeleccionado);
+                    JOptionPane.showMessageDialog(null, "Producto comprado y stock actualizado.");
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al añadir producto: " + ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe confirmar la compra seleccionando la casilla.");
             }
         });
 

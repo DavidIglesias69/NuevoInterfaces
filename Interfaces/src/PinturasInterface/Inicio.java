@@ -505,21 +505,31 @@ public class Inicio extends JFrame {
 		btnNewButton.setBounds(506, 486, 151, 35);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					int idCompra = CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual);
-					if (idCompra != -1) {
-						HistorialDB.actualizarHistorial(idCompra, componentes, labels);
-						JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal() + " €", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
-					} else {
-						JOptionPane.showMessageDialog(null, "Error al guardar la compra.", "Error", JOptionPane.ERROR_MESSAGE);
-					}
-				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
-				}
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            int idCompra = CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual);
+		            if (idCompra != -1) {
+		                // Filtra los componentes habilitados (los seleccionados) antes de actualizar el historial
+		                ArrayList<JSpinner> componentesSeleccionados = new ArrayList<JSpinner>();
+		                ArrayList<JLabel> labelsSeleccionados = new ArrayList<JLabel>();
+		                for (int i = 0; i < componentes.size(); i++) {
+		                    if (componentes.get(i).isEnabled()) {
+		                        componentesSeleccionados.add(componentes.get(i));
+		                        labelsSeleccionados.add(labels.get(i));
+		                    }
+		                }
+		                HistorialDB.actualizarHistorial(idCompra, componentesSeleccionados, labelsSeleccionados);
+		                JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal() + " €", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Error al guardar la compra.", "Error", JOptionPane.ERROR_MESSAGE);
+		            }
+		        } catch (SQLException e1) {
+		            JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		            e1.printStackTrace();
+		        }
+		    }
 		});
+
 
 		//---------------------------------------------------------------------------------//
 		Integer i =Integer.parseInt(spinnerPintura.getValue().toString());
@@ -608,27 +618,18 @@ public class Inicio extends JFrame {
 
 
 	public double precioTotal() {
-
-		double total = 0;
-		for (int i = 0; i < componentes.size(); i++) {
-
-			String text = labels.get(i).getText();
-			double precioLabel = Double.parseDouble(text.substring(0, text.length()-1));
-
-			System.out.println(precioLabel);
-
-			int cantSpinner = Integer.parseInt(componentes.get(i).getValue().toString());
-			System.out.println(cantSpinner);
-
-
-			total += precioLabel*cantSpinner;
-
-
-		}	
-
-
-		return total;
+	    double total = 0;
+	    for (int i = 0; i < componentes.size(); i++) {
+	        if (componentes.get(i).isEnabled()) {
+	            String text = labels.get(i).getText();
+	            double precioLabel = Double.parseDouble(text.substring(0, text.length() - 1));
+	            int cantSpinner = Integer.parseInt(componentes.get(i).getValue().toString());
+	            total += precioLabel * cantSpinner;
+	        }
+	    }
+	    return total;
 	}
+
 
 	// Método para deshabilitar la edición del JSpinner
 	private void disableSpinnerEdit(ArrayList<JSpinner> comp) {
