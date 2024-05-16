@@ -8,72 +8,57 @@ import java.sql.SQLException;
 import PinturasInterface.Conexion;
 
 public class ProductoDB {
-    
+    // Método para obtener el precio de un producto
     public static double obtenerPrecio(String nombreProducto) throws SQLException {
         Conexion conexion = new Conexion();
-        Connection link = conexion.abrirConsulta();
-        double precio = 0;
-
-        try {
-            String query = "SELECT precio FROM Producto WHERE nombre = ?";
-            PreparedStatement preparedStatement = link.prepareStatement(query);
-            preparedStatement.setString(1, nombreProducto);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                precio = resultSet.getDouble("precio");
+        Connection conn = conexion.abrirConsulta();
+        String sql = "SELECT precio FROM Producto WHERE nombre = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nombreProducto);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("precio");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;  // Propagar la excepción para manejarla en la capa superior
         } finally {
-            if (link != null) {
-                try {
-                    link.close();  // Asegurarse de cerrar la conexión
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+            if (conn != null) {
+                conn.close();
             }
         }
+        return 0;
+    }
 
-        return precio;
-    }
-    
-    public static double calcularPrecioTotal(int[] cantidades, double[] precios) {
-        double total = 0;
-        for (int i = 0; i < cantidades.length; i++) {
-            total += cantidades[i] * precios[i];
-        }
-        return total;
-    }
+    // Método para obtener la cantidad de un producto
     public static int obtenerCantidad(String nombreProducto) throws SQLException {
         Conexion conexion = new Conexion();
-        Connection link = conexion.abrirConsulta();
-        int cantidad = 0;
-
-        try {
-            String query = "SELECT cantidad FROM Producto WHERE nombre = ?";
-            PreparedStatement preparedStatement = link.prepareStatement(query);
-            preparedStatement.setString(1, nombreProducto);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                cantidad = resultSet.getInt("cantidad");
+        Connection conn = conexion.abrirConsulta();
+        String sql = "SELECT cantidad FROM Producto WHERE nombre = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nombreProducto);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("cantidad");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;  // Propagar la excepción para manejarla en la capa superior
         } finally {
-            if (link != null) {
-                try {
-                    link.close();  // Asegurarse de cerrar la conexión
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+            if (conn != null) {
+                conn.close();
             }
         }
-
-        return cantidad;
+        return 0;
     }
 
+    // Método para actualizar la cantidad de un producto
+    public static void actualizarCantidad(String nombreProducto, int nuevaCantidad) throws SQLException {
+        Conexion conexion = new Conexion();
+        Connection conn = conexion.abrirConsulta();
+        String sql = "UPDATE Producto SET cantidad = ? WHERE nombre = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, nuevaCantidad);
+            stmt.setString(2, nombreProducto);
+            stmt.executeUpdate();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }
