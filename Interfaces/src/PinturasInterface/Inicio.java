@@ -2,29 +2,33 @@ package PinturasInterface;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import PinturasDB.CompraDB;
 import PinturasDB.HistorialDB;
 import PinturasDB.ProductoDB;
 import ProyectoPinturas.Usuario;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 public class Inicio extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    Usuario usuario_logueado;
-    private Date fechaActual = new Date(System.currentTimeMillis());
-    double precioTotal = 0;
-    ArrayList<JSpinner> componentes = new ArrayList<JSpinner>();
-    ArrayList<JLabel> labels = new ArrayList<JLabel>();
+	 private static final long serialVersionUID = 1L;
+	    private JPanel contentPane;
+	    Usuario usuario_logueado;
+	    private Date fechaActual = new Date(System.currentTimeMillis());
+	    double precioTotal = 0;
+	    ArrayList<JSpinner> componentes = new ArrayList<JSpinner>();
+	    ArrayList<JLabel> labels = new ArrayList<JLabel>();
+
+	    // Definir nombresProductos como variable de instancia
+	    private String[] nombresProductos = { "pintura", "rodillo", "papel", "brocha", "escalera", "barniz", "disolvente", "plasticos", "decapante", "espatula" };
+
 
     public Inicio(Usuario usuario_logueado) throws SQLException {
         setTitle("Panel de Productos ");
@@ -148,6 +152,9 @@ public class Inicio extends JFrame {
         contentPane.add(lblNewLabel_2_1_1);
 
         ProductoDB productoDB = new ProductoDB();
+        Conexion conexion = new Conexion();
+        Connection conn = conexion.abrirConsulta();
+
         // Obtener y mostrar el precio de la pintura
         double precioPintura = ProductoDB.obtenerPrecio("pintura");
         PrecioPintura.setText(String.valueOf(precioPintura) + "€");
@@ -187,6 +194,7 @@ public class Inicio extends JFrame {
         double precioEspatula = ProductoDB.obtenerPrecio("espatula");
         PrecioEspatula.setText(String.valueOf(precioEspatula) + "€");
 
+        // Obtener y mostrar las cantidades de cada producto
         int cantStockPintura = ProductoDB.obtenerCantidad("pintura");
         JSpinner spinnerPintura = new JSpinner();
         spinnerPintura.setEnabled(false);
@@ -257,18 +265,20 @@ public class Inicio extends JFrame {
         spinnerEspatula.setBounds(574, 394, 45, 20);
         contentPane.add(spinnerEspatula);
 
+        // Cerrar la conexión después de usarla
+        if (conn != null) {
+            conn.close();
+        }
+
         JCheckBox BoxPintura = new JCheckBox("Pintura");
         BoxPintura.setFont(new Font("Monospaced", Font.PLAIN, 16));
         BoxPintura.setBounds(25, 51, 97, 23);
         contentPane.add(BoxPintura);
         BoxPintura.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxPintura.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerPintura.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerPintura.setEnabled(false);
                 }
             }
@@ -280,12 +290,9 @@ public class Inicio extends JFrame {
         contentPane.add(BoxRodillo);
         BoxRodillo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxRodillo.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerRodillo.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerRodillo.setEnabled(false);
                 }
             }
@@ -297,12 +304,9 @@ public class Inicio extends JFrame {
         contentPane.add(BoxPapel);
         BoxPapel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxPapel.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerPapel.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerPapel.setEnabled(false);
                 }
             }
@@ -314,12 +318,9 @@ public class Inicio extends JFrame {
         contentPane.add(BoxBrocha);
         BoxBrocha.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxBrocha.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerBrocha.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerBrocha.setEnabled(false);
                 }
             }
@@ -331,12 +332,9 @@ public class Inicio extends JFrame {
         contentPane.add(BoxEscalera);
         BoxEscalera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxEscalera.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerEscalera.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerEscalera.setEnabled(false);
                 }
             }
@@ -348,12 +346,9 @@ public class Inicio extends JFrame {
         contentPane.add(BoxBarniz);
         BoxBarniz.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxBarniz.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerBarniz.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerBarniz.setEnabled(false);
                 }
             }
@@ -365,12 +360,9 @@ public class Inicio extends JFrame {
         contentPane.add(BoxDisolvente);
         BoxDisolvente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxDisolvente.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerDisolvente.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerDisolvente.setEnabled(false);
                 }
             }
@@ -382,12 +374,9 @@ public class Inicio extends JFrame {
         contentPane.add(BoxPlasticos);
         BoxPlasticos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxPlasticos.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerPlasticos.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerPlasticos.setEnabled(false);
                 }
             }
@@ -399,12 +388,9 @@ public class Inicio extends JFrame {
         contentPane.add(BoxDecapante);
         BoxDecapante.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxDecapante.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerDecapante.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerDecapante.setEnabled(false);
                 }
             }
@@ -416,12 +402,9 @@ public class Inicio extends JFrame {
         contentPane.add(BoxEspatula);
         BoxEspatula.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Verificar si el checkbox está marcado
                 if (BoxEspatula.isSelected()) {
-                    // Habilitar el spinner si el checkbox está marcado
                     spinnerEspatula.setEnabled(true);
                 } else {
-                    // Deshabilitar el spinner si el checkbox está desmarcado
                     spinnerEspatula.setEnabled(false);
                 }
             }
@@ -429,7 +412,6 @@ public class Inicio extends JFrame {
 
         JTextField PanelTotal = new JTextField();
 
-        // LISTENERS DE UNA VEZ
         componentes.add(spinnerPintura);
         componentes.add(spinnerRodillo);
         componentes.add(spinnerPapel);
@@ -470,29 +452,60 @@ public class Inicio extends JFrame {
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int idCompra = CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual);
-                    if (idCompra != -1) {
-                        // Filtra los componentes habilitados (los seleccionados) antes de actualizar el historial
-                        ArrayList<JSpinner> componentesSeleccionados = new ArrayList<JSpinner>();
-                        ArrayList<JLabel> labelsSeleccionados = new ArrayList<JLabel>();
-                        for (int i = 0; i < componentes.size(); i++) {
-                            if (componentes.get(i).isEnabled()) {
-                                componentesSeleccionados.add(componentes.get(i));
-                                labelsSeleccionados.add(labels.get(i));
+                    Conexion conexion = new Conexion();
+                    try (Connection conn = conexion.abrirConsulta()) {
+                        conn.setAutoCommit(false); // Desactivar el autocommit para manejar transacciones manualmente
+
+                        ArrayList<String> productosSinStock = verificarStock(conn);
+                        if (productosSinStock.size() < componentes.size()) {
+                            int idCompra = CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual, conn);
+                            if (idCompra != -1) {
+                                ArrayList<JSpinner> componentesSeleccionados = new ArrayList<JSpinner>();
+                                ArrayList<JLabel> labelsSeleccionados = new ArrayList<JLabel>();
+                                for (int i = 0; i < componentes.size(); i++) {
+                                    if (componentes.get(i).isEnabled() && !productosSinStock.contains(nombresProductos[i])) {
+                                        componentesSeleccionados.add(componentes.get(i));
+                                        labelsSeleccionados.add(labels.get(i));
+                                    }
+                                }
+                                if (actualizarStock(componentesSeleccionados, conn, productosSinStock)) {
+                                    HistorialDB.actualizarHistorial(idCompra, componentesSeleccionados, labelsSeleccionados, nombresProductos, conn);
+                                    conn.commit();
+                                    String mensaje = "El precio total de la compra es: " + precioTotal() + " €";
+                                    if (!productosSinStock.isEmpty()) {
+                                        mensaje += "\n\nNo hay suficiente stock para los siguientes productos, por lo que no se compraron:\n";
+                                        for (String producto : productosSinStock) {
+                                            mensaje += "- " + producto + "\n";
+                                        }
+                                    }
+                                    JOptionPane.showMessageDialog(null, mensaje, "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
+                                } else {
+                                    conn.rollback();
+                                    JOptionPane.showMessageDialog(null, "Error al actualizar el stock.", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else {
+                                conn.rollback();
+                                JOptionPane.showMessageDialog(null, "Error al guardar la compra.", "Error", JOptionPane.ERROR_MESSAGE);
                             }
+                        } else {
+                            String mensaje = "No hay suficiente stock para los siguientes productos:\n";
+                            for (String producto : productosSinStock) {
+                                mensaje += "- " + producto + "\n";
+                            }
+                            JOptionPane.showMessageDialog(null, mensaje, "Error de Stock", JOptionPane.ERROR_MESSAGE);
                         }
-                        HistorialDB.actualizarHistorial(idCompra, componentesSeleccionados, labelsSeleccionados);
-                        actualizarStock(componentesSeleccionados);
-                        JOptionPane.showMessageDialog(null, "El precio total de la compra es: " + precioTotal() + " €", "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error al guardar la compra.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (SQLException e1) {
-                    JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     e1.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+
+
+
+
+
 
         Integer i = Integer.parseInt(spinnerPintura.getValue().toString());
         double totalProductos = precioPintura * i + precioRodillo * i + precioPapel * i + precioBrocha * i + precioEscalera * i + precioBarniz * i + precioDisolvente * i + precioPlasticos * i + precioDecapante * i + precioEspatula * i;
@@ -504,7 +517,6 @@ public class Inicio extends JFrame {
         PanelTotal.setBounds(210, 498, 272, 20);
         contentPane.add(PanelTotal);
 
-        // Recopilar información sobre los productos seleccionados y las cantidades
         int cantidadPintura = (int) spinnerPintura.getValue();
         int cantidadRodillo = (int) spinnerRodillo.getValue();
         int cantidadPapel = (int) spinnerPapel.getValue();
@@ -516,7 +528,6 @@ public class Inicio extends JFrame {
         int cantidadDecapante = (int) spinnerDecapante.getValue();
         int cantidadEspatula = (int) spinnerEspatula.getValue();
 
-        // Obtener precios de los productos seleccionados
         double precioTotalPintura = precioPintura * cantidadPintura;
         double precioTotalRodillo = precioRodillo * cantidadRodillo;
         double precioTotalPapel = precioPapel * cantidadPapel;
@@ -528,11 +539,8 @@ public class Inicio extends JFrame {
         double precioTotalDecapante = precioDecapante * cantidadDecapante;
         double precioTotalEspatula = precioEspatula * cantidadEspatula;
 
-        // Calcular el precio total sumando los precios individuales de los productos seleccionados
         precioTotal = precioTotalPintura + precioTotalRodillo + precioTotalPapel + precioTotalBrocha + precioTotalEscalera + precioTotalBarniz + precioTotalDisolvente + precioTotalPlasticos + precioTotalDecapante + precioTotalEspatula;
-        // Convertir el precio total a una cadena de texto
         String precioTotalTexto = String.valueOf(precioTotal);
-        // Establecer el texto en el JEditorPane
         PanelTotal.setText(precioTotalTexto);
 
         JButton historial = new JButton("Historial de Compras");
@@ -540,13 +548,9 @@ public class Inicio extends JFrame {
         historial.setBounds(10, 491, 190, 34);
         contentPane.add(historial);
 
-        // Crear un ActionListener para el botón de historial de compras
         historial.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Obtener el DNI del usuario actual
                 String dniUsuario = usuario_logueado.getDNI();
-                // Aquí debes verificar si el usuario logueado es responsable o no
-                // Crear una instancia de HistorialCompras pasando el DNI del usuario como parámetro
                 HistorialCompras historial = new HistorialCompras(dniUsuario);
                 historial.setVisible(true);
             }
@@ -562,7 +566,6 @@ public class Inicio extends JFrame {
             }
         });
 
-        // Crea un JLabel para mostrar la fecha actual
         JLabel lblFecha = new JLabel("Fecha:  " + fechaActual);
         lblFecha.setBounds(719, 45, 124, 14);
         contentPane.add(lblFecha);
@@ -581,7 +584,6 @@ public class Inicio extends JFrame {
         return total;
     }
 
-    // Método para deshabilitar la edición del JSpinner
     private void disableSpinnerEdit(ArrayList<JSpinner> comp) {
         for (JSpinner spinner : comp) {
             JComponent editor = spinner.getEditor();
@@ -592,13 +594,32 @@ public class Inicio extends JFrame {
         }
     }
 
-    // Método para actualizar el stock de los productos seleccionados
-    private void actualizarStock(ArrayList<JSpinner> componentesSeleccionados) throws SQLException {
-        String[] nombresProductos = { "pintura", "rodillo", "papel", "brocha", "escalera", "barniz", "disolvente", "plasticos", "decapante", "espatula" };
-        for (int i = 0; i < componentesSeleccionados.size(); i++) {
-            int cantidadComprada = (Integer) componentesSeleccionados.get(i).getValue();
-            int stockActual = ProductoDB.obtenerCantidad(nombresProductos[i]);
-            ProductoDB.actualizarCantidad(nombresProductos[i], stockActual - cantidadComprada);
+    private ArrayList<String> verificarStock(Connection conn) throws SQLException {
+        ArrayList<String> productosSinStock = new ArrayList<>();
+
+        for (int i = 0; i < componentes.size(); i++) {
+            if (componentes.get(i).isEnabled()) {
+                int cantidadSeleccionada = (Integer) componentes.get(i).getValue();
+                int stockActual = ProductoDB.obtenerCantidad(nombresProductos[i]);
+                if (cantidadSeleccionada > stockActual) {
+                    productosSinStock.add(nombresProductos[i]);
+                }
+            }
         }
+        return productosSinStock;
     }
+
+
+    private boolean actualizarStock(ArrayList<JSpinner> componentesSeleccionados, Connection conn, ArrayList<String> productosSinStock) throws SQLException {
+        for (int i = 0; i < componentesSeleccionados.size(); i++) {
+            if (!productosSinStock.contains(nombresProductos[i])) {
+                int cantidadComprada = (Integer) componentesSeleccionados.get(i).getValue();
+                int stockActual = ProductoDB.obtenerCantidad(nombresProductos[i]);
+                ProductoDB.actualizarCantidad(nombresProductos[i], stockActual - cantidadComprada, conn);
+            }
+        }
+        return true;
+    }
+
+
 }
