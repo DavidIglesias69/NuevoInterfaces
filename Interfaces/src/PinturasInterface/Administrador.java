@@ -57,12 +57,12 @@ public class Administrador extends JFrame {
         despegableProductos.add(btnNewButton_2);
 
         txtNuevoPrecio = new JTextField();
-        txtNuevoPrecio.setBounds(600, 130, 86, 20);
+        txtNuevoPrecio.setBounds(249, 136, 86, 20);
         despegableProductos.add(txtNuevoPrecio);
         txtNuevoPrecio.setColumns(10);
 
         JLabel lblNuevoPrecio = new JLabel("Nuevo Precio:");
-        lblNuevoPrecio.setBounds(490, 130, 100, 20);
+        lblNuevoPrecio.setBounds(139, 136, 100, 20);
         despegableProductos.add(lblNuevoPrecio);
 
         spinner = new JSpinner(new SpinnerNumberModel(0, 0, null, 1));
@@ -80,7 +80,7 @@ public class Administrador extends JFrame {
         cantidadDB.setBackground(Color.GREEN);
         despegableProductos.add(cantidadDB);
 
-        JLabel lblNewLabel = new JLabel(new ImageIcon(getClass().getResource("/resources/mancha arcoiris.jpg")));
+        JLabel lblNewLabel = new JLabel(new ImageIcon(Administrador.class.getResource("/resources/aerosol.png")));
         lblNewLabel.setBounds(0, 0, 885, 698);
         despegableProductos.add(lblNewLabel);
 

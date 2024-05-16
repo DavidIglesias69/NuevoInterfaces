@@ -70,7 +70,7 @@ public class AdministradorDB {
         Conexion conexion = new Conexion();
         Connection con = conexion.abrirConsulta();
         try {
-            String sql = "UPDATE productos SET cantidad = cantidad + ? WHERE nombre = ?";
+            String sql = "UPDATE Producto SET cantidad = cantidad + ? WHERE nombre = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, cantidad);
             pst.setString(2, nombreProducto);
@@ -94,7 +94,7 @@ public class AdministradorDB {
         Conexion conexion = new Conexion();
         Connection con = conexion.abrirConsulta();
         try {
-            String sql = "UPDATE productos SET cantidad = cantidad - ? WHERE nombre = ?";
+            String sql = "UPDATE Producto SET cantidad = cantidad - ? WHERE nombre = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, cantidad);
             pst.setString(2, nombreProducto);
@@ -118,7 +118,7 @@ public class AdministradorDB {
         Conexion conexion = new Conexion();
         Connection con = conexion.abrirConsulta();
         try {
-            String sql = "UPDATE productos SET precio = ? WHERE nombre = ?";
+            String sql = "UPDATE Producto SET precio = ? WHERE nombre = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setDouble(1, nuevoPrecio);
             pst.setString(2, nombreProducto);
