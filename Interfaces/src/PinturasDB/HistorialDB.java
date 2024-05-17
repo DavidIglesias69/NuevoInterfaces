@@ -15,8 +15,7 @@ public class HistorialDB {
                 int cantidad = (Integer) componentes.get(i).getValue();
                 if (cantidad > 0) {
                     int idProducto = ProductoDB.obtenerIdProducto(nombresProductos[i], conn); // Obtener el ID del producto basado en el nombre
-                    String text = labels.get(i).getText().replace("€", "");
-                    double precio = Double.parseDouble(text) * cantidad;
+                    double precio = ProductoDB.obtenerPrecio(nombresProductos[i]) * cantidad;
                     statement.setInt(1, idCompra);
                     statement.setInt(2, idProducto);
                     statement.setInt(3, cantidad);

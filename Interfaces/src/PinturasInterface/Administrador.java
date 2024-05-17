@@ -20,9 +20,8 @@ public class Administrador extends JFrame {
     private JTextField txtNuevoPrecio;
     private JSpinner spinner;
    
-
     public Administrador(Usuario user) {
-    	setTitle("PANTALLA ADMINISTRADOR MODIFICAR PRODUCTOS");
+        setTitle("PANTALLA ADMINISTRADOR MODIFICAR PRODUCTOS");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 901, 848);
         despegableProductos = new JPanel();
@@ -108,7 +107,6 @@ public class Administrador extends JFrame {
                 // Cerrar el panel actual
                 dispose();
                 Principal.main(null);
-               
             }
         });
         despegableProductos.add(btnNewButton_3);

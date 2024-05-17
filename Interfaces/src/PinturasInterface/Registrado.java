@@ -120,7 +120,6 @@ public class Registrado extends JFrame {
         btnNewButton.setIcon(new ImageIcon(Registrado.class.getResource("/resources/nota.png")));
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 String DNI1 = dni_tex.getText().trim();
                 String pass1 = new String(_contraseña.getPassword());
                 String pass2 = new String(_repetirContra.getPassword());

@@ -13,7 +13,7 @@ public class HistorialCompras extends JFrame {
     private static String usuarioDNI;
 
     public HistorialCompras(String usuarioDNI) {
-        this.usuarioDNI=usuarioDNI;
+        this.usuarioDNI = usuarioDNI;
         setTitle("Historial de Compras");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(800, 600);
@@ -86,7 +86,6 @@ public class HistorialCompras extends JFrame {
                     "JOIN Historial_Producto hp ON c.ID_Compra = hp.ID_Compra " +
                     "JOIN Producto p ON hp.ID_Producto = p.ID_Producto " +
                     "WHERE c.DNI = '" + usuarioDNI + "'";
-
 
             // Ejecutar la consulta
             resultSet = statement.executeQuery(sql);

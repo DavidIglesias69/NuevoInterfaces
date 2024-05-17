@@ -13,7 +13,7 @@ public class AdministradorDB {
         Connection con = conexion.abrirConsulta();
         double precio = 0;
         try {
-            String sql = "SELECT precio FROM productos WHERE nombre = ?";
+            String sql = "SELECT precio FROM Producto WHERE nombre = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, nombreProducto);
             ResultSet rs = pst.executeQuery();
@@ -37,17 +37,17 @@ public class AdministradorDB {
         return precio;
     }
 
-    public static double obtenerCantidad(String nombreProducto) throws SQLException {
+    public static int obtenerCantidad(String nombreProducto) throws SQLException {
         Conexion conexion = new Conexion();
         Connection con = conexion.abrirConsulta();
-        double cantidad = 0;
+        int cantidad = 0;
         try {
-            String sql = "SELECT cantidad FROM productos WHERE nombre = ?";
+            String sql = "SELECT cantidad FROM Producto WHERE nombre = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, nombreProducto);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                cantidad = rs.getDouble("cantidad");
+                cantidad = rs.getInt("cantidad");
             }
             rs.close();
             pst.close();
@@ -94,10 +94,11 @@ public class AdministradorDB {
         Conexion conexion = new Conexion();
         Connection con = conexion.abrirConsulta();
         try {
-            String sql = "UPDATE Producto SET cantidad = cantidad - ? WHERE nombre = ?";
+            String sql = "UPDATE Producto SET cantidad = cantidad - ? WHERE nombre = ? AND cantidad >= ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, cantidad);
             pst.setString(2, nombreProducto);
+            pst.setInt(3, cantidad);  // Asegura que la cantidad no sea negativa
             pst.executeUpdate();
             pst.close();
         } catch (SQLException e) {

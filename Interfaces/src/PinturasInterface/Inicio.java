@@ -1,10 +1,6 @@
 package PinturasInterface;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,20 +11,22 @@ import PinturasDB.CompraDB;
 import PinturasDB.HistorialDB;
 import PinturasDB.ProductoDB;
 import ProyectoPinturas.Usuario;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Inicio extends JFrame {
 
-	 private static final long serialVersionUID = 1L;
-	    private JPanel contentPane;
-	    Usuario usuario_logueado;
-	    private Date fechaActual = new Date(System.currentTimeMillis());
-	    double precioTotal = 0;
-	    ArrayList<JSpinner> componentes = new ArrayList<JSpinner>();
-	    ArrayList<JLabel> labels = new ArrayList<JLabel>();
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    Usuario usuario_logueado;
+    private Date fechaActual = new Date(System.currentTimeMillis());
+    double precioTotal = 0;
+    ArrayList<JSpinner> componentes = new ArrayList<JSpinner>();
+    ArrayList<JLabel> labels = new ArrayList<JLabel>();
 
-	    // Definir nombresProductos como variable de instancia
-	    private String[] nombresProductos = { "pintura", "rodillo", "papel", "brocha", "escalera", "barniz", "disolvente", "plasticos", "decapante", "espatula" };
-
+    // Definir nombresProductos como variable de instancia
+    private String[] nombresProductos = { "Pintura", "Rodillo", "Papel", "Brocha", "Escalera", "Barniz", "Disolvente", "Plasticos", "Decapante", "Espatula" };
 
     public Inicio(Usuario usuario_logueado) throws SQLException {
         setTitle("Panel de Productos ");
@@ -101,164 +99,164 @@ public class Inicio extends JFrame {
         PrecioEspatula.setBounds(519, 397, 57, 14);
         contentPane.add(PrecioEspatula);
 
-        JLabel lblNewLabel_2 = new JLabel("");
-        lblNewLabel_2.setIcon(new ImageIcon(Inicio.class.getResource("/resources/bote-de-pintura (1).png")));
-        lblNewLabel_2.setBounds(227, 11, 73, 72);
-        contentPane.add(lblNewLabel_2);
+        JLabel iconoPintura = new JLabel("");
+        iconoPintura.setIcon(new ImageIcon(Inicio.class.getResource("/resources/bote-de-pintura (1).png")));
+        iconoPintura.setBounds(227, 11, 73, 72);
+        contentPane.add(iconoPintura);
 
-        JLabel lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rodillo.png")));
-        lblNewLabel_1.setBounds(227, 105, 73, 66);
-        contentPane.add(lblNewLabel_1);
+        JLabel iconoRodillo = new JLabel("");
+        iconoRodillo.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rodillo.png")));
+        iconoRodillo.setBounds(227, 105, 73, 66);
+        contentPane.add(iconoRodillo);
 
-        JLabel lblNewLabel_3 = new JLabel("");
-        lblNewLabel_3.setIcon(new ImageIcon(Inicio.class.getResource("/resources/toalla-de-papel (1).png")));
-        lblNewLabel_3.setBounds(227, 197, 73, 67);
-        contentPane.add(lblNewLabel_3);
+        JLabel iconoPapel = new JLabel("");
+        iconoPapel.setIcon(new ImageIcon(Inicio.class.getResource("/resources/toalla-de-papel (1).png")));
+        iconoPapel.setBounds(227, 197, 73, 67);
+        contentPane.add(iconoPapel);
 
-        JLabel lblNewLabel_4 = new JLabel("");
-        lblNewLabel_4.setIcon(new ImageIcon(Inicio.class.getResource("/resources/construccion.png")));
-        lblNewLabel_4.setBounds(227, 275, 73, 66);
-        contentPane.add(lblNewLabel_4);
+        JLabel iconoBrocha = new JLabel("");
+        iconoBrocha.setIcon(new ImageIcon(Inicio.class.getResource("/resources/construccion.png")));
+        iconoBrocha.setBounds(227, 275, 73, 66);
+        contentPane.add(iconoBrocha);
 
-        JLabel lblNewLabel_2_1 = new JLabel("");
-        lblNewLabel_2_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/escalera-de-mano.png")));
-        lblNewLabel_2_1.setBounds(242, 366, 80, 66);
-        contentPane.add(lblNewLabel_2_1);
+        JLabel iconoEscalera = new JLabel("");
+        iconoEscalera.setIcon(new ImageIcon(Inicio.class.getResource("/resources/escalera-de-mano.png")));
+        iconoEscalera.setBounds(242, 366, 80, 66);
+        contentPane.add(iconoEscalera);
 
-        JLabel lblNewLabel_2_2 = new JLabel("");
-        lblNewLabel_2_2.setIcon(new ImageIcon(Inicio.class.getResource("/resources/barniz.png")));
-        lblNewLabel_2_2.setBounds(629, 24, 80, 64);
-        contentPane.add(lblNewLabel_2_2);
+        JLabel iconoBarniz = new JLabel("");
+        iconoBarniz.setIcon(new ImageIcon(Inicio.class.getResource("/resources/barniz.png")));
+        iconoBarniz.setBounds(629, 24, 80, 64);
+        contentPane.add(iconoBarniz);
 
-        JLabel lblNewLabel_1_1 = new JLabel("");
-        lblNewLabel_1_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/sin-disolventes.png")));
-        lblNewLabel_1_1.setBounds(614, 99, 80, 72);
-        contentPane.add(lblNewLabel_1_1);
+        JLabel iconoDisolvente = new JLabel("");
+        iconoDisolvente.setIcon(new ImageIcon(Inicio.class.getResource("/resources/sin-disolventes.png")));
+        iconoDisolvente.setBounds(614, 99, 80, 72);
+        contentPane.add(iconoDisolvente);
 
-        JLabel lblNewLabel_3_1 = new JLabel("");
-        lblNewLabel_3_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rollos-de-papel.png")));
-        lblNewLabel_3_1.setBounds(629, 197, 80, 67);
-        contentPane.add(lblNewLabel_3_1);
+        JLabel iconoPlasticos = new JLabel("");
+        iconoPlasticos.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rollos-de-papel.png")));
+        iconoPlasticos.setBounds(629, 197, 80, 67);
+        contentPane.add(iconoPlasticos);
 
-        JLabel lblNewLabel_4_1 = new JLabel("");
-        lblNewLabel_4_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/aerosol.png")));
-        lblNewLabel_4_1.setBounds(629, 277, 65, 72);
-        contentPane.add(lblNewLabel_4_1);
+        JLabel iconoDecapante = new JLabel("");
+        iconoDecapante.setIcon(new ImageIcon(Inicio.class.getResource("/resources/aerosol.png")));
+        iconoDecapante.setBounds(629, 277, 65, 72);
+        contentPane.add(iconoDecapante);
 
-        JLabel lblNewLabel_2_1_1 = new JLabel("");
-        lblNewLabel_2_1_1.setIcon(new ImageIcon(Inicio.class.getResource("/resources/espatula.png")));
-        lblNewLabel_2_1_1.setBounds(629, 360, 80, 72);
-        contentPane.add(lblNewLabel_2_1_1);
+        JLabel iconoEspatula = new JLabel("");
+        iconoEspatula.setIcon(new ImageIcon(Inicio.class.getResource("/resources/espatula.png")));
+        iconoEspatula.setBounds(629, 360, 80, 72);
+        contentPane.add(iconoEspatula);
 
         ProductoDB productoDB = new ProductoDB();
         Conexion conexion = new Conexion();
         Connection conn = conexion.abrirConsulta();
 
         // Obtener y mostrar el precio de la pintura
-        double precioPintura = ProductoDB.obtenerPrecio("pintura");
+        double precioPintura = ProductoDB.obtenerPrecio("Pintura");
         PrecioPintura.setText(String.valueOf(precioPintura) + "€");
 
         // Obtener y mostrar el precio del rodillo
-        double precioRodillo = ProductoDB.obtenerPrecio("rodillo");
+        double precioRodillo = ProductoDB.obtenerPrecio("Rodillo");
         PrecioRodillo.setText(String.valueOf(precioRodillo) + "€");
 
         // Obtener y mostrar el precio del papel
-        double precioPapel = ProductoDB.obtenerPrecio("papel");
+        double precioPapel = ProductoDB.obtenerPrecio("Papel");
         PrecioPapel.setText(String.valueOf(precioPapel) + "€");
 
         // Obtener y mostrar el precio de la brocha
-        double precioBrocha = ProductoDB.obtenerPrecio("brocha");
+        double precioBrocha = ProductoDB.obtenerPrecio("Brocha");
         PrecioBrocha.setText(String.valueOf(precioBrocha) + "€");
 
         // Obtener y mostrar el precio de la escalera
-        double precioEscalera = ProductoDB.obtenerPrecio("escalera");
+        double precioEscalera = ProductoDB.obtenerPrecio("Escalera");
         PrecioEscalera.setText(String.valueOf(precioEscalera) + "€");
 
-        double precioBarniz = ProductoDB.obtenerPrecio("barniz");
+        double precioBarniz = ProductoDB.obtenerPrecio("Barniz");
         PrecioBarniz.setText(String.valueOf(precioBarniz) + "€");
 
         // Obtener y mostrar el precio del disolvente
-        double precioDisolvente = ProductoDB.obtenerPrecio("disolvente");
+        double precioDisolvente = ProductoDB.obtenerPrecio("Disolvente");
         PrecioDisolvente.setText(String.valueOf(precioDisolvente) + "€");
 
         // Obtener y mostrar el precio de los plasticos
-        double precioPlasticos = ProductoDB.obtenerPrecio("plasticos");
+        double precioPlasticos = ProductoDB.obtenerPrecio("Plasticos");
         PrecioPlasticos.setText(String.valueOf(precioPlasticos) + "€");
 
         // Obtener y mostrar el precio del decapante
-        double precioDecapante = ProductoDB.obtenerPrecio("decapante");
+        double precioDecapante = ProductoDB.obtenerPrecio("Decapante");
         PrecioDecapante.setText(String.valueOf(precioDecapante) + "€");
 
         // Obtener y mostrar el precio de la espatula
-        double precioEspatula = ProductoDB.obtenerPrecio("espatula");
+        double precioEspatula = ProductoDB.obtenerPrecio("Espatula");
         PrecioEspatula.setText(String.valueOf(precioEspatula) + "€");
 
         // Obtener y mostrar las cantidades de cada producto
-        int cantStockPintura = ProductoDB.obtenerCantidad("pintura");
+        int cantStockPintura = ProductoDB.obtenerCantidad("Pintura");
         JSpinner spinnerPintura = new JSpinner();
         spinnerPintura.setEnabled(false);
         spinnerPintura.setModel(new SpinnerNumberModel(0, 0, cantStockPintura, 1));
         spinnerPintura.setBounds(174, 54, 43, 20);
         contentPane.add(spinnerPintura);
 
-        int cantStockRodillo = ProductoDB.obtenerCantidad("rodillo");
+        int cantStockRodillo = ProductoDB.obtenerCantidad("Rodillo");
         JSpinner spinnerRodillo = new JSpinner();
         spinnerRodillo.setEnabled(false);
         spinnerRodillo.setModel(new SpinnerNumberModel(0, 0, cantStockRodillo, 1));
         spinnerRodillo.setBounds(174, 126, 43, 20);
         contentPane.add(spinnerRodillo);
 
-        int cantStockPapel = ProductoDB.obtenerCantidad("papel");
+        int cantStockPapel = ProductoDB.obtenerCantidad("Papel");
         JSpinner spinnerPapel = new JSpinner();
         spinnerPapel.setEnabled(false);
         spinnerPapel.setModel(new SpinnerNumberModel(0, 0, cantStockPapel, 1));
         spinnerPapel.setBounds(174, 230, 43, 20);
         contentPane.add(spinnerPapel);
 
-        int cantStockBrocha = ProductoDB.obtenerCantidad("brocha");
+        int cantStockBrocha = ProductoDB.obtenerCantidad("Brocha");
         JSpinner spinnerBrocha = new JSpinner();
         spinnerBrocha.setEnabled(false);
         spinnerBrocha.setModel(new SpinnerNumberModel(0, 0, cantStockBrocha, 1));
         spinnerBrocha.setBounds(174, 307, 43, 20);
         contentPane.add(spinnerBrocha);
 
-        int cantStockEscalera = ProductoDB.obtenerCantidad("escalera");
+        int cantStockEscalera = ProductoDB.obtenerCantidad("Escalera");
         JSpinner spinnerEscalera = new JSpinner();
         spinnerEscalera.setEnabled(false);
         spinnerEscalera.setModel(new SpinnerNumberModel(0, 0, cantStockEscalera, 1));
         spinnerEscalera.setBounds(189, 394, 43, 20);
         contentPane.add(spinnerEscalera);
 
-        int cantStockBarniz = ProductoDB.obtenerCantidad("barniz");
+        int cantStockBarniz = ProductoDB.obtenerCantidad("Barniz");
         JSpinner spinnerBarniz = new JSpinner();
         spinnerBarniz.setEnabled(false);
         spinnerBarniz.setModel(new SpinnerNumberModel(0, 0, cantStockBarniz, 1));
         spinnerBarniz.setBounds(574, 54, 45, 20);
         contentPane.add(spinnerBarniz);
 
-        int cantStockDisolvente = ProductoDB.obtenerCantidad("disolvente");
+        int cantStockDisolvente = ProductoDB.obtenerCantidad("Disolvente");
         JSpinner spinnerDisolvente = new JSpinner();
         spinnerDisolvente.setEnabled(false);
         spinnerDisolvente.setModel(new SpinnerNumberModel(0, 0, cantStockDisolvente, 1));
         spinnerDisolvente.setBounds(574, 126, 45, 20);
         contentPane.add(spinnerDisolvente);
 
-        int cantStockPlasticos = ProductoDB.obtenerCantidad("plasticos");
+        int cantStockPlasticos = ProductoDB.obtenerCantidad("Plasticos");
         JSpinner spinnerPlasticos = new JSpinner();
         spinnerPlasticos.setEnabled(false);
         spinnerPlasticos.setModel(new SpinnerNumberModel(0, 0, cantStockPlasticos, 1));
         spinnerPlasticos.setBounds(574, 230, 45, 20);
         contentPane.add(spinnerPlasticos);
 
-        int cantStockDecapante = ProductoDB.obtenerCantidad("decapante");
+        int cantStockDecapante = ProductoDB.obtenerCantidad("Decapante");
         JSpinner spinnerDecapante = new JSpinner();
         spinnerDecapante.setEnabled(false);
         spinnerDecapante.setModel(new SpinnerNumberModel(0, 0, cantStockDecapante, 1));
         spinnerDecapante.setBounds(574, 307, 45, 20);
         contentPane.add(spinnerDecapante);
 
-        int cantStockEspatula = ProductoDB.obtenerCantidad("espatula");
+        int cantStockEspatula = ProductoDB.obtenerCantidad("Espatula");
         JSpinner spinnerEspatula = new JSpinner();
         spinnerEspatula.setEnabled(false);
         spinnerEspatula.setModel(new SpinnerNumberModel(0, 0, cantStockEspatula, 1));
@@ -445,11 +443,11 @@ public class Inicio extends JFrame {
             });
         }
 
-        JButton btnNewButton = new JButton("COMPRAR");
-        btnNewButton.setIcon(new ImageIcon(Inicio.class.getResource("/resources/carrito-de-supermercado (1).png")));
-        btnNewButton.setBounds(506, 486, 151, 35);
-        contentPane.add(btnNewButton);
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnComprar = new JButton("COMPRAR");
+        btnComprar.setIcon(new ImageIcon(Inicio.class.getResource("/resources/carrito-de-supermercado (1).png")));
+        btnComprar.setBounds(506, 486, 151, 35);
+        contentPane.add(btnComprar);
+        btnComprar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Conexion conexion = new Conexion();
@@ -479,6 +477,7 @@ public class Inicio extends JFrame {
                                         }
                                     }
                                     JOptionPane.showMessageDialog(null, mensaje, "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
+                                    actualizarPreciosYCantidades();
                                 } else {
                                     conn.rollback();
                                     JOptionPane.showMessageDialog(null, "Error al actualizar el stock.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -501,11 +500,6 @@ public class Inicio extends JFrame {
                 }
             }
         });
-
-
-
-
-
 
         Integer i = Integer.parseInt(spinnerPintura.getValue().toString());
         double totalProductos = precioPintura * i + precioRodillo * i + precioPapel * i + precioBrocha * i + precioEscalera * i + precioBarniz * i + precioDisolvente * i + precioPlasticos * i + precioDecapante * i + precioEspatula * i;
@@ -543,12 +537,12 @@ public class Inicio extends JFrame {
         String precioTotalTexto = String.valueOf(precioTotal);
         PanelTotal.setText(precioTotalTexto);
 
-        JButton historial = new JButton("Historial de Compras");
-        historial.setIcon(new ImageIcon(Inicio.class.getResource("/resources/historial-medico (1).png")));
-        historial.setBounds(10, 491, 190, 34);
-        contentPane.add(historial);
+        JButton btnHistorial = new JButton("Historial de Compras");
+        btnHistorial.setIcon(new ImageIcon(Inicio.class.getResource("/resources/historial-medico (1).png")));
+        btnHistorial.setBounds(10, 491, 190, 34);
+        contentPane.add(btnHistorial);
 
-        historial.addActionListener(new ActionListener() {
+        btnHistorial.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String dniUsuario = usuario_logueado.getDNI();
                 HistorialCompras historial = new HistorialCompras(dniUsuario);
@@ -609,7 +603,6 @@ public class Inicio extends JFrame {
         return productosSinStock;
     }
 
-
     private boolean actualizarStock(ArrayList<JSpinner> componentesSeleccionados, Connection conn, ArrayList<String> productosSinStock) throws SQLException {
         for (int i = 0; i < componentesSeleccionados.size(); i++) {
             if (!productosSinStock.contains(nombresProductos[i])) {
@@ -621,5 +614,25 @@ public class Inicio extends JFrame {
         return true;
     }
 
+    private void actualizarPreciosYCantidades() {
+        try {
+            Conexion conexion = new Conexion();
+            Connection conn = conexion.abrirConsulta();
 
+            for (int i = 0; i < componentes.size(); i++) {
+                String nombreProducto = nombresProductos[i];
+                double precio = ProductoDB.obtenerPrecio(nombreProducto);
+                int cantidad = ProductoDB.obtenerCantidad(nombreProducto);
+
+                labels.get(i).setText(String.valueOf(precio) + "€");
+                componentes.get(i).setModel(new SpinnerNumberModel(0, 0, cantidad, 1));
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

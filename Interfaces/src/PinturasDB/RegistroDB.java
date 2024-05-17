@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import ProyectoPinturas.Conexion;
+import PinturasInterface.Conexion;
 import ProyectoPinturas.Usuario;
 
 public class RegistroDB extends JFrame{
