@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 public class Inicio extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    private HistorialCompras historialComprasFrame;
     private JPanel contentPane;
     Usuario usuario_logueado;
     private Date fechaActual = new Date(System.currentTimeMillis());
@@ -39,400 +40,85 @@ public class Inicio extends JFrame {
         contentPane.setLayout(null);
         this.usuario_logueado = usuario_logueado;
 
-        JLabel PrecioPintura = new JLabel();
-        PrecioPintura.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioPintura.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioPintura.setBounds(119, 57, 57, 14);
-        contentPane.add(PrecioPintura);
+        // Crear los labels de precio y agregar al contentPane
+        JLabel[] labelsPrecios = new JLabel[nombresProductos.length];
+        for (int i = 0; i < nombresProductos.length; i++) {
+            labelsPrecios[i] = new JLabel();
+            labelsPrecios[i].setFont(new Font("Tahoma", Font.PLAIN, 15));
+            labelsPrecios[i].setHorizontalAlignment(SwingConstants.CENTER);
+            if (i < 5) {
+                labelsPrecios[i].setBounds(119, 57 + i * 72, 57, 14);
+            } else {
+                labelsPrecios[i].setBounds(519, 57 + (i - 5) * 72, 57, 14);
+            }
+            contentPane.add(labelsPrecios[i]);
+        }
 
-        JLabel PrecioRodillo = new JLabel();
-        PrecioRodillo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioRodillo.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioRodillo.setBounds(119, 129, 57, 14);
-        contentPane.add(PrecioRodillo);
-
-        JLabel PrecioPapel = new JLabel();
-        PrecioPapel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioPapel.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioPapel.setBounds(119, 233, 57, 14);
-        contentPane.add(PrecioPapel);
-
-        JLabel PrecioBrocha = new JLabel();
-        PrecioBrocha.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioBrocha.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioBrocha.setBounds(119, 310, 57, 14);
-        contentPane.add(PrecioBrocha);
-
-        JLabel PrecioEscalera = new JLabel();
-        PrecioEscalera.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioEscalera.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioEscalera.setBounds(134, 397, 57, 14);
-        contentPane.add(PrecioEscalera);
-
-        JLabel PrecioBarniz = new JLabel();
-        PrecioBarniz.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioBarniz.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioBarniz.setBounds(519, 57, 57, 14);
-        contentPane.add(PrecioBarniz);
-
-        JLabel PrecioDisolvente = new JLabel();
-        PrecioDisolvente.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioDisolvente.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioDisolvente.setBounds(519, 129, 57, 14);
-        contentPane.add(PrecioDisolvente);
-
-        JLabel PrecioPlasticos = new JLabel();
-        PrecioPlasticos.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioPlasticos.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioPlasticos.setBounds(519, 233, 57, 14);
-        contentPane.add(PrecioPlasticos);
-
-        JLabel PrecioDecapante = new JLabel();
-        PrecioDecapante.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioDecapante.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioDecapante.setBounds(519, 310, 57, 14);
-        contentPane.add(PrecioDecapante);
-
-        JLabel PrecioEspatula = new JLabel();
-        PrecioEspatula.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        PrecioEspatula.setHorizontalAlignment(SwingConstants.CENTER);
-        PrecioEspatula.setBounds(519, 397, 57, 14);
-        contentPane.add(PrecioEspatula);
-
-        JLabel iconoPintura = new JLabel("");
-        iconoPintura.setIcon(new ImageIcon(Inicio.class.getResource("/resources/bote-de-pintura (1).png")));
-        iconoPintura.setBounds(227, 11, 73, 72);
-        contentPane.add(iconoPintura);
-
-        JLabel iconoRodillo = new JLabel("");
-        iconoRodillo.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rodillo.png")));
-        iconoRodillo.setBounds(227, 105, 73, 66);
-        contentPane.add(iconoRodillo);
-
-        JLabel iconoPapel = new JLabel("");
-        iconoPapel.setIcon(new ImageIcon(Inicio.class.getResource("/resources/toalla-de-papel (1).png")));
-        iconoPapel.setBounds(227, 197, 73, 67);
-        contentPane.add(iconoPapel);
-
-        JLabel iconoBrocha = new JLabel("");
-        iconoBrocha.setIcon(new ImageIcon(Inicio.class.getResource("/resources/construccion.png")));
-        iconoBrocha.setBounds(227, 275, 73, 66);
-        contentPane.add(iconoBrocha);
-
-        JLabel iconoEscalera = new JLabel("");
-        iconoEscalera.setIcon(new ImageIcon(Inicio.class.getResource("/resources/escalera-de-mano.png")));
-        iconoEscalera.setBounds(242, 366, 80, 66);
-        contentPane.add(iconoEscalera);
-
-        JLabel iconoBarniz = new JLabel("");
-        iconoBarniz.setIcon(new ImageIcon(Inicio.class.getResource("/resources/barniz.png")));
-        iconoBarniz.setBounds(629, 24, 80, 64);
-        contentPane.add(iconoBarniz);
-
-        JLabel iconoDisolvente = new JLabel("");
-        iconoDisolvente.setIcon(new ImageIcon(Inicio.class.getResource("/resources/sin-disolventes.png")));
-        iconoDisolvente.setBounds(614, 99, 80, 72);
-        contentPane.add(iconoDisolvente);
-
-        JLabel iconoPlasticos = new JLabel("");
-        iconoPlasticos.setIcon(new ImageIcon(Inicio.class.getResource("/resources/rollos-de-papel.png")));
-        iconoPlasticos.setBounds(629, 197, 80, 67);
-        contentPane.add(iconoPlasticos);
-
-        JLabel iconoDecapante = new JLabel("");
-        iconoDecapante.setIcon(new ImageIcon(Inicio.class.getResource("/resources/aerosol.png")));
-        iconoDecapante.setBounds(629, 277, 65, 72);
-        contentPane.add(iconoDecapante);
-
-        JLabel iconoEspatula = new JLabel("");
-        iconoEspatula.setIcon(new ImageIcon(Inicio.class.getResource("/resources/espatula.png")));
-        iconoEspatula.setBounds(629, 360, 80, 72);
-        contentPane.add(iconoEspatula);
+        // Crear los iconos de los productos y agregar al contentPane
+        JLabel[] iconosProductos = new JLabel[nombresProductos.length];
+        String[] iconosPaths = { "bote-de-pintura (1).png", "rodillo.png", "toalla-de-papel (1).png", "construccion.png", "escalera-de-mano.png", "barniz.png", "sin-disolventes.png", "rollos-de-papel.png", "aerosol.png", "espatula.png" };
+        for (int i = 0; i < nombresProductos.length; i++) {
+            iconosProductos[i] = new JLabel("");
+            iconosProductos[i].setIcon(new ImageIcon(Inicio.class.getResource("/resources/" + iconosPaths[i])));
+            if (i < 5) {
+                iconosProductos[i].setBounds(227, 11 + i * 72, 73, 72);
+            } else {
+                iconosProductos[i].setBounds(629, 24 + (i - 5) * 72, 73, 72);
+            }
+            contentPane.add(iconosProductos[i]);
+        }
 
         ProductoDB productoDB = new ProductoDB();
         Conexion conexion = new Conexion();
         Connection conn = conexion.abrirConsulta();
 
-        // Obtener y mostrar el precio de la pintura
-        double precioPintura = ProductoDB.obtenerPrecio("Pintura");
-        PrecioPintura.setText(String.valueOf(precioPintura) + "€");
+        // Obtener y mostrar los precios y cantidades de cada producto
+        for (int i = 0; i < nombresProductos.length; i++) {
+            double precio = ProductoDB.obtenerPrecio(nombresProductos[i]);
+            labelsPrecios[i].setText(String.valueOf(precio) + "€");
 
-        // Obtener y mostrar el precio del rodillo
-        double precioRodillo = ProductoDB.obtenerPrecio("Rodillo");
-        PrecioRodillo.setText(String.valueOf(precioRodillo) + "€");
-
-        // Obtener y mostrar el precio del papel
-        double precioPapel = ProductoDB.obtenerPrecio("Papel");
-        PrecioPapel.setText(String.valueOf(precioPapel) + "€");
-
-        // Obtener y mostrar el precio de la brocha
-        double precioBrocha = ProductoDB.obtenerPrecio("Brocha");
-        PrecioBrocha.setText(String.valueOf(precioBrocha) + "€");
-
-        // Obtener y mostrar el precio de la escalera
-        double precioEscalera = ProductoDB.obtenerPrecio("Escalera");
-        PrecioEscalera.setText(String.valueOf(precioEscalera) + "€");
-
-        double precioBarniz = ProductoDB.obtenerPrecio("Barniz");
-        PrecioBarniz.setText(String.valueOf(precioBarniz) + "€");
-
-        // Obtener y mostrar el precio del disolvente
-        double precioDisolvente = ProductoDB.obtenerPrecio("Disolvente");
-        PrecioDisolvente.setText(String.valueOf(precioDisolvente) + "€");
-
-        // Obtener y mostrar el precio de los plasticos
-        double precioPlasticos = ProductoDB.obtenerPrecio("Plasticos");
-        PrecioPlasticos.setText(String.valueOf(precioPlasticos) + "€");
-
-        // Obtener y mostrar el precio del decapante
-        double precioDecapante = ProductoDB.obtenerPrecio("Decapante");
-        PrecioDecapante.setText(String.valueOf(precioDecapante) + "€");
-
-        // Obtener y mostrar el precio de la espatula
-        double precioEspatula = ProductoDB.obtenerPrecio("Espatula");
-        PrecioEspatula.setText(String.valueOf(precioEspatula) + "€");
-
-        // Obtener y mostrar las cantidades de cada producto
-        int cantStockPintura = ProductoDB.obtenerCantidad("Pintura");
-        JSpinner spinnerPintura = new JSpinner();
-        spinnerPintura.setEnabled(false);
-        spinnerPintura.setModel(new SpinnerNumberModel(0, 0, cantStockPintura, 1));
-        spinnerPintura.setBounds(174, 54, 43, 20);
-        contentPane.add(spinnerPintura);
-
-        int cantStockRodillo = ProductoDB.obtenerCantidad("Rodillo");
-        JSpinner spinnerRodillo = new JSpinner();
-        spinnerRodillo.setEnabled(false);
-        spinnerRodillo.setModel(new SpinnerNumberModel(0, 0, cantStockRodillo, 1));
-        spinnerRodillo.setBounds(174, 126, 43, 20);
-        contentPane.add(spinnerRodillo);
-
-        int cantStockPapel = ProductoDB.obtenerCantidad("Papel");
-        JSpinner spinnerPapel = new JSpinner();
-        spinnerPapel.setEnabled(false);
-        spinnerPapel.setModel(new SpinnerNumberModel(0, 0, cantStockPapel, 1));
-        spinnerPapel.setBounds(174, 230, 43, 20);
-        contentPane.add(spinnerPapel);
-
-        int cantStockBrocha = ProductoDB.obtenerCantidad("Brocha");
-        JSpinner spinnerBrocha = new JSpinner();
-        spinnerBrocha.setEnabled(false);
-        spinnerBrocha.setModel(new SpinnerNumberModel(0, 0, cantStockBrocha, 1));
-        spinnerBrocha.setBounds(174, 307, 43, 20);
-        contentPane.add(spinnerBrocha);
-
-        int cantStockEscalera = ProductoDB.obtenerCantidad("Escalera");
-        JSpinner spinnerEscalera = new JSpinner();
-        spinnerEscalera.setEnabled(false);
-        spinnerEscalera.setModel(new SpinnerNumberModel(0, 0, cantStockEscalera, 1));
-        spinnerEscalera.setBounds(189, 394, 43, 20);
-        contentPane.add(spinnerEscalera);
-
-        int cantStockBarniz = ProductoDB.obtenerCantidad("Barniz");
-        JSpinner spinnerBarniz = new JSpinner();
-        spinnerBarniz.setEnabled(false);
-        spinnerBarniz.setModel(new SpinnerNumberModel(0, 0, cantStockBarniz, 1));
-        spinnerBarniz.setBounds(574, 54, 45, 20);
-        contentPane.add(spinnerBarniz);
-
-        int cantStockDisolvente = ProductoDB.obtenerCantidad("Disolvente");
-        JSpinner spinnerDisolvente = new JSpinner();
-        spinnerDisolvente.setEnabled(false);
-        spinnerDisolvente.setModel(new SpinnerNumberModel(0, 0, cantStockDisolvente, 1));
-        spinnerDisolvente.setBounds(574, 126, 45, 20);
-        contentPane.add(spinnerDisolvente);
-
-        int cantStockPlasticos = ProductoDB.obtenerCantidad("Plasticos");
-        JSpinner spinnerPlasticos = new JSpinner();
-        spinnerPlasticos.setEnabled(false);
-        spinnerPlasticos.setModel(new SpinnerNumberModel(0, 0, cantStockPlasticos, 1));
-        spinnerPlasticos.setBounds(574, 230, 45, 20);
-        contentPane.add(spinnerPlasticos);
-
-        int cantStockDecapante = ProductoDB.obtenerCantidad("Decapante");
-        JSpinner spinnerDecapante = new JSpinner();
-        spinnerDecapante.setEnabled(false);
-        spinnerDecapante.setModel(new SpinnerNumberModel(0, 0, cantStockDecapante, 1));
-        spinnerDecapante.setBounds(574, 307, 45, 20);
-        contentPane.add(spinnerDecapante);
-
-        int cantStockEspatula = ProductoDB.obtenerCantidad("Espatula");
-        JSpinner spinnerEspatula = new JSpinner();
-        spinnerEspatula.setEnabled(false);
-        spinnerEspatula.setModel(new SpinnerNumberModel(0, 0, cantStockEspatula, 1));
-        spinnerEspatula.setBounds(574, 394, 45, 20);
-        contentPane.add(spinnerEspatula);
+            int cantStock = ProductoDB.obtenerCantidad(nombresProductos[i]);
+            JSpinner spinner = new JSpinner();
+            spinner.setEnabled(false);
+            spinner.setModel(new SpinnerNumberModel(0, 0, cantStock, 1));
+            if (i < 5) {
+                spinner.setBounds(174, 54 + i * 72, 43, 20);
+            } else {
+                spinner.setBounds(574, 54 + (i - 5) * 72, 45, 20);
+            }
+            contentPane.add(spinner);
+            componentes.add(spinner);
+            labels.add(labelsPrecios[i]);
+        }
 
         // Cerrar la conexión después de usarla
         if (conn != null) {
             conn.close();
         }
 
-        JCheckBox BoxPintura = new JCheckBox("Pintura");
-        BoxPintura.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxPintura.setBounds(25, 51, 97, 23);
-        contentPane.add(BoxPintura);
-        BoxPintura.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxPintura.isSelected()) {
-                    spinnerPintura.setEnabled(true);
-                } else {
-                    spinnerPintura.setEnabled(false);
-                }
+        // Crear los checkboxes y agregar al contentPane
+        for (int i = 0; i < nombresProductos.length; i++) {
+            JCheckBox checkBox = new JCheckBox(nombresProductos[i]);
+            checkBox.setFont(new Font("Monospaced", Font.PLAIN, 16));
+            if (i < 5) {
+                checkBox.setBounds(25, 51 + i * 72, 97, 23);
+            } else {
+                checkBox.setBounds(388, 54 + (i - 5) * 72, 125, 23);
             }
-        });
-
-        JCheckBox BoxRodillo = new JCheckBox("Rodillo");
-        BoxRodillo.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxRodillo.setBounds(25, 123, 101, 23);
-        contentPane.add(BoxRodillo);
-        BoxRodillo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxRodillo.isSelected()) {
-                    spinnerRodillo.setEnabled(true);
-                } else {
-                    spinnerRodillo.setEnabled(false);
+            contentPane.add(checkBox);
+            int index = i; // Necesario para usar en el ActionListener
+            checkBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    componentes.get(index).setEnabled(checkBox.isSelected());
                 }
-            }
-        });
-
-        JCheckBox BoxPapel = new JCheckBox("Papel");
-        BoxPapel.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxPapel.setBounds(25, 227, 88, 23);
-        contentPane.add(BoxPapel);
-        BoxPapel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxPapel.isSelected()) {
-                    spinnerPapel.setEnabled(true);
-                } else {
-                    spinnerPapel.setEnabled(false);
-                }
-            }
-        });
-
-        JCheckBox BoxBrocha = new JCheckBox("Brocha");
-        BoxBrocha.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxBrocha.setBounds(25, 304, 89, 23);
-        contentPane.add(BoxBrocha);
-        BoxBrocha.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxBrocha.isSelected()) {
-                    spinnerBrocha.setEnabled(true);
-                } else {
-                    spinnerBrocha.setEnabled(false);
-                }
-            }
-        });
-
-        JCheckBox BoxEscalera = new JCheckBox("Escalera");
-        BoxEscalera.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxEscalera.setBounds(21, 391, 110, 23);
-        contentPane.add(BoxEscalera);
-        BoxEscalera.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxEscalera.isSelected()) {
-                    spinnerEscalera.setEnabled(true);
-                } else {
-                    spinnerEscalera.setEnabled(false);
-                }
-            }
-        });
-
-        JCheckBox BoxBarniz = new JCheckBox("Barniz");
-        BoxBarniz.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxBarniz.setBounds(388, 54, 97, 23);
-        contentPane.add(BoxBarniz);
-        BoxBarniz.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxBarniz.isSelected()) {
-                    spinnerBarniz.setEnabled(true);
-                } else {
-                    spinnerBarniz.setEnabled(false);
-                }
-            }
-        });
-
-        JCheckBox BoxDisolvente = new JCheckBox("Disolvente");
-        BoxDisolvente.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxDisolvente.setBounds(388, 126, 125, 23);
-        contentPane.add(BoxDisolvente);
-        BoxDisolvente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxDisolvente.isSelected()) {
-                    spinnerDisolvente.setEnabled(true);
-                } else {
-                    spinnerDisolvente.setEnabled(false);
-                }
-            }
-        });
-
-        JCheckBox BoxPlasticos = new JCheckBox("Plasticos");
-        BoxPlasticos.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxPlasticos.setBounds(388, 230, 125, 23);
-        contentPane.add(BoxPlasticos);
-        BoxPlasticos.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxPlasticos.isSelected()) {
-                    spinnerPlasticos.setEnabled(true);
-                } else {
-                    spinnerPlasticos.setEnabled(false);
-                }
-            }
-        });
-
-        JCheckBox BoxDecapante = new JCheckBox("Decapante");
-        BoxDecapante.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxDecapante.setBounds(388, 307, 125, 23);
-        contentPane.add(BoxDecapante);
-        BoxDecapante.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxDecapante.isSelected()) {
-                    spinnerDecapante.setEnabled(true);
-                } else {
-                    spinnerDecapante.setEnabled(false);
-                }
-            }
-        });
-
-        JCheckBox BoxEspatula = new JCheckBox("Espatula");
-        BoxEspatula.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        BoxEspatula.setBounds(388, 394, 110, 23);
-        contentPane.add(BoxEspatula);
-        BoxEspatula.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (BoxEspatula.isSelected()) {
-                    spinnerEspatula.setEnabled(true);
-                } else {
-                    spinnerEspatula.setEnabled(false);
-                }
-            }
-        });
+            });
+        }
 
         JTextField PanelTotal = new JTextField();
-
-        componentes.add(spinnerPintura);
-        componentes.add(spinnerRodillo);
-        componentes.add(spinnerPapel);
-        componentes.add(spinnerBrocha);
-        componentes.add(spinnerEscalera);
-        componentes.add(spinnerBarniz);
-        componentes.add(spinnerDisolvente);
-        componentes.add(spinnerPlasticos);
-        componentes.add(spinnerDecapante);
-        componentes.add(spinnerEspatula);
-
-        disableSpinnerEdit(componentes);
-
-        labels.add(PrecioPintura);
-        labels.add(PrecioRodillo);
-        labels.add(PrecioPapel);
-        labels.add(PrecioBrocha);
-        labels.add(PrecioEscalera);
-        labels.add(PrecioBarniz);
-        labels.add(PrecioDisolvente);
-        labels.add(PrecioPlasticos);
-        labels.add(PrecioDecapante);
-        labels.add(PrecioEspatula);
+        PanelTotal.setBackground(Color.ORANGE);
+        PanelTotal.setForeground(new Color(0, 0, 255));
+        PanelTotal.setBounds(210, 498, 272, 20);
+        contentPane.add(PanelTotal);
 
         for (JSpinner componente : componentes) {
             componente.addChangeListener(new ChangeListener() {
@@ -452,14 +138,14 @@ public class Inicio extends JFrame {
                 try {
                     Conexion conexion = new Conexion();
                     try (Connection conn = conexion.abrirConsulta()) {
-                        conn.setAutoCommit(false); // Desactivar el autocommit para manejar transacciones manualmente
+                        conn.setAutoCommit(false);
 
                         ArrayList<String> productosSinStock = verificarStock(conn);
                         if (productosSinStock.size() < componentes.size()) {
                             int idCompra = CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual, conn);
                             if (idCompra != -1) {
-                                ArrayList<JSpinner> componentesSeleccionados = new ArrayList<JSpinner>();
-                                ArrayList<JLabel> labelsSeleccionados = new ArrayList<JLabel>();
+                                ArrayList<JSpinner> componentesSeleccionados = new ArrayList<>();
+                                ArrayList<JLabel> labelsSeleccionados = new ArrayList<>();
                                 for (int i = 0; i < componentes.size(); i++) {
                                     if (componentes.get(i).isEnabled() && !productosSinStock.contains(nombresProductos[i])) {
                                         componentesSeleccionados.add(componentes.get(i));
@@ -478,6 +164,9 @@ public class Inicio extends JFrame {
                                     }
                                     JOptionPane.showMessageDialog(null, mensaje, "Compra realizada", JOptionPane.INFORMATION_MESSAGE);
                                     actualizarPreciosYCantidades();
+                                    if (historialComprasFrame != null) {
+                                        historialComprasFrame.updateTable();
+                                    }
                                 } else {
                                     conn.rollback();
                                     JOptionPane.showMessageDialog(null, "Error al actualizar el stock.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -501,41 +190,7 @@ public class Inicio extends JFrame {
             }
         });
 
-        Integer i = Integer.parseInt(spinnerPintura.getValue().toString());
-        double totalProductos = precioPintura * i + precioRodillo * i + precioPapel * i + precioBrocha * i + precioEscalera * i + precioBarniz * i + precioDisolvente * i + precioPlasticos * i + precioDecapante * i + precioEspatula * i;
-        String valorTextonumerico = String.valueOf(totalProductos);
 
-        PanelTotal.setText(valorTextonumerico);
-        PanelTotal.setBackground(Color.ORANGE);
-        PanelTotal.setForeground(new Color(0, 0, 255));
-        PanelTotal.setBounds(210, 498, 272, 20);
-        contentPane.add(PanelTotal);
-
-        int cantidadPintura = (int) spinnerPintura.getValue();
-        int cantidadRodillo = (int) spinnerRodillo.getValue();
-        int cantidadPapel = (int) spinnerPapel.getValue();
-        int cantidadBrocha = (int) spinnerBrocha.getValue();
-        int cantidadEscalera = (int) spinnerEscalera.getValue();
-        int cantidadBarniz = (int) spinnerBarniz.getValue();
-        int cantidadDisolvente = (int) spinnerDisolvente.getValue();
-        int cantidadPlasticos = (int) spinnerPlasticos.getValue();
-        int cantidadDecapante = (int) spinnerDecapante.getValue();
-        int cantidadEspatula = (int) spinnerEspatula.getValue();
-
-        double precioTotalPintura = precioPintura * cantidadPintura;
-        double precioTotalRodillo = precioRodillo * cantidadRodillo;
-        double precioTotalPapel = precioPapel * cantidadPapel;
-        double precioTotalBrocha = precioBrocha * cantidadBrocha;
-        double precioTotalEscalera = precioEscalera * cantidadEscalera;
-        double precioTotalBarniz = precioBarniz * cantidadBarniz;
-        double precioTotalDisolvente = precioDisolvente * cantidadDisolvente;
-        double precioTotalPlasticos = precioPlasticos * cantidadPlasticos;
-        double precioTotalDecapante = precioDecapante * cantidadDecapante;
-        double precioTotalEspatula = precioEspatula * cantidadEspatula;
-
-        precioTotal = precioTotalPintura + precioTotalRodillo + precioTotalPapel + precioTotalBrocha + precioTotalEscalera + precioTotalBarniz + precioTotalDisolvente + precioTotalPlasticos + precioTotalDecapante + precioTotalEspatula;
-        String precioTotalTexto = String.valueOf(precioTotal);
-        PanelTotal.setText(precioTotalTexto);
 
         JButton btnHistorial = new JButton("Historial de Compras");
         btnHistorial.setIcon(new ImageIcon(Inicio.class.getResource("/resources/historial-medico (1).png")));
@@ -544,9 +199,11 @@ public class Inicio extends JFrame {
 
         btnHistorial.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String dniUsuario = usuario_logueado.getDNI();
-                HistorialCompras historial = new HistorialCompras(dniUsuario);
-                historial.setVisible(true);
+                if (historialComprasFrame == null) {
+                    historialComprasFrame = new HistorialCompras(usuario_logueado.getDNI());
+                }
+                historialComprasFrame.updateTable();
+                historialComprasFrame.setVisible(true);
             }
         });
 
@@ -556,7 +213,7 @@ public class Inicio extends JFrame {
         contentPane.add(btnSalir);
         btnSalir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(0); // Cerrar la aplicación al hacer clic en el botón "Salir"
+                System.exit(0);
             }
         });
 
@@ -605,10 +262,15 @@ public class Inicio extends JFrame {
 
     private boolean actualizarStock(ArrayList<JSpinner> componentesSeleccionados, Connection conn, ArrayList<String> productosSinStock) throws SQLException {
         for (int i = 0; i < componentesSeleccionados.size(); i++) {
-            if (!productosSinStock.contains(nombresProductos[i])) {
+            String nombreProducto = nombresProductos[i];
+            if (!productosSinStock.contains(nombreProducto)) {
                 int cantidadComprada = (Integer) componentesSeleccionados.get(i).getValue();
-                int stockActual = ProductoDB.obtenerCantidad(nombresProductos[i]);
-                ProductoDB.actualizarCantidad(nombresProductos[i], stockActual - cantidadComprada, conn);
+                int stockActual = ProductoDB.obtenerCantidad(nombreProducto);
+                if (cantidadComprada <= stockActual) {
+                    ProductoDB.actualizarCantidad(nombreProducto, stockActual - cantidadComprada, conn);
+                } else {
+                    return false; // Error: Intentando comprar más de lo que hay en stock
+                }
             }
         }
         return true;

@@ -18,7 +18,7 @@ public class Administrador extends JFrame {
     private JLabel precioDB;
     private JLabel cantidadDB;
     private JTextField txtNuevoPrecio;
-    private JSpinner spinner;
+    private JSpinner spinnerModificarPrroducto;
    
     public Administrador(Usuario user) {
         setTitle("PANTALLA ADMINISTRADOR MODIFICAR PRODUCTOS");
@@ -37,42 +37,42 @@ public class Administrador extends JFrame {
         precioDB.setOpaque(true);
         despegableProductos.add(precioDB);
       
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.setModel(new DefaultComboBoxModel<>(new String[]{
+        JComboBox<String> despegableProducto = new JComboBox<>();
+        despegableProducto.setModel(new DefaultComboBoxModel<>(new String[]{
                 "", "Pintura", "Rodillo", "Papel", "Brocha", "Escalera", "Barniz", "Disolvente", "Plasticos", "Decapante", "Espatula"}));
-        comboBox.setBounds(10, 261, 206, 30);
-        comboBox.setForeground(new Color(255, 128, 64));
-        comboBox.setFont(new Font("Tahoma", Font.BOLD, 22));
-        despegableProductos.add(comboBox);
+        despegableProducto.setBounds(10, 261, 206, 30);
+        despegableProducto.setForeground(new Color(255, 128, 64));
+        despegableProducto.setFont(new Font("Tahoma", Font.BOLD, 22));
+        despegableProductos.add(despegableProducto);
 
-        JLabel lblNewLabel_1 = new JLabel("PRODUCTO");
-        lblNewLabel_1.setForeground(new Color(255, 0, 0));
-        lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 22));
-        lblNewLabel_1.setBounds(42, 208, 153, 28);
-        despegableProductos.add(lblNewLabel_1);
+        JLabel nombreProducto = new JLabel("PRODUCTO");
+        nombreProducto.setForeground(new Color(255, 0, 0));
+        nombreProducto.setHorizontalAlignment(SwingConstants.CENTER);
+        nombreProducto.setFont(new Font("Tahoma", Font.BOLD, 22));
+        nombreProducto.setBounds(42, 208, 153, 28);
+        despegableProductos.add(nombreProducto);
 
-        JLabel precio = new JLabel("PRECIO");
-        precio.setForeground(new Color(64, 0, 128));
-        precio.setFont(new Font("Tahoma", Font.BOLD, 22));
-        precio.setHorizontalAlignment(SwingConstants.CENTER);
-        precio.setBounds(300, 201, 129, 42);
-        despegableProductos.add(precio);
+        JLabel nombrePrecio = new JLabel("PRECIO");
+        nombrePrecio.setForeground(new Color(64, 0, 128));
+        nombrePrecio.setFont(new Font("Tahoma", Font.BOLD, 22));
+        nombrePrecio.setHorizontalAlignment(SwingConstants.CENTER);
+        nombrePrecio.setBounds(300, 201, 129, 42);
+        despegableProductos.add(nombrePrecio);
 
-        JButton btnNewButton = new JButton("AÑADIR");
-        btnNewButton.setIcon(new ImageIcon(Administrador.class.getResource("/resources/anadir-al-carrito.png")));
-        btnNewButton.setBounds(493, 371, 122, 35);
-        despegableProductos.add(btnNewButton);
+        JButton botonAñadir = new JButton("AÑADIR");
+        botonAñadir.setIcon(new ImageIcon(Administrador.class.getResource("/resources/anadir-al-carrito.png")));
+        botonAñadir.setBounds(493, 371, 122, 35);
+        despegableProductos.add(botonAñadir);
 
-        JButton btnNewButton_1 = new JButton("ELIMINAR");
-        btnNewButton_1.setIcon(new ImageIcon(Administrador.class.getResource("/resources/boton-eliminar.png")));
-        btnNewButton_1.setBounds(644, 371, 122, 35);
-        despegableProductos.add(btnNewButton_1);
+        JButton botonEliminar = new JButton("ELIMINAR");
+        botonEliminar.setIcon(new ImageIcon(Administrador.class.getResource("/resources/boton-eliminar.png")));
+        botonEliminar.setBounds(644, 371, 122, 35);
+        despegableProductos.add(botonEliminar);
 
-        JButton btnNewButton_2 = new JButton("CAMBIAR PRECIO");
-        btnNewButton_2.setIcon(new ImageIcon(Administrador.class.getResource("/resources/euro.png")));
-        btnNewButton_2.setBounds(265, 371, 176, 35);
-        despegableProductos.add(btnNewButton_2);
+        JButton botonCambiarPrecio = new JButton("CAMBIAR PRECIO");
+        botonCambiarPrecio.setIcon(new ImageIcon(Administrador.class.getResource("/resources/euro.png")));
+        botonCambiarPrecio.setBounds(265, 371, 176, 35);
+        despegableProductos.add(botonCambiarPrecio);
 
         txtNuevoPrecio = new JTextField();
         txtNuevoPrecio.setBounds(299, 336, 96, 22);
@@ -85,9 +85,9 @@ public class Administrador extends JFrame {
         lblNuevoPrecio.setBounds(149, 335, 134, 20);
         despegableProductos.add(lblNuevoPrecio);
 
-        spinner = new JSpinner(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-        spinner.setBounds(603, 334, 48, 26);
-        despegableProductos.add(spinner);
+        spinnerModificarPrroducto = new JSpinner(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spinnerModificarPrroducto.setBounds(603, 334, 48, 26);
+        despegableProductos.add(spinnerModificarPrroducto);
 
         cantidadDB = new JLabel(""); 
         cantidadDB.setBounds(556, 261, 147, 30);
@@ -97,26 +97,26 @@ public class Administrador extends JFrame {
         cantidadDB.setOpaque(true);
         despegableProductos.add(cantidadDB);
 
-        setupActionListeners(comboBox, btnNewButton, btnNewButton_1, btnNewButton_2);
+        setupActionListeners(despegableProducto, botonAñadir, botonEliminar, botonCambiarPrecio);
         
-        JButton btnNewButton_3 = new JButton("SALIR");
-        btnNewButton_3.setIcon(new ImageIcon(Administrador.class.getResource("/resources/boton.png")));
-        btnNewButton_3.setBounds(726, 631, 122, 31);
-        btnNewButton_3.addActionListener(new ActionListener() {
+        JButton botonSalir = new JButton("SALIR");
+        botonSalir.setIcon(new ImageIcon(Administrador.class.getResource("/resources/boton.png")));
+        botonSalir.setBounds(726, 631, 122, 31);
+        botonSalir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Cerrar el panel actual
                 dispose();
                 Principal.main(null);
             }
         });
-        despegableProductos.add(btnNewButton_3);
+        despegableProductos.add(botonSalir);
                 
-        JLabel lblCantidad = new JLabel("CANTIDAD");
-        lblCantidad.setForeground(new Color(0, 0, 128));
-        lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 22));
-        lblCantidad.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCantidad.setBounds(556, 202, 147, 48);
-        despegableProductos.add(lblCantidad);
+        JLabel nombreCantidad = new JLabel("CANTIDAD");
+        nombreCantidad.setForeground(new Color(0, 0, 128));
+        nombreCantidad.setFont(new Font("Tahoma", Font.BOLD, 22));
+        nombreCantidad.setHorizontalAlignment(SwingConstants.CENTER);
+        nombreCantidad.setBounds(556, 202, 147, 48);
+        despegableProductos.add(nombreCantidad);
                
         JLabel lblNewLabel = new JLabel(new ImageIcon(Administrador.class.getResource("/resources/mancha arcoirirs.jpg")));
         lblNewLabel.setBounds(0, 0, 885, 809);
@@ -135,7 +135,7 @@ public class Administrador extends JFrame {
         });
 
         btnAdd.addActionListener(e -> {
-            int cantidad = (Integer) spinner.getValue();
+            int cantidad = (Integer) spinnerModificarPrroducto.getValue();
             String productoSeleccionado = comboBox.getSelectedItem().toString();
             try {
                 AdministradorDB.añadirProducto(productoSeleccionado, cantidad);
@@ -147,7 +147,7 @@ public class Administrador extends JFrame {
         });
 
         btnRemove.addActionListener(e -> {
-            int cantidad = (Integer) spinner.getValue();
+            int cantidad = (Integer) spinnerModificarPrroducto.getValue();
             String productoSeleccionado = comboBox.getSelectedItem().toString();
             try {
                 AdministradorDB.eliminarProducto(productoSeleccionado, cantidad);
