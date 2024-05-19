@@ -27,7 +27,7 @@ public class Inicio extends JFrame {
     ArrayList<JLabel> labels = new ArrayList<JLabel>();
 
     // Definir nombresProductos como variable de instancia
-    private String[] nombresProductos = { "Pintura", "Rodillo", "Papel", "Brocha", "Escalera", "Barniz", "Disolvente", "Plasticos", "Decapante", "Espatula" };
+    String[] nombresProductos = { "Pintura", "Rodillo", "Papel", "Brocha", "Escalera", "Barniz", "Disolvente", "Plasticos", "Decapante", "Espatula" };
 
     public Inicio(Usuario usuario_logueado) throws SQLException {
         setTitle("Panel de Productos ");
@@ -146,14 +146,16 @@ public class Inicio extends JFrame {
                             if (idCompra != -1) {
                                 ArrayList<JSpinner> componentesSeleccionados = new ArrayList<>();
                                 ArrayList<JLabel> labelsSeleccionados = new ArrayList<>();
+                                ArrayList<String> nombresProductosSeleccionados = new ArrayList<>();
                                 for (int i = 0; i < componentes.size(); i++) {
                                     if (componentes.get(i).isEnabled() && !productosSinStock.contains(nombresProductos[i])) {
                                         componentesSeleccionados.add(componentes.get(i));
                                         labelsSeleccionados.add(labels.get(i));
+                                        nombresProductosSeleccionados.add(nombresProductos[i]);
                                     }
                                 }
-                                if (actualizarStock(componentesSeleccionados, conn, productosSinStock)) {
-                                    HistorialDB.actualizarHistorial(idCompra, componentesSeleccionados, labelsSeleccionados, nombresProductos, conn);
+                                if (actualizarStock(componentesSeleccionados, nombresProductosSeleccionados, conn)) {
+                                    HistorialDB.actualizarHistorial(idCompra, componentesSeleccionados, labelsSeleccionados, nombresProductosSeleccionados, conn);
                                     conn.commit();
                                     String mensaje = "El precio total de la compra es: " + precioTotal() + " €";
                                     if (!productosSinStock.isEmpty()) {
@@ -189,8 +191,6 @@ public class Inicio extends JFrame {
                 }
             }
         });
-
-
 
         JButton btnHistorial = new JButton("Historial de Compras");
         btnHistorial.setIcon(new ImageIcon(Inicio.class.getResource("/resources/historial-medico (1).png")));
@@ -260,17 +260,15 @@ public class Inicio extends JFrame {
         return productosSinStock;
     }
 
-    private boolean actualizarStock(ArrayList<JSpinner> componentesSeleccionados, Connection conn, ArrayList<String> productosSinStock) throws SQLException {
+    private boolean actualizarStock(ArrayList<JSpinner> componentesSeleccionados, ArrayList<String> nombresProductosSeleccionados, Connection conn) throws SQLException {
         for (int i = 0; i < componentesSeleccionados.size(); i++) {
-            String nombreProducto = nombresProductos[i];
-            if (!productosSinStock.contains(nombreProducto)) {
-                int cantidadComprada = (Integer) componentesSeleccionados.get(i).getValue();
-                int stockActual = ProductoDB.obtenerCantidad(nombreProducto);
-                if (cantidadComprada <= stockActual) {
-                    ProductoDB.actualizarCantidad(nombreProducto, stockActual - cantidadComprada, conn);
-                } else {
-                    return false; // Error: Intentando comprar más de lo que hay en stock
-                }
+            String nombreProducto = nombresProductosSeleccionados.get(i);
+            int cantidadComprada = (Integer) componentesSeleccionados.get(i).getValue();
+            int stockActual = ProductoDB.obtenerCantidad(nombreProducto);
+            if (cantidadComprada <= stockActual) {
+                ProductoDB.actualizarCantidad(nombreProducto, stockActual - cantidadComprada, conn);
+            } else {
+                return false; // Error: Intentando comprar más de lo que hay en stock
             }
         }
         return true;
