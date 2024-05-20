@@ -86,6 +86,11 @@ public class Inicio extends JFrame {
             } else {
                 spinner.setBounds(585, 54 + (i - 5) * 72, 45, 20);
             }
+            JComponent editor = spinner.getEditor();
+            if (editor instanceof JSpinner.DefaultEditor) {
+                JFormattedTextField textField = ((JSpinner.DefaultEditor) editor).getTextField();
+                textField.setEditable(false);
+            }
             contentPane.add(spinner);
             componentes.add(spinner);
             labels.add(labelsPrecios[i]);
@@ -118,6 +123,7 @@ public class Inicio extends JFrame {
         PanelTotal.setBackground(Color.ORANGE);
         PanelTotal.setForeground(new Color(0, 0, 255));
         PanelTotal.setBounds(206, 419, 436, 20);
+        PanelTotal.setEditable(false);
         contentPane.add(PanelTotal);
 
         for (JSpinner componente : componentes) {

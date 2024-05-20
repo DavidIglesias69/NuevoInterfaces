@@ -25,6 +25,15 @@ public class HistorialCompras extends JFrame {
         table.setBackground(new Color(255, 255, 240));
         table.setForeground(new Color(51, 51, 51));
         table.setSelectionBackground(new Color(173, 216, 230));
+        
+        // Desactivar la edición y la reordenación de columnas
+        table.setModel(new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        table.getTableHeader().setReorderingAllowed(false);
 
         JScrollPane scrollPane = new JScrollPane(table);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -87,7 +96,12 @@ public class HistorialCompras extends JFrame {
 
             resultSet = statement.executeQuery(sql);
 
-            DefaultTableModel tableModel = new DefaultTableModel();
+            DefaultTableModel tableModel = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
             tableModel.addColumn("ID Compra");
             tableModel.addColumn("Fecha");
             tableModel.addColumn("Producto");
