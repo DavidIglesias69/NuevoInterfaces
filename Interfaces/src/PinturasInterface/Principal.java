@@ -26,12 +26,15 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import PinturasDB.*;
 import ProyectoPinturas.Usuario;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Principal {
 
     private JFrame frmPrimerInterface;
     private JTextField usuarioTextField;
     private JPasswordField usuarioPasswordField;
+    private int numPulsaciones=0;
 
     /**
      * Launch the application.
@@ -67,6 +70,32 @@ public class Principal {
         frmPrimerInterface.setBounds(100, 100, 519, 573);
         frmPrimerInterface.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmPrimerInterface.getContentPane().setLayout(null);
+        
+        JLabel iconoContraseña = new JLabel("");
+        iconoContraseña.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		
+        		numPulsaciones++;
+				if(numPulsaciones%2 == 0) {
+					usuarioPasswordField.setEchoChar('*');
+					
+					ImageIcon icono = new ImageIcon(Principal.class.getResource("/resources/ojo (1).png"));
+					iconoContraseña.setIcon(icono);
+				}else {
+					usuarioPasswordField.setEchoChar((char)0);
+					
+					ImageIcon icono = new ImageIcon(Principal.class.getResource("/resources/ojo.png"));
+					iconoContraseña.setIcon(icono);
+				}
+        		
+        		
+        	}
+        });
+        iconoContraseña.setHorizontalAlignment(SwingConstants.CENTER);
+        iconoContraseña.setIcon(new ImageIcon(Principal.class.getResource("/resources/ojo (1).png")));
+        iconoContraseña.setBounds(241, 146, 46, 24);
+        frmPrimerInterface.getContentPane().add(iconoContraseña);
 
         usuarioTextField = new JTextField();
         usuarioTextField.setBounds(10, 84, 232, 20);

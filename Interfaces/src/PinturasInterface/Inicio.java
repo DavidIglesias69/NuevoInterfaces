@@ -117,14 +117,14 @@ public class Inicio extends JFrame {
         JTextField PanelTotal = new JTextField();
         PanelTotal.setBackground(Color.ORANGE);
         PanelTotal.setForeground(new Color(0, 0, 255));
-        PanelTotal.setBounds(264, 419, 272, 20);
+        PanelTotal.setBounds(206, 419, 436, 20);
         contentPane.add(PanelTotal);
 
         for (JSpinner componente : componentes) {
             componente.addChangeListener(new ChangeListener() {
                 public void stateChanged(ChangeEvent e) {
                     double precio = precioTotal();
-                    PanelTotal.setText("" + precio + "€");
+                    PanelTotal.setText("" + precio + " € euros. Comfirmar la compra en el boton \"COMPRAR\"");
                 }
             });
         }
@@ -218,6 +218,7 @@ public class Inicio extends JFrame {
         });
 
         JLabel lblFecha = new JLabel("Fecha:  " + fechaActual);
+        lblFecha.setFont(new Font("Tahoma", Font.BOLD, 11));
         lblFecha.setBounds(732, 25, 124, 14);
         contentPane.add(lblFecha);
     }

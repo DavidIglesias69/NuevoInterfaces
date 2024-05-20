@@ -80,6 +80,7 @@ public class Administrador extends JFrame {
         txtNuevoPrecio.setColumns(10);
 
         JLabel lblNuevoPrecio = new JLabel("NUEVO PRECIO:");
+        lblNuevoPrecio.setBackground(new Color(0, 64, 0));
         lblNuevoPrecio.setFont(new Font("Tahoma", Font.BOLD, 15));
         lblNuevoPrecio.setHorizontalAlignment(SwingConstants.CENTER);
         lblNuevoPrecio.setBounds(149, 335, 134, 20);
