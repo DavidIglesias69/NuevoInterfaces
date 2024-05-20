@@ -47,9 +47,9 @@ public class Inicio extends JFrame {
             labelsPrecios[i].setFont(new Font("Tahoma", Font.PLAIN, 15));
             labelsPrecios[i].setHorizontalAlignment(SwingConstants.CENTER);
             if (i < 5) {
-                labelsPrecios[i].setBounds(119, 57 + i * 72, 57, 14);
+                labelsPrecios[i].setBounds(180, 57 + i * 72, 57, 14);
             } else {
-                labelsPrecios[i].setBounds(519, 57 + (i - 5) * 72, 57, 14);
+                labelsPrecios[i].setBounds(530, 57 + (i - 5) * 72, 57, 14);
             }
             contentPane.add(labelsPrecios[i]);
         }
@@ -61,9 +61,9 @@ public class Inicio extends JFrame {
             iconosProductos[i] = new JLabel("");
             iconosProductos[i].setIcon(new ImageIcon(Inicio.class.getResource("/resources/" + iconosPaths[i])));
             if (i < 5) {
-                iconosProductos[i].setBounds(227, 11 + i * 72, 73, 72);
+                iconosProductos[i].setBounds(290, 15 + i * 72, 73, 72);
             } else {
-                iconosProductos[i].setBounds(629, 24 + (i - 5) * 72, 73, 72);
+                iconosProductos[i].setBounds(650, 24 + (i - 5) * 72, 73, 72);
             }
             contentPane.add(iconosProductos[i]);
         }
@@ -82,9 +82,9 @@ public class Inicio extends JFrame {
             spinner.setEnabled(false);
             spinner.setModel(new SpinnerNumberModel(0, 0, cantStock, 1));
             if (i < 5) {
-                spinner.setBounds(174, 54 + i * 72, 43, 20);
+                spinner.setBounds(240, 54 + i * 72, 43, 20);
             } else {
-                spinner.setBounds(574, 54 + (i - 5) * 72, 45, 20);
+                spinner.setBounds(585, 54 + (i - 5) * 72, 45, 20);
             }
             contentPane.add(spinner);
             componentes.add(spinner);
@@ -101,9 +101,9 @@ public class Inicio extends JFrame {
             JCheckBox checkBox = new JCheckBox(nombresProductos[i]);
             checkBox.setFont(new Font("Monospaced", Font.PLAIN, 16));
             if (i < 5) {
-                checkBox.setBounds(25, 51 + i * 72, 97, 23);
+                checkBox.setBounds(75, 51 + i * 72, 110, 23);
             } else {
-                checkBox.setBounds(388, 54 + (i - 5) * 72, 125, 23);
+                checkBox.setBounds(400, 54 + (i - 5) * 72, 125, 23);
             }
             contentPane.add(checkBox);
             int index = i; // Necesario para usar en el ActionListener
@@ -117,7 +117,7 @@ public class Inicio extends JFrame {
         JTextField PanelTotal = new JTextField();
         PanelTotal.setBackground(Color.ORANGE);
         PanelTotal.setForeground(new Color(0, 0, 255));
-        PanelTotal.setBounds(210, 498, 272, 20);
+        PanelTotal.setBounds(264, 419, 272, 20);
         contentPane.add(PanelTotal);
 
         for (JSpinner componente : componentes) {
@@ -131,7 +131,7 @@ public class Inicio extends JFrame {
 
         JButton btnComprar = new JButton("COMPRAR");
         btnComprar.setIcon(new ImageIcon(Inicio.class.getResource("/resources/carrito-de-supermercado (1).png")));
-        btnComprar.setBounds(506, 486, 151, 35);
+        btnComprar.setBounds(351, 474, 151, 35);
         contentPane.add(btnComprar);
         btnComprar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -192,9 +192,9 @@ public class Inicio extends JFrame {
             }
         });
 
-        JButton btnHistorial = new JButton("Historial de Compras");
+        JButton btnHistorial = new JButton("HISTORIAL DE COMPRAS");
         btnHistorial.setIcon(new ImageIcon(Inicio.class.getResource("/resources/historial-medico (1).png")));
-        btnHistorial.setBounds(10, 491, 190, 34);
+        btnHistorial.setBounds(82, 474, 215, 34);
         contentPane.add(btnHistorial);
 
         btnHistorial.addActionListener(new ActionListener() {
@@ -209,7 +209,7 @@ public class Inicio extends JFrame {
 
         JButton btnSalir = new JButton("SALIR");
         btnSalir.setIcon(new ImageIcon(Inicio.class.getResource("/resources/boton.png")));
-        btnSalir.setBounds(670, 486, 136, 37);
+        btnSalir.setBounds(563, 473, 136, 37);
         contentPane.add(btnSalir);
         btnSalir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -218,7 +218,7 @@ public class Inicio extends JFrame {
         });
 
         JLabel lblFecha = new JLabel("Fecha:  " + fechaActual);
-        lblFecha.setBounds(719, 45, 124, 14);
+        lblFecha.setBounds(732, 25, 124, 14);
         contentPane.add(lblFecha);
     }
 
