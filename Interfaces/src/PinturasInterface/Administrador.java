@@ -18,7 +18,7 @@ public class Administrador extends JFrame {
     private JLabel precioDB;
     private JLabel cantidadDB;
     private JTextField txtNuevoPrecio;
-    private JSpinner spinnerModificarPrroducto;
+    private JSpinner spinnerModificarProducto;
    
     public Administrador(Usuario user) {
         setTitle("PANTALLA ADMINISTRADOR MODIFICAR PRODUCTOS");
@@ -86,9 +86,9 @@ public class Administrador extends JFrame {
         lblNuevoPrecio.setBounds(149, 335, 134, 20);
         despegableProductos.add(lblNuevoPrecio);
 
-        spinnerModificarPrroducto = new JSpinner(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-        spinnerModificarPrroducto.setBounds(603, 334, 48, 26);
-        despegableProductos.add(spinnerModificarPrroducto);
+        spinnerModificarProducto = new JSpinner(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spinnerModificarProducto.setBounds(603, 334, 48, 26);
+        despegableProductos.add(spinnerModificarProducto);
 
         cantidadDB = new JLabel(""); 
         cantidadDB.setBounds(556, 261, 147, 30);
@@ -98,7 +98,7 @@ public class Administrador extends JFrame {
         cantidadDB.setOpaque(true);
         despegableProductos.add(cantidadDB);
 
-        setupActionListeners(despegableProducto, botonAñadir, botonEliminar, botonCambiarPrecio);
+        setupAccionListeners(despegableProducto, botonAñadir, botonEliminar, botonCambiarPrecio);
         
         JButton botonSalir = new JButton("SALIR");
         botonSalir.setIcon(new ImageIcon(Administrador.class.getResource("/resources/boton.png")));
@@ -124,7 +124,7 @@ public class Administrador extends JFrame {
         despegableProductos.add(lblNewLabel);
     }
 
-    private void setupActionListeners(JComboBox<String> comboBox, JButton btnAdd, JButton btnRemove, JButton btnChangePrice) {
+    private void setupAccionListeners(JComboBox<String> comboBox, JButton btnAdd, JButton btnEliminar, JButton btnActualizarPrecio) {
         comboBox.addActionListener(e -> {
             if (comboBox.getSelectedIndex() != 0) {
                 String productoSeleccionado = comboBox.getSelectedItem().toString();
@@ -136,7 +136,7 @@ public class Administrador extends JFrame {
         });
 
         btnAdd.addActionListener(e -> {
-            int cantidad = (Integer) spinnerModificarPrroducto.getValue();
+            int cantidad = (Integer) spinnerModificarProducto.getValue();
             String productoSeleccionado = comboBox.getSelectedItem().toString();
             try {
                 AdministradorDB.añadirProducto(productoSeleccionado, cantidad);
@@ -147,8 +147,8 @@ public class Administrador extends JFrame {
             }
         });
 
-        btnRemove.addActionListener(e -> {
-            int cantidad = (Integer) spinnerModificarPrroducto.getValue();
+        btnEliminar.addActionListener(e -> {
+            int cantidad = (Integer) spinnerModificarProducto.getValue();
             String productoSeleccionado = comboBox.getSelectedItem().toString();
             try {
                 AdministradorDB.eliminarProducto(productoSeleccionado, cantidad);
@@ -159,7 +159,7 @@ public class Administrador extends JFrame {
             }
         });
 
-        btnChangePrice.addActionListener(e -> {
+        btnActualizarPrecio.addActionListener(e -> {
             String productoSeleccionado = comboBox.getSelectedItem().toString();
             String inputPrecio = txtNuevoPrecio.getText();
             if (inputPrecio != null && !inputPrecio.isEmpty()) {
