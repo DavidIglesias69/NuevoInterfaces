@@ -58,7 +58,7 @@ public class Registrado extends JFrame {
     public Registrado() {
         setTitle("Registro Usuario Nuevo");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 685, 400);
+        setBounds(100, 100, 789, 441);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -66,28 +66,33 @@ public class Registrado extends JFrame {
         contentPane.setLayout(null);
 
         JPanel panel = new JPanel();
+        panel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panel.setBackground(new Color(153, 51, 204));
         panel.setLayout(null);
-        panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Insertar Nuevo Usuario", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-        panel.setBounds(10, 37, 649, 313);
+        panel.setBorder(new TitledBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Insertar Nuevo Usuario", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 0)));
+        panel.setBounds(56, 38, 649, 313);
         contentPane.add(panel);
 
         JLabel lblNewLabel_1 = new JLabel("Contraseña*:");
+        lblNewLabel_1.setForeground(new Color(0, 0, 0));
         lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_1.setBounds(137, 94, 129, 17);
         panel.add(lblNewLabel_1);
 
         JLabel lblNewLabel_1_1 = new JLabel("Repetir Contraseña*:");
+        lblNewLabel_1_1.setForeground(new Color(0, 0, 0));
         lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_1_1.setBounds(137, 119, 144, 20);
         panel.add(lblNewLabel_1_1);
 
         JLabel lblNewLabel_1_3 = new JLabel("Nombre:");
+        lblNewLabel_1_3.setForeground(new Color(0, 0, 0));
         lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_1_3.setBounds(137, 150, 82, 23);
         panel.add(lblNewLabel_1_3);
 
         JLabel lblNewLabel_1_4 = new JLabel("Email:");
+        lblNewLabel_1_4.setForeground(new Color(0, 0, 0));
         lblNewLabel_1_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_1_4.setBounds(137, 184, 93, 17);
         panel.add(lblNewLabel_1_4);
@@ -112,11 +117,12 @@ public class Registrado extends JFrame {
         
         JLabel panelRegistro = new JLabel("New label");
         panelRegistro.setIcon(new ImageIcon(Registrado.class.getResource("/resources/mancha arcoirirs.jpg")));
-        panelRegistro.setBounds(0, 0, 669, 361);
+        panelRegistro.setBounds(-17, 0, 790, 402);
         contentPane.add(panelRegistro);
 
         JButton btnNewButton = new JButton("Registrarse");
-        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnNewButton.setForeground(new Color(0, 0, 0));
+        btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
         btnNewButton.setIcon(new ImageIcon(Registrado.class.getResource("/resources/nota.png")));
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -159,6 +165,7 @@ public class Registrado extends JFrame {
         panel.add(btnNewButton);
 
         JLabel lblNewLabel_1_2 = new JLabel("DNI*:");
+        lblNewLabel_1_2.setForeground(new Color(0, 0, 0));
         lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_1_2.setBounds(137, 65, 129, 18);
         panel.add(lblNewLabel_1_2);

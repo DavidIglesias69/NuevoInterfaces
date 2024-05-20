@@ -25,7 +25,7 @@ public class HistorialCompras extends JFrame {
         table.setBackground(new Color(255, 255, 240));
         table.setForeground(new Color(51, 51, 51));
         table.setSelectionBackground(new Color(173, 216, 230));
-        
+
         // Desactivar la edición y la reordenación de columnas
         table.setModel(new DefaultTableModel() {
             @Override
@@ -36,7 +36,14 @@ public class HistorialCompras extends JFrame {
         table.getTableHeader().setReorderingAllowed(false);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        getContentPane().add(scrollPane, BorderLayout.CENTER);
+        scrollPane.setBounds(0, 29, 784, 497);
+
+        // Crear un panel para el aviso y la tabla
+        JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setLayout(null);
+        panelPrincipal.add(scrollPane);
+
+        getContentPane().add(panelPrincipal, BorderLayout.CENTER);
 
         // Creación de botones con diseño personalizado
         JButton btnImprimir = new JButton("Imprimir");

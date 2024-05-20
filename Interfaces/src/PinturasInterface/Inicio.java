@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import PinturasDB.CompraDB;
 import PinturasDB.HistorialDB;
@@ -223,9 +225,16 @@ public class Inicio extends JFrame {
             }
         });
 
-        JLabel lblFecha = new JLabel("Fecha:  " + fechaActual);
-        lblFecha.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblFecha.setBounds(732, 25, 124, 14);
+        // Crear el formato de fecha
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        // Obtener la fecha actual formateada
+        String fechaFormateada = formatoFecha.format(fechaActual);
+
+        // Crear y agregar el label con la fecha formateada
+        JLabel lblFecha = new JLabel("Fecha: " + fechaFormateada);
+        lblFecha.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblFecha.setBounds(710, 25, 156, 14);
         contentPane.add(lblFecha);
     }
 
