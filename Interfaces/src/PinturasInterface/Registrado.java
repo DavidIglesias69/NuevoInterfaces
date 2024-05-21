@@ -1,17 +1,13 @@
 package PinturasInterface;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
-
 import PinturasDB.RegistroDB;
 import ProyectoPinturas.Usuario;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
@@ -22,8 +18,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
-import java.awt.SystemColor;
 import javax.swing.JPasswordField;
+import java.util.regex.Pattern;
 
 public class Registrado extends JFrame {
 
@@ -36,9 +32,6 @@ public class Registrado extends JFrame {
     private JPasswordField _contraseña;
     private JPasswordField _repetirContra;
 
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -52,9 +45,6 @@ public class Registrado extends JFrame {
         });
     }
 
-    /**
-     * Create the frame.
-     */
     public Registrado() {
         setTitle("Registro Usuario Nuevo");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -127,8 +117,8 @@ public class Registrado extends JFrame {
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String DNI1 = dni_tex.getText().trim();
-                String pass1 = new String(_contraseña.getPassword());
-                String pass2 = new String(_repetirContra.getPassword());
+                String pass1 = new String(_contraseña.getPassword()).trim();
+                String pass2 = new String(_repetirContra.getPassword()).trim();
                 String nombre1 = nombre.getText().trim();
                 String email1 = email.getText().trim();
                 
@@ -137,10 +127,22 @@ public class Registrado extends JFrame {
                     JOptionPane.showMessageDialog(null, "Los campos con * son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+
+                // Validación de DNI (8 números seguidos de una letra)
+                if (!Pattern.matches("\\d{8}[A-Za-z]", DNI1)) {
+                    JOptionPane.showMessageDialog(null, "El DNI debe tener 8 números seguidos de una letra", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 
                 // Validación de contraseñas iguales
                 if (!pass1.equals(pass2)) {
                     JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Validación de contraseña no vacía ni solo espacios
+                if (pass1.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "La contraseña no puede estar vacía ni contener solo espacios", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 

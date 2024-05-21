@@ -149,14 +149,21 @@ public class Inicio extends JFrame {
                         conn.setAutoCommit(false);
 
                         ArrayList<String> productosSinStock = verificarStock(conn);
-                        if (productosSinStock.size() < componentes.size()) {
+                        ArrayList<String> productosSeleccionados = new ArrayList<>();
+                        for (JSpinner componente : componentes) {
+                            if (componente.isEnabled() && (Integer) componente.getValue() > 0) {
+                                productosSeleccionados.add(nombresProductos[componentes.indexOf(componente)]);
+                            }
+                        }
+
+                        if (productosSeleccionados.size() > 0 && productosSinStock.size() < componentes.size()) {
                             int idCompra = CompraDB.guardarCompra(usuario_logueado.getDNI(), fechaActual, conn);
                             if (idCompra != -1) {
                                 ArrayList<JSpinner> componentesSeleccionados = new ArrayList<>();
                                 ArrayList<JLabel> labelsSeleccionados = new ArrayList<>();
                                 ArrayList<String> nombresProductosSeleccionados = new ArrayList<>();
                                 for (int i = 0; i < componentes.size(); i++) {
-                                    if (componentes.get(i).isEnabled() && !productosSinStock.contains(nombresProductos[i])) {
+                                    if (componentes.get(i).isEnabled() && !productosSinStock.contains(nombresProductos[i]) && (Integer) componentes.get(i).getValue() > 0) {
                                         componentesSeleccionados.add(componentes.get(i));
                                         labelsSeleccionados.add(labels.get(i));
                                         nombresProductosSeleccionados.add(nombresProductos[i]);
@@ -190,6 +197,9 @@ public class Inicio extends JFrame {
                             for (String producto : productosSinStock) {
                                 mensaje += "- " + producto + "\n";
                             }
+                            if (productosSeleccionados.size() == 0) {
+                                mensaje = "No se seleccionaron productos para comprar.";
+                            }
                             JOptionPane.showMessageDialog(null, mensaje, "Error de Stock", JOptionPane.ERROR_MESSAGE);
                         }
                     }
@@ -199,6 +209,7 @@ public class Inicio extends JFrame {
                 }
             }
         });
+
 
         JButton btnHistorial = new JButton("HISTORIAL DE COMPRAS");
         btnHistorial.setIcon(new ImageIcon(Inicio.class.getResource("/resources/historial-medico (1).png")));
