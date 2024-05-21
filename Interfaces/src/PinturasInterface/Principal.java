@@ -23,8 +23,8 @@ import java.awt.event.MouseEvent;
 public class Principal {
 
     private JFrame frmPrimerInterface;
-    private JTextField usuarioTextField;
-    private JPasswordField usuarioPasswordField;
+    private JTextField DNITextField;
+    private JPasswordField ContraseñaPasswordField;
     private int numPulsaciones = 0;
 
     /**
@@ -70,93 +70,93 @@ public class Principal {
             public void mouseClicked(MouseEvent e) {
                 numPulsaciones++;
                 if (numPulsaciones % 2 == 0) {
-                    usuarioPasswordField.setEchoChar('*');
+                    ContraseñaPasswordField.setEchoChar('*');
                     ImageIcon icono = new ImageIcon(Principal.class.getResource("/resources/ojo (1).png"));
                     iconoContraseña.setIcon(icono);
                 } else {
-                    usuarioPasswordField.setEchoChar((char) 0);
+                    ContraseñaPasswordField.setEchoChar((char) 0);
                     ImageIcon icono = new ImageIcon(Principal.class.getResource("/resources/ojo.png"));
                     iconoContraseña.setIcon(icono);
                 }
             }
         });
+        
+                // Etiqueta del título principal
+                JLabel lblPinturasArcoiris = new JLabel("PINTURAS  ARCOIRIS");
+                lblPinturasArcoiris.setHorizontalAlignment(SwingConstants.CENTER);
+                lblPinturasArcoiris.setForeground(new Color(255, 0, 0));
+                lblPinturasArcoiris.setFont(new Font("Tahoma", Font.PLAIN, 18));
+                lblPinturasArcoiris.setBounds(10, 11, 468, 30);
+                frmPrimerInterface.getContentPane().add(lblPinturasArcoiris);
         iconoContraseña.setHorizontalAlignment(SwingConstants.CENTER);
         iconoContraseña.setIcon(new ImageIcon(Principal.class.getResource("/resources/ojo (1).png")));
         iconoContraseña.setBounds(241, 146, 46, 24);
         frmPrimerInterface.getContentPane().add(iconoContraseña);
 
         // Campo de texto para el DNI del usuario
-        usuarioTextField = new JTextField();
-        usuarioTextField.setBounds(10, 84, 232, 20);
-        frmPrimerInterface.getContentPane().add(usuarioTextField);
-        usuarioTextField.setColumns(10);
+        DNITextField = new JTextField();
+        DNITextField.setBounds(10, 84, 232, 20);
+        frmPrimerInterface.getContentPane().add(DNITextField);
+        DNITextField.setColumns(10);
 
         // Campo de contraseña
-        usuarioPasswordField = new JPasswordField();
-        usuarioPasswordField.setBounds(10, 146, 232, 20);
-        frmPrimerInterface.getContentPane().add(usuarioPasswordField);
+        ContraseñaPasswordField = new JPasswordField();
+        ContraseñaPasswordField.setBounds(10, 146, 232, 20);
+        frmPrimerInterface.getContentPane().add(ContraseñaPasswordField);
 
         // Botón de aceptación para iniciar sesión
-        JButton boton1 = new JButton("ACEPTAR");
-        boton1.setToolTipText("Iniciar compra");
-        boton1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        boton1.setIcon(new ImageIcon(Principal.class.getResource("/resources/si.png")));
-        boton1.addActionListener(new ActionListener() {
+        JButton btnAceptar = new JButton("ACEPTAR");
+        btnAceptar.setToolTipText("Iniciar compra");
+        btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        btnAceptar.setIcon(new ImageIcon(Principal.class.getResource("/resources/si.png")));
+        btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 iniciarSesion();
             }
         });
-        boton1.setBounds(287, 93, 191, 73);
-        frmPrimerInterface.getContentPane().add(boton1);
+        btnAceptar.setBounds(287, 93, 191, 73);
+        frmPrimerInterface.getContentPane().add(btnAceptar);
 
         // Etiqueta para el campo de usuario
-        JLabel textoUsuario = new JLabel("DNI:");
-        textoUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        textoUsuario.setLabelFor(usuarioTextField);
-        textoUsuario.setForeground(new Color(255, 0, 0));
-        textoUsuario.setBounds(10, 52, 232, 31);
-        frmPrimerInterface.getContentPane().add(textoUsuario);
+        JLabel lblDNI = new JLabel("DNI:");
+        lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        lblDNI.setLabelFor(DNITextField);
+        lblDNI.setForeground(new Color(255, 0, 0));
+        lblDNI.setBounds(10, 52, 232, 31);
+        frmPrimerInterface.getContentPane().add(lblDNI);
 
         // Etiqueta para el campo de contraseña
-        JLabel lblNewLabel = new JLabel("Contraseña:");
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblNewLabel.setForeground(new Color(255, 0, 0));
-        lblNewLabel.setLabelFor(usuarioPasswordField);
-        lblNewLabel.setBounds(10, 111, 117, 37);
-        frmPrimerInterface.getContentPane().add(lblNewLabel);
+        JLabel lblContraseña = new JLabel("Contraseña:");
+        lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        lblContraseña.setForeground(new Color(255, 0, 0));
+        lblContraseña.setLabelFor(ContraseñaPasswordField);
+        lblContraseña.setBounds(10, 111, 117, 37);
+        frmPrimerInterface.getContentPane().add(lblContraseña);
 
         // Botón de registro para nuevos usuarios
-        JButton registro = new JButton("   Registro");
-        registro.setHorizontalAlignment(SwingConstants.LEFT);
-        registro.setIcon(new ImageIcon(Principal.class.getResource("/resources/nota.png")));
-        registro.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        registro.addActionListener(new ActionListener() {
+        JButton btnRegistro = new JButton("   Registro");
+        btnRegistro.setHorizontalAlignment(SwingConstants.LEFT);
+        btnRegistro.setIcon(new ImageIcon(Principal.class.getResource("/resources/nota.png")));
+        btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        btnRegistro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 abrirVentanaRegistro();
             }
         });
-        registro.setBounds(297, 177, 181, 51);
-        frmPrimerInterface.getContentPane().add(registro);
+        btnRegistro.setBounds(297, 177, 181, 51);
+        frmPrimerInterface.getContentPane().add(btnRegistro);
 
         // Etiqueta de fondo con el logo
-        JLabel lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.setIcon(new ImageIcon(Principal.class.getResource("/resources/LOGO.jpg")));
-        lblNewLabel_1.setBounds(-288, -31, 872, 642);
-        frmPrimerInterface.getContentPane().add(lblNewLabel_1);
-
-        // Etiqueta del título principal
-        JLabel lblNewLabel_2 = new JLabel("PINTURAS  ARCOIRIS");
-        lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_2.setForeground(new Color(255, 0, 0));
-        lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblNewLabel_2.setBounds(10, 11, 468, 30);
-        frmPrimerInterface.getContentPane().add(lblNewLabel_2);
+        JLabel lblFondo = new JLabel("");
+        lblFondo.setIcon(new ImageIcon(Principal.class.getResource("/resources/LOGO.jpg")));
+        lblFondo.setBounds(-288, -31, 872, 642);
+        frmPrimerInterface.getContentPane().add(lblFondo);
     }
 
     // Método para iniciar sesión
     private void iniciarSesion() {
-        String DNI = usuarioTextField.getText();
-        String password = new String(usuarioPasswordField.getPassword());
+        String DNI = DNITextField.getText();
+        String password = new String(ContraseñaPasswordField.getPassword());
         try {
             Usuario logeado = RegistroDB.doLogin(DNI, password);
             if (logeado != null) {

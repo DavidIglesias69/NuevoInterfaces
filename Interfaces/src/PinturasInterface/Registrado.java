@@ -7,7 +7,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import PinturasDB.RegistroDB;
-import ProyectoPinturas.Usuario;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
@@ -82,7 +81,7 @@ public class Registrado extends JFrame {
 
         txtContraseña = new JPasswordField();
         txtContraseña.setBounds(291, 91, 275, 20);
-        txtContraseña.setToolTipText("<html>La contraseña debe tener al menos:<br>- 8 caracteres<br>- Una letra mayúscula<br>- Una letra minúscula<br>- Un número<br>- Un carácter especial</html>");
+        txtContraseña.setToolTipText("<html>La contraseña debe tener al menos:<br>- 8 caracteres<br>- Una letra mayúscula<br>- Una letra minúscula<br>- Un número<br>- Un carácter especial: @$!%*?&+\\-_.,:;=<>#[]{}|~`^()\"'\\</html>");
         panelInsertarNuevoUsuario.add(txtContraseña);
 
         // Campo de repetir contraseña
@@ -144,6 +143,19 @@ public class Registrado extends JFrame {
         });
         btnRegistrarse.setBounds(403, 223, 163, 39);
         panelInsertarNuevoUsuario.add(btnRegistrarse);
+        
+        // Botón para volver al panel principal
+        JButton btnAtras = new JButton("Atrás");
+        btnAtras.setForeground(Color.BLACK);
+        btnAtras.setFont(new Font("Tahoma", Font.BOLD, 15));
+        btnAtras.setIcon(new ImageIcon(Registrado.class.getResource("/resources/flecha-hacia-atras.png")));
+        btnAtras.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                volverAlPrincipal();
+            }
+        });
+        btnAtras.setBounds(243, 223, 137, 39);
+        panelInsertarNuevoUsuario.add(btnAtras);
 
         // Icono para mostrar/ocultar contraseñas
         JLabel iconoContraseña = new JLabel("");
@@ -252,9 +264,15 @@ public class Registrado extends JFrame {
         JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    // Método para validar la seguridad de la contraseña
+ // Método para validar la seguridad de la contraseña
     private boolean esContraseñaSegura(String contraseña) {
-        String patron = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        String patron = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&+\\-_.,:;=<>#\\[\\]{}|~`^()\"'\\\\])[A-Za-z\\d@$!%*?&+\\-_.,:;=<>#\\[\\]{}|~`^()\"'\\\\]{8,}$";
         return Pattern.matches(patron, contraseña);
+    }
+    
+    // Método para volver al panel principal
+    private void volverAlPrincipal() {
+        Principal.main(null);
+        dispose();
     }
 }
