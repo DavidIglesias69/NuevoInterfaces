@@ -14,6 +14,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
@@ -26,11 +28,11 @@ public class Registrado extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     Usuario usuario_logueado;    
-    private JTextField nombre;
-    private JTextField email;
-    private JTextField dni_tex;
-    private JPasswordField _contraseña;
-    private JPasswordField _repetirContra;
+    private JTextField texNombre;
+    private JTextField texEmail;
+    private JTextField texDNI;
+    private JPasswordField txtContraseña;
+    private JPasswordField textRrepetirContra;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -38,6 +40,8 @@ public class Registrado extends JFrame {
                 try {
                     Registrado frame = new Registrado();
                     frame.setVisible(true);
+                    // Establecer el foco en el campo nombre después de hacer visible la ventana
+                    frame.texNombre.requestFocusInWindow();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -55,72 +59,72 @@ public class Registrado extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JPanel panel = new JPanel();
-        panel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel.setBackground(new Color(153, 51, 204));
-        panel.setLayout(null);
-        panel.setBorder(new TitledBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Insertar Nuevo Usuario", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 0)));
-        panel.setBounds(56, 38, 649, 313);
-        contentPane.add(panel);
+        JPanel panelInsertarNuevoUsuario = new JPanel();
+        panelInsertarNuevoUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        panelInsertarNuevoUsuario.setBackground(new Color(153, 51, 204));
+        panelInsertarNuevoUsuario.setLayout(null);
+        panelInsertarNuevoUsuario.setBorder(new TitledBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Insertar Nuevo Usuario", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 0)));
+        panelInsertarNuevoUsuario.setBounds(56, 38, 649, 313);
+        contentPane.add(panelInsertarNuevoUsuario);
 
-        JLabel lblNewLabel_1 = new JLabel("Contraseña*:");
-        lblNewLabel_1.setForeground(new Color(0, 0, 0));
-        lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1.setBounds(137, 94, 129, 17);
-        panel.add(lblNewLabel_1);
+        JLabel lblContraseña = new JLabel("Contraseña*:");
+        lblContraseña.setForeground(new Color(0, 0, 0));
+        lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblContraseña.setBounds(137, 94, 129, 17);
+        panelInsertarNuevoUsuario.add(lblContraseña);
 
-        JLabel lblNewLabel_1_1 = new JLabel("Repetir Contraseña*:");
-        lblNewLabel_1_1.setForeground(new Color(0, 0, 0));
-        lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_1.setBounds(137, 119, 144, 20);
-        panel.add(lblNewLabel_1_1);
+        JLabel lblRepetirContraseña = new JLabel("Repetir Contraseña*:");
+        lblRepetirContraseña.setForeground(new Color(0, 0, 0));
+        lblRepetirContraseña.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblRepetirContraseña.setBounds(137, 119, 144, 20);
+        panelInsertarNuevoUsuario.add(lblRepetirContraseña);
 
-        JLabel lblNewLabel_1_3 = new JLabel("Nombre:");
-        lblNewLabel_1_3.setForeground(new Color(0, 0, 0));
-        lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_3.setBounds(137, 150, 82, 23);
-        panel.add(lblNewLabel_1_3);
+        JLabel lblNombre = new JLabel("Nombre:");
+        lblNombre.setForeground(new Color(0, 0, 0));
+        lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblNombre.setBounds(137, 150, 82, 23);
+        panelInsertarNuevoUsuario.add(lblNombre);
 
-        JLabel lblNewLabel_1_4 = new JLabel("Email:");
-        lblNewLabel_1_4.setForeground(new Color(0, 0, 0));
-        lblNewLabel_1_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_4.setBounds(137, 184, 93, 17);
-        panel.add(lblNewLabel_1_4);
+        JLabel lblEmail = new JLabel("Email:");
+        lblEmail.setForeground(new Color(0, 0, 0));
+        lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblEmail.setBounds(137, 184, 93, 17);
+        panelInsertarNuevoUsuario.add(lblEmail);
 
-        _contraseña = new JPasswordField();
-        _contraseña.setBounds(291, 91, 275, 20);
-        panel.add(_contraseña);
+        txtContraseña = new JPasswordField();
+        txtContraseña.setBounds(291, 91, 275, 20);
+        panelInsertarNuevoUsuario.add(txtContraseña);
         
-        _repetirContra = new JPasswordField();
-        _repetirContra.setBounds(291, 120, 275, 19);
-        panel.add(_repetirContra);
+        textRrepetirContra = new JPasswordField();
+        textRrepetirContra.setBounds(291, 120, 275, 19);
+        panelInsertarNuevoUsuario.add(textRrepetirContra);
 
-        nombre = new JTextField();
-        nombre.setColumns(10);
-        nombre.setBounds(291, 150, 275, 20);
-        panel.add(nombre);
+        texNombre = new JTextField();
+        texNombre.setColumns(10);
+        texNombre.setBounds(291, 150, 275, 20);
+        panelInsertarNuevoUsuario.add(texNombre);
 
-        email = new JTextField();
-        email.setColumns(10);
-        email.setBounds(291, 181, 275, 20);
-        panel.add(email);
+        texEmail = new JTextField();
+        texEmail.setColumns(10);
+        texEmail.setBounds(291, 181, 275, 20);
+        panelInsertarNuevoUsuario.add(texEmail);
         
-        JLabel panelRegistro = new JLabel("New label");
-        panelRegistro.setIcon(new ImageIcon(Registrado.class.getResource("/resources/mancha arcoirirs.jpg")));
-        panelRegistro.setBounds(-17, 0, 790, 402);
-        contentPane.add(panelRegistro);
+        JLabel imagenFondo = new JLabel("New label");
+        imagenFondo.setIcon(new ImageIcon(Registrado.class.getResource("/resources/mancha arcoirirs.jpg")));
+        imagenFondo.setBounds(-17, 0, 790, 402);
+        contentPane.add(imagenFondo);
 
-        JButton btnNewButton = new JButton("Registrarse");
-        btnNewButton.setForeground(new Color(0, 0, 0));
-        btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-        btnNewButton.setIcon(new ImageIcon(Registrado.class.getResource("/resources/nota.png")));
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnRegistrarse = new JButton("Registrarse");
+        btnRegistrarse.setForeground(new Color(0, 0, 0));
+        btnRegistrarse.setFont(new Font("Tahoma", Font.BOLD, 15));
+        btnRegistrarse.setIcon(new ImageIcon(Registrado.class.getResource("/resources/nota.png")));
+        btnRegistrarse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String DNI1 = dni_tex.getText().trim();
-                String pass1 = new String(_contraseña.getPassword()).trim();
-                String pass2 = new String(_repetirContra.getPassword()).trim();
-                String nombre1 = nombre.getText().trim();
-                String email1 = email.getText().trim();
+                String DNI1 = texDNI.getText().trim();
+                String pass1 = new String(txtContraseña.getPassword()).trim();
+                String pass2 = new String(textRrepetirContra.getPassword()).trim();
+                String nombre1 = texNombre.getText().trim();
+                String email1 = texEmail.getText().trim();
                 
                 // Validación de campos obligatorios
                 if (DNI1.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
@@ -163,18 +167,38 @@ public class Registrado extends JFrame {
                 }
             }
         });
-        btnNewButton.setBounds(403, 223, 163, 39);
-        panel.add(btnNewButton);
+        btnRegistrarse.setBounds(403, 223, 163, 39);
+        panelInsertarNuevoUsuario.add(btnRegistrarse);
 
-        JLabel lblNewLabel_1_2 = new JLabel("DNI*:");
-        lblNewLabel_1_2.setForeground(new Color(0, 0, 0));
-        lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel_1_2.setBounds(137, 65, 129, 18);
-        panel.add(lblNewLabel_1_2);
+        JLabel lblDNI = new JLabel("DNI*:");
+        lblDNI.setForeground(new Color(0, 0, 0));
+        lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblDNI.setBounds(137, 65, 129, 18);
+        panelInsertarNuevoUsuario.add(lblDNI);
 
-        dni_tex = new JTextField();
-        dni_tex.setColumns(10);
-        dni_tex.setBounds(291, 66, 275, 20);
-        panel.add(dni_tex);
+        texDNI = new JTextField();
+        texDNI.setToolTipText("Formato: 12345678A");
+        texDNI.setText("12345678A");
+        texDNI.setForeground(Color.GRAY);
+        texDNI.setColumns(10);
+        texDNI.setBounds(291, 66, 275, 20);
+        panelInsertarNuevoUsuario.add(texDNI);
+        texDNI.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (texDNI.getText().equals("12345678A")) {
+                    texDNI.setText("");
+                    texDNI.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (texDNI.getText().isEmpty()) {
+                    texDNI.setForeground(Color.GRAY);
+                    texDNI.setText("12345678A");
+                }
+            }
+        });
     }
 }
