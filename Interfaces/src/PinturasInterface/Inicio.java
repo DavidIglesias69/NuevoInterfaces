@@ -163,7 +163,7 @@ public class Inicio extends JFrame {
                                 ArrayList<JLabel> labelsSeleccionados = new ArrayList<>();
                                 ArrayList<String> nombresProductosSeleccionados = new ArrayList<>();
                                 for (int i = 0; i < componentes.size(); i++) {
-                                    if (componentes.get(i).isEnabled() && !productosSinStock.contains(nombresProductos[i]) && (Integer) componentes.get(i).getValue() > 0) {
+                                    if (componentes.get(i).isEnabled() && !productosSinStock.contains(nombresProductos[i])) {
                                         componentesSeleccionados.add(componentes.get(i));
                                         labelsSeleccionados.add(labels.get(i));
                                         nombresProductosSeleccionados.add(nombresProductos[i]);
@@ -209,7 +209,6 @@ public class Inicio extends JFrame {
                 }
             }
         });
-
 
         JButton btnHistorial = new JButton("HISTORIAL DE COMPRAS");
         btnHistorial.setIcon(new ImageIcon(Inicio.class.getResource("/resources/historial-medico (1).png")));
