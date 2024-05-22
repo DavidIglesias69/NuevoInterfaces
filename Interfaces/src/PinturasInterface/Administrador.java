@@ -78,6 +78,7 @@ public class Administrador extends JFrame {
         txtNuevoPrecio.setBounds(299, 336, 96, 22);
         despegableProductos.add(txtNuevoPrecio);
         txtNuevoPrecio.setColumns(10);
+        txtNuevoPrecio.setEditable(false); // Hacer que el campo no sea editable
 
         JLabel lblNuevoPrecio = new JLabel("NUEVO PRECIO:");
         lblNuevoPrecio.setBackground(new Color(0, 64, 0));
@@ -89,6 +90,10 @@ public class Administrador extends JFrame {
         spinnerModificarProducto = new JSpinner(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
         spinnerModificarProducto.setBounds(603, 334, 48, 26);
         despegableProductos.add(spinnerModificarProducto);
+
+        JComponent editor = spinnerModificarProducto.getEditor();
+        JFormattedTextField textField = ((JSpinner.DefaultEditor) editor).getTextField();
+        textField.setEditable(false); // Hacer que el campo no sea editable
 
         cantidadDB = new JLabel(""); 
         cantidadDB.setBounds(556, 261, 147, 30);
@@ -130,8 +135,10 @@ public class Administrador extends JFrame {
                 String productoSeleccionado = comboBox.getSelectedItem().toString();
                 actualizarPrecio(productoSeleccionado);
                 txtNuevoPrecio.setText("");  // Limpiar el campo de nuevo precio
+                txtNuevoPrecio.setEditable(true); // Hacer el campo editable solo cuando se selecciona un producto
             } else {
                 precioDB.setText(""); // Limpiar el texto si no se selecciona un producto
+                txtNuevoPrecio.setEditable(false); // Hacer el campo no editable
             }
         });
 
@@ -194,7 +201,8 @@ public class Administrador extends JFrame {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
-            
+            // Aquí puedes iniciar la ventana del administrador para pruebas
+            // new Administrador(new Usuario()).setVisible(true);
         });
     }
 }

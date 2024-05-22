@@ -24,6 +24,8 @@ import java.util.regex.Pattern;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.KeyStroke;
 
 public class Registrado extends JFrame {
 
@@ -34,7 +36,7 @@ public class Registrado extends JFrame {
     private JTextField texDNI;
     private JPasswordField txtContraseña;
     private JPasswordField textRrepetirContra;
-    private JLabel iconoContraseña; 
+    private JLabel iconoContraseña;
     private int numPulsaciones = 0;
 
     public static void main(String[] args) {
@@ -84,6 +86,13 @@ public class Registrado extends JFrame {
         txtContraseña.setToolTipText("<html>La contraseña debe tener al menos:<br>- 8 caracteres<br>- Una letra mayúscula<br>- Una letra minúscula<br>- Un número<br>- Un carácter especial: @$!%*?&+\\-_.,:;=<>#[]{}|~`^()\"'\\</html>");
         panelInsertarNuevoUsuario.add(txtContraseña);
 
+        // Deshabilitar copiar y pegar en el campo de contraseña
+        txtContraseña.getInputMap().put(KeyStroke.getKeyStroke("ctrl C"), "none");
+        txtContraseña.getInputMap().put(KeyStroke.getKeyStroke("ctrl V"), "none");
+        txtContraseña.getInputMap().put(KeyStroke.getKeyStroke("ctrl X"), "none");
+        txtContraseña.getInputMap().put(KeyStroke.getKeyStroke("shift INSERT"), "none");
+        txtContraseña.getInputMap().put(KeyStroke.getKeyStroke("shift DELETE"), "none");
+
         // Campo de repetir contraseña
         JLabel lblRepetirContraseña = new JLabel("Repetir Contraseña*:");
         lblRepetirContraseña.setForeground(Color.BLACK);
@@ -94,6 +103,13 @@ public class Registrado extends JFrame {
         textRrepetirContra = new JPasswordField();
         textRrepetirContra.setBounds(291, 120, 275, 19);
         panelInsertarNuevoUsuario.add(textRrepetirContra);
+
+        // Deshabilitar copiar y pegar en el campo de repetir contraseña
+        textRrepetirContra.getInputMap().put(KeyStroke.getKeyStroke("ctrl C"), "none");
+        textRrepetirContra.getInputMap().put(KeyStroke.getKeyStroke("ctrl V"), "none");
+        textRrepetirContra.getInputMap().put(KeyStroke.getKeyStroke("ctrl X"), "none");
+        textRrepetirContra.getInputMap().put(KeyStroke.getKeyStroke("shift INSERT"), "none");
+        textRrepetirContra.getInputMap().put(KeyStroke.getKeyStroke("shift DELETE"), "none");
 
         // Otros campos del formulario
         agregarCampo(panelInsertarNuevoUsuario, "Nombre:", 150, 291, 150);
@@ -264,12 +280,12 @@ public class Registrado extends JFrame {
         JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
- // Método para validar la seguridad de la contraseña
+    // Método para validar la seguridad de la contraseña
     private boolean esContraseñaSegura(String contraseña) {
         String patron = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&+\\-_.,:;=<>#\\[\\]{}|~`^()\"'\\\\])[A-Za-z\\d@$!%*?&+\\-_.,:;=<>#\\[\\]{}|~`^()\"'\\\\]{8,}$";
         return Pattern.matches(patron, contraseña);
     }
-    
+
     // Método para volver al panel principal
     private void volverAlPrincipal() {
         Principal.main(null);
