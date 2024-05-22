@@ -57,7 +57,7 @@ public class Principal {
         // Configuración de la ventana principal
         frmPrimerInterface = new JFrame();
         frmPrimerInterface.setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/resources/descargar.jpg")));
-        frmPrimerInterface.setTitle("Pinturas ArcoIrirs");
+        frmPrimerInterface.setTitle("Pinturas ArcoIris");
         frmPrimerInterface.getContentPane().setForeground(new Color(0, 128, 64));
         frmPrimerInterface.setBounds(100, 100, 519, 573);
         frmPrimerInterface.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -80,14 +80,15 @@ public class Principal {
                 }
             }
         });
+
+        // Etiqueta del título principal
+        JLabel lblPinturasArcoiris = new JLabel("PINTURAS  ARCOIRIS");
+        lblPinturasArcoiris.setHorizontalAlignment(SwingConstants.CENTER);
+        lblPinturasArcoiris.setForeground(new Color(255, 0, 0));
+        lblPinturasArcoiris.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        lblPinturasArcoiris.setBounds(10, 11, 468, 30);
+        frmPrimerInterface.getContentPane().add(lblPinturasArcoiris);
         
-                // Etiqueta del título principal
-                JLabel lblPinturasArcoiris = new JLabel("PINTURAS  ARCOIRIS");
-                lblPinturasArcoiris.setHorizontalAlignment(SwingConstants.CENTER);
-                lblPinturasArcoiris.setForeground(new Color(255, 0, 0));
-                lblPinturasArcoiris.setFont(new Font("Tahoma", Font.PLAIN, 18));
-                lblPinturasArcoiris.setBounds(10, 11, 468, 30);
-                frmPrimerInterface.getContentPane().add(lblPinturasArcoiris);
         iconoContraseña.setHorizontalAlignment(SwingConstants.CENTER);
         iconoContraseña.setIcon(new ImageIcon(Principal.class.getResource("/resources/ojo (1).png")));
         iconoContraseña.setBounds(241, 146, 46, 24);
@@ -182,5 +183,10 @@ public class Principal {
         Registrado ventanaRegistro = new Registrado();
         ventanaRegistro.setVisible(true);
         frmPrimerInterface.dispose();
+    }
+
+    // Método para mostrar la ventana principal
+    public void setVisible(boolean visible) {
+        frmPrimerInterface.setVisible(visible);
     }
 }

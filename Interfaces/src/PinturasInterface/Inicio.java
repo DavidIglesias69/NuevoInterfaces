@@ -8,7 +8,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-
+import PinturasInterface.Principal;
 import PinturasDB.CompraDB;
 import PinturasDB.HistorialDB;
 import PinturasDB.ProductoDB;
@@ -231,7 +231,9 @@ public class Inicio extends JFrame {
         contentPane.add(btnSalir);
         btnSalir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                Principal ventanaPrincipal = new Principal();
+                ventanaPrincipal.setVisible(true);
+                dispose();  // Cierra la ventana actual
             }
         });
 
