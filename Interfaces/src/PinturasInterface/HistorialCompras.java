@@ -44,6 +44,12 @@ public class HistorialCompras extends JFrame {
         panelPrincipal.add(scrollPane);
 
         getContentPane().add(panelPrincipal, BorderLayout.CENTER);
+        
+        JLabel panelInformativo = new JLabel("HACIENDO CLIC EN LAS COLUMNAS SE PUEDEN ORDENAR LOS DATOS");
+        panelInformativo.setFont(new Font("Sitka Subheading", Font.PLAIN, 15));
+        panelInformativo.setHorizontalAlignment(SwingConstants.CENTER);
+        panelInformativo.setBounds(116, 4, 550, 24);
+        panelPrincipal.add(panelInformativo);
 
         // Creación de botones con diseño personalizado
         JButton btnImprimir = new JButton("Imprimir");

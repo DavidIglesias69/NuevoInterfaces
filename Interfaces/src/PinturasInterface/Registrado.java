@@ -158,7 +158,7 @@ public class Registrado extends JFrame {
         panelInsertarNuevoUsuario.add(btnAtras);
 
         // Icono para mostrar/ocultar contraseñas
-        JLabel iconoContraseña = new JLabel("");
+        iconoContraseña = new JLabel("");  // Usar la variable de instancia en lugar de declarar una nueva
         iconoContraseña.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
