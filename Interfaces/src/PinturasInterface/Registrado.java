@@ -83,7 +83,7 @@ public class Registrado extends JFrame {
 
         txtContraseña = new JPasswordField();
         txtContraseña.setBounds(291, 91, 275, 20);
-        txtContraseña.setToolTipText("<html>La contraseña debe tener al menos:<br>- 8 caracteres<br>- Una letra mayúscula<br>- Una letra minúscula<br>- Un número<br>- Un carácter especial: @$!%*?&+\\-_.,:;=<>#[]{}|~`^()\"'\\</html>");
+        txtContraseña.setToolTipText("<html>La contraseña debe tener al menos:<br>- sin espacios<br>- 8 caracteres<br>- Una letra mayúscula<br>- Una letra minúscula<br>- Un número<br>- Un carácter especial: @$!%*?&+\\-_.,:;=<>#[]{}|~`^()\"'\\</html>");
         panelInsertarNuevoUsuario.add(txtContraseña);
 
         // Deshabilitar copiar y pegar en el campo de contraseña
