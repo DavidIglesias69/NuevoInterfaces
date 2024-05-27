@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import PinturasDB.RegistroDB;
+import ProyectoPinturas.BCrypt;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
@@ -264,6 +266,20 @@ public class Registrado extends JFrame {
             if (usuarioExiste) {
                 mostrarMensajeError("El usuario con este DNI ya existe");
             } else {
+            	
+            	
+            	
+            	// Hash a password for the first time
+            	String hashed = BCrypt.hashpw(pass1, BCrypt.gensalt());
+            	System.out.println(hashed);
+            	
+            	// PARA COMPRBAR SI ES CORRECTA O NO
+            	if (BCrypt.checkpw(pass2, hashed))
+            		System.out.println("It matches");
+            	else
+            		System.out.println("It does not match");
+            	
+            	
                 RegistroDB.añadirUsuario(DNI1, nombre1, pass1, email1);
                 JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
                 Principal.main(null);
