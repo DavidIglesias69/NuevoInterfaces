@@ -123,7 +123,10 @@ public class Administrador extends JFrame {
         nombreCantidad.setHorizontalAlignment(SwingConstants.CENTER);
         nombreCantidad.setBounds(556, 202, 147, 48);
         despegableProductos.add(nombreCantidad);
-               
+        
+        JButton botonUsuario = new JButton("GESTIONAR USUARIO");
+        botonUsuario.setBounds(510, 631, 168, 31);
+        despegableProductos.add(botonUsuario);               
         JLabel lblNewLabel = new JLabel(new ImageIcon(Administrador.class.getResource("/resources/mancha arcoirirs.jpg")));
         lblNewLabel.setBounds(0, 0, 885, 809);
         despegableProductos.add(lblNewLabel);
