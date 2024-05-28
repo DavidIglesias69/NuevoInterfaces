@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import PinturasInterface.Conexion;
@@ -58,6 +61,60 @@ public class RegistroDB extends JFrame{
 
         return false;
     }
+    
+ // Método para obtener todos los usuarios
+    public static List<Usuario> obtenerTodosLosUsuarios() throws SQLException {
+        List<Usuario> usuarios = new ArrayList<>();
+        Conexion cone = new Conexion();
+        Connection link = cone.abrirConsulta();
+        String query = "SELECT * FROM Usuario";
+        PreparedStatement llamada = link.prepareStatement(query);
+        ResultSet rs = llamada.executeQuery();
+
+        while (rs.next()) {
+            String DNI = rs.getString(1);
+            String nombre = rs.getString(2);
+            String hashedPassword = rs.getString(3);
+            String email = rs.getString(4);
+            int resp = rs.getInt(5);
+            Usuario usuario = new Usuario(DNI, hashedPassword, nombre, email, resp);
+            usuarios.add(usuario);
+        }
+        link.close();
+        return usuarios;
+    }
+
+    // Método para actualizar un usuario
+    public static void actualizarUsuario(Usuario usuario) throws SQLException {
+        Conexion cone = new Conexion();
+        Connection link = cone.abrirConsulta();
+        String query = "UPDATE Usuario SET Nombre = ?, Contraseña = ?, Email = ?, Responsable = ? WHERE DNI = ?";
+        PreparedStatement llamada = link.prepareStatement(query);
+        llamada.setString(1, usuario.getNombre());
+        llamada.setString(2, usuario.getPassword());
+        llamada.setString(3, usuario.getEmail());
+        llamada.setInt(4, usuario.isResponsable());
+        llamada.setString(5, usuario.getDNI());
+        llamada.executeUpdate();
+        link.close();
+    }
+
+    // Método para eliminar un usuario
+    public static void eliminarUsuario(String dni) throws SQLException {
+        Conexion cone = new Conexion();
+        Connection link = cone.abrirConsulta();
+        String query = "DELETE FROM Usuario WHERE DNI = ?";
+        PreparedStatement llamada = link.prepareStatement(query);
+        llamada.setString(1, dni);
+        llamada.executeUpdate();
+        link.close();
+    }
+
+    
+    
+    
+    
+    
 
     // Método modificado para añadir usuario
     public static void añadirUsuario(String DNI, String nombre, String pass, String email) {
