@@ -4,36 +4,40 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import PinturasInterface.Conexion;
+import ProyectoPinturas.BCrypt;
 import ProyectoPinturas.Usuario;
 
 public class RegistroDB extends JFrame{
 
+	 // Método existente para hacer login
     public static Usuario doLogin(String usuario, String pass) throws SQLException {
         Conexion cone = new Conexion();
         Connection link = cone.abrirConsulta();
         Usuario nuevo = null;
-        String query = "SELECT * FROM Usuario where DNI = ? AND BINARY Contraseña = ?";
+        String query = "SELECT * FROM Usuario WHERE DNI = ?";
         PreparedStatement llamada = link.prepareStatement(query);
         llamada.setString(1, usuario);
-        llamada.setString(2, pass);
         ResultSet rs = llamada.executeQuery();
 
-        if (rs != null) {
-            while (rs.next()) {
-                String DNI = rs.getString(1);
-                String nombre = rs.getString(2);
-                //String password = rs.getString(3); me salto la contraseña no la almaceno no es recomendable
-                String email = rs.getString(4);
-                int resp = rs.getInt(5);
+        if (rs != null && rs.next()) {
+            String DNI = rs.getString(1);
+            String nombre = rs.getString(2);
+            String hashedPassword = rs.getString(3); // Contraseña encriptada almacenada
+            String email = rs.getString(4);
+            int resp = rs.getInt(5);
 
+            // Comparar la contraseña ingresada con la encriptada usando BCrypt
+            if (BCrypt.checkpw(pass, hashedPassword)) {
                 nuevo = new Usuario(DNI, nombre, "", email, resp);
                 return nuevo;
+            } else {
+                JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado");
         }
 
         return null;
@@ -55,35 +59,32 @@ public class RegistroDB extends JFrame{
         return false;
     }
 
+    // Método modificado para añadir usuario
     public static void añadirUsuario(String DNI, String nombre, String pass, String email) {
         Conexion cone = new Conexion();
         Connection link = null;
         try {
             link = cone.abrirConsulta();
-            if (!existeUsuario(DNI)) {
-                String query = "INSERT INTO Usuario (DNI, Nombre, Contraseña, Email) VALUES (?,?,?,?)";
-                PreparedStatement llamada = link.prepareStatement(query);
-                llamada.setString(1, DNI);
-                llamada.setString(2, nombre);
-                llamada.setString(3, pass);
-                llamada.setString(4, email);
+            String query = "INSERT INTO Usuario (DNI, Nombre, Contraseña, Email) VALUES (?, ?, ?, ?)";
+            PreparedStatement llamada = link.prepareStatement(query);
+            llamada.setString(1, DNI);
+            llamada.setString(2, nombre);
+            // Encriptar la contraseña antes de guardarla
+            String hashedPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
+            llamada.setString(3, hashedPassword);
+            llamada.setString(4, email);
 
-                llamada.executeUpdate();
-              
-            } else {
-                JOptionPane.showMessageDialog(null, "El usuario con este DNI ya existe", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            llamada.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
         } catch (SQLException e) {
-            e.printStackTrace();
-            // Manejar la excepción apropiadamente
+            JOptionPane.showMessageDialog(null, "Error al registrar usuario: " + e.getMessage());
         } finally {
-            if (link != null) {
-                try {
+            try {
+                if (link != null) {
                     link.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    // Manejar la excepción apropiadamente
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }
