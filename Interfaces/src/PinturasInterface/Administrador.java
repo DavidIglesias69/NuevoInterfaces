@@ -137,7 +137,7 @@ public class Administrador extends JFrame {
         		
         	}
         });
-        botonUsuario.setBounds(493, 631, 185, 31);
+        botonUsuario.setBounds(472, 631, 217, 31);
         despegableProductos.add(botonUsuario);               
         JLabel lblNewLabel = new JLabel(new ImageIcon(Administrador.class.getResource("/resources/mancha arcoirirs.jpg")));
         lblNewLabel.setBounds(0, 0, 885, 809);
