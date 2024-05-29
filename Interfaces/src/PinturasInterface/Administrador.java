@@ -124,19 +124,20 @@ public class Administrador extends JFrame {
         nombreCantidad.setBounds(556, 202, 147, 48);
         despegableProductos.add(nombreCantidad);
         
-        JButton botonUsuario = new JButton("GESTIONAR USUARIO");
+        JButton botonUsuario = new JButton("GESTIONAR USUARIOS");
+        botonUsuario.setIcon(new ImageIcon(Administrador.class.getResource("/resources/usuario.png")));
         botonUsuario.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
                 JFrame frameUsuarios = new JFrame("Gestión de Usuarios");
                 frameUsuarios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frameUsuarios.setSize(600, 400);
-                frameUsuarios.add(new PanelUsuario());
+                frameUsuarios.getContentPane().add(new PanelUsuario());
                 frameUsuarios.setVisible(true);
 
         		
         	}
         });
-        botonUsuario.setBounds(510, 631, 168, 31);
+        botonUsuario.setBounds(493, 631, 185, 31);
         despegableProductos.add(botonUsuario);               
         JLabel lblNewLabel = new JLabel(new ImageIcon(Administrador.class.getResource("/resources/mancha arcoirirs.jpg")));
         lblNewLabel.setBounds(0, 0, 885, 809);
