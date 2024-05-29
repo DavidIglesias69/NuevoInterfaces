@@ -6,16 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import PinturasInterface.Conexion;
 import ProyectoPinturas.BCrypt;
 import ProyectoPinturas.Usuario;
 
-public class RegistroDB extends JFrame{
+public class RegistroDB extends JFrame {
 
-	 // Método existente para hacer login
+    // Método existente para hacer login
     public static Usuario doLogin(String usuario, String pass) throws SQLException {
         Conexion cone = new Conexion();
         Connection link = cone.abrirConsulta();
@@ -62,7 +61,7 @@ public class RegistroDB extends JFrame{
         return false;
     }
     
- // Método para obtener todos los usuarios
+    // Método para obtener todos los usuarios
     public static List<Usuario> obtenerTodosLosUsuarios() throws SQLException {
         List<Usuario> usuarios = new ArrayList<>();
         Conexion cone = new Conexion();
@@ -91,7 +90,9 @@ public class RegistroDB extends JFrame{
         String query = "UPDATE Usuario SET Nombre = ?, Contraseña = ?, Email = ?, Responsable = ? WHERE DNI = ?";
         PreparedStatement llamada = link.prepareStatement(query);
         llamada.setString(1, usuario.getNombre());
-        llamada.setString(2, usuario.getPassword());
+        // Encriptar la contraseña antes de actualizarla
+        String hashedPassword = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
+        llamada.setString(2, hashedPassword);
         llamada.setString(3, usuario.getEmail());
         llamada.setInt(4, usuario.isResponsable());
         llamada.setString(5, usuario.getDNI());
@@ -109,12 +110,6 @@ public class RegistroDB extends JFrame{
         llamada.executeUpdate();
         link.close();
     }
-
-    
-    
-    
-    
-    
 
     // Método modificado para añadir usuario
     public static void añadirUsuario(String DNI, String nombre, String pass, String email) {
