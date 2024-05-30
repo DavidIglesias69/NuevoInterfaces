@@ -19,7 +19,7 @@ public class Administrador extends JFrame {
     private JLabel cantidadDB;
     private JTextField txtNuevoPrecio;
     private JSpinner spinnerModificarProducto;
-   
+
     public Administrador(Usuario user) {
         setTitle("PANTALLA ADMINISTRADOR MODIFICAR PRODUCTOS");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +28,7 @@ public class Administrador extends JFrame {
         despegableProductos.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(despegableProductos);
         despegableProductos.setLayout(null);
-        
+
         precioDB = new JLabel("");
         precioDB.setBounds(279, 261, 162, 30);
         precioDB.setBackground(new Color(34, 34, 34)); // Color oscuro de fondo
@@ -36,7 +36,7 @@ public class Administrador extends JFrame {
         precioDB.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamaño de fuente 20
         precioDB.setOpaque(true);
         despegableProductos.add(precioDB);
-      
+
         JComboBox<String> despegableProducto = new JComboBox<>();
         despegableProducto.setModel(new DefaultComboBoxModel<>(new String[]{
                 "", "Pintura", "Rodillo", "Papel", "Brocha", "Escalera", "Barniz", "Disolvente", "Plasticos", "Decapante", "Espatula"}));
@@ -87,7 +87,7 @@ public class Administrador extends JFrame {
         lblNuevoPrecio.setBounds(149, 335, 134, 20);
         despegableProductos.add(lblNuevoPrecio);
 
-        spinnerModificarProducto = new JSpinner(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spinnerModificarProducto = new JSpinner(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         spinnerModificarProducto.setBounds(603, 334, 48, 26);
         despegableProductos.add(spinnerModificarProducto);
 
@@ -95,7 +95,7 @@ public class Administrador extends JFrame {
         JFormattedTextField textField = ((JSpinner.DefaultEditor) editor).getTextField();
         textField.setEditable(false); // Hacer que el campo no sea editable
 
-        cantidadDB = new JLabel(""); 
+        cantidadDB = new JLabel("");
         cantidadDB.setBounds(556, 261, 147, 30);
         cantidadDB.setBackground(new Color(34, 34, 34)); // Color oscuro de fondo
         cantidadDB.setForeground(new Color(255, 255, 255)); // Letras claras
@@ -104,7 +104,7 @@ public class Administrador extends JFrame {
         despegableProductos.add(cantidadDB);
 
         setupAccionListeners(despegableProducto, botonAñadir, botonEliminar, botonCambiarPrecio);
-        
+
         JButton botonSalir = new JButton("SALIR");
         botonSalir.setIcon(new ImageIcon(Administrador.class.getResource("/resources/boton.png")));
         botonSalir.setBounds(726, 631, 122, 31);
@@ -116,29 +116,27 @@ public class Administrador extends JFrame {
             }
         });
         despegableProductos.add(botonSalir);
-                
+
         JLabel nombreCantidad = new JLabel("CANTIDAD");
         nombreCantidad.setForeground(new Color(0, 0, 128));
         nombreCantidad.setFont(new Font("Tahoma", Font.BOLD, 22));
         nombreCantidad.setHorizontalAlignment(SwingConstants.CENTER);
         nombreCantidad.setBounds(556, 202, 147, 48);
         despegableProductos.add(nombreCantidad);
-        
+
         JButton botonUsuario = new JButton("GESTIONAR USUARIOS");
         botonUsuario.setIcon(new ImageIcon(Administrador.class.getResource("/resources/usuario.png")));
         botonUsuario.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 JFrame frameUsuarios = new JFrame("Gestión de Usuarios");
                 frameUsuarios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frameUsuarios.setSize(600, 400);
                 frameUsuarios.getContentPane().add(new PanelUsuario());
                 frameUsuarios.setVisible(true);
-
-        		
-        	}
+            }
         });
         botonUsuario.setBounds(472, 631, 217, 31);
-        despegableProductos.add(botonUsuario);               
+        despegableProductos.add(botonUsuario);
         JLabel lblNewLabel = new JLabel(new ImageIcon(Administrador.class.getResource("/resources/mancha arcoirirs.jpg")));
         lblNewLabel.setBounds(0, 0, 885, 809);
         despegableProductos.add(lblNewLabel);
@@ -173,9 +171,14 @@ public class Administrador extends JFrame {
             int cantidad = (Integer) spinnerModificarProducto.getValue();
             String productoSeleccionado = comboBox.getSelectedItem().toString();
             try {
-                AdministradorDB.eliminarProducto(productoSeleccionado, cantidad);
-                actualizarPrecio(productoSeleccionado);
-                JOptionPane.showMessageDialog(null, "Producto eliminado y stock actualizado correctamente.");
+                int cantidadActual = ProductoDB.obtenerCantidad(productoSeleccionado.toLowerCase());
+                if (cantidad > cantidadActual) {
+                    JOptionPane.showMessageDialog(null, "No se puede eliminar más cantidad que la disponible en stock.");
+                } else {
+                    AdministradorDB.eliminarProducto(productoSeleccionado, cantidad);
+                    actualizarPrecio(productoSeleccionado);
+                    JOptionPane.showMessageDialog(null, "Producto eliminado y stock actualizado correctamente.");
+                }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al eliminar producto: " + ex.getMessage());
             }
@@ -187,9 +190,13 @@ public class Administrador extends JFrame {
             if (inputPrecio != null && !inputPrecio.isEmpty()) {
                 try {
                     double nuevoPrecio = Double.parseDouble(inputPrecio);
-                    AdministradorDB.actualizarPrecio(productoSeleccionado, nuevoPrecio);
-                    actualizarPrecio(productoSeleccionado);
-                    JOptionPane.showMessageDialog(null, "Precio actualizado correctamente.");
+                    if (nuevoPrecio < 0) {
+                        JOptionPane.showMessageDialog(null, "El precio no puede ser negativo.");
+                    } else {
+                        AdministradorDB.actualizarPrecio(productoSeleccionado, nuevoPrecio);
+                        actualizarPrecio(productoSeleccionado);
+                        JOptionPane.showMessageDialog(null, "Precio actualizado correctamente.");
+                    }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido.");
                 } catch (SQLException ex) {
@@ -217,7 +224,7 @@ public class Administrador extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             // Aquí puedes iniciar la ventana del administrador para pruebas
-            // new Administrador(new Usuario()).setVisible(true);
+            //new Administrador(new Usuario()).setVisible(true);
         });
     }
 }
