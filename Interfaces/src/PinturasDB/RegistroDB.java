@@ -87,15 +87,13 @@ public class RegistroDB extends JFrame {
     public static void actualizarUsuario(Usuario usuario) throws SQLException {
         Conexion cone = new Conexion();
         Connection link = cone.abrirConsulta();
-        String query = "UPDATE Usuario SET Nombre = ?, Contraseña = ?, Email = ?, Responsable = ? WHERE DNI = ?";
+        String query = "UPDATE Usuario SET Nombre = ?, Email = ?, Responsable = ? WHERE DNI = ?";
         PreparedStatement llamada = link.prepareStatement(query);
         llamada.setString(1, usuario.getNombre());
-        // Encriptar la contraseña antes de actualizarla
-        String hashedPassword = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
-        llamada.setString(2, hashedPassword);
-        llamada.setString(3, usuario.getEmail());
-        llamada.setInt(4, usuario.isResponsable());
-        llamada.setString(5, usuario.getDNI());
+        
+        llamada.setString(2, usuario.getEmail());
+        llamada.setInt(3, usuario.isResponsable());
+        llamada.setString(4, usuario.getDNI());
         llamada.executeUpdate();
         link.close();
     }
@@ -127,7 +125,7 @@ public class RegistroDB extends JFrame {
             llamada.setString(4, email);
 
             llamada.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
+       
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al registrar usuario: " + e.getMessage());
         } finally {

@@ -3,18 +3,16 @@ package PinturasInterface;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.*;
 
-public class HistorialCompras extends JFrame {
+public class DetalleCompraPanel extends JFrame {
 
     private JTable table;
-    private String usuarioDNI;
+    private int idCompra;
 
-    public HistorialCompras(String usuarioDNI) {
-        this.usuarioDNI = usuarioDNI;
-        setTitle("Historial de Compras");
+    public DetalleCompraPanel(int idCompra) {
+        this.idCompra = idCompra;
+        setTitle("Detalles de la Compra");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -45,7 +43,7 @@ public class HistorialCompras extends JFrame {
 
         getContentPane().add(panelPrincipal, BorderLayout.CENTER);
 
-        JLabel panelInformativo = new JLabel("HACIENDO CLIC EN LAS COLUMNAS SE PUEDEN ORDENAR LOS DATOS");
+        JLabel panelInformativo = new JLabel("DETALLES DE LA COMPRA");
         panelInformativo.setFont(new Font("Sitka Subheading", Font.PLAIN, 15));
         panelInformativo.setHorizontalAlignment(SwingConstants.CENTER);
         panelInformativo.setBounds(116, 4, 550, 24);
@@ -83,23 +81,9 @@ public class HistorialCompras extends JFrame {
 
         // Consulta la base de datos y actualiza la tabla
         updateTable();
-
-        // Añadir el listener de doble clic para abrir el nuevo panel
-        table.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int row = table.getSelectedRow();
-                    if (row != -1) {
-                        int idCompra = (int) table.getValueAt(row, 0);
-                        DetalleCompraPanel detalleCompraPanel = new DetalleCompraPanel(idCompra);
-                        detalleCompraPanel.setVisible(true);
-                    }
-                }
-            }
-        });
     }
 
-    public void updateTable() {
+    private void updateTable() {
         Conexion conexion = new Conexion();
         Connection conn = null;
         Statement statement = null;
@@ -109,11 +93,11 @@ public class HistorialCompras extends JFrame {
             conn = conexion.abrirConsulta();
             statement = conn.createStatement();
 
-            String sql = "SELECT c.ID_Compra, c.Fecha, SUM(hp.Precio_Total) AS Cantidad_Total " +
+            String sql = "SELECT c.ID_Compra, c.Fecha, p.Nombre AS Producto, hp.Cantidad, hp.Precio_Total " +
                     "FROM Compra c " +
                     "JOIN Historial_Producto hp ON c.ID_Compra = hp.ID_Compra " +
-                    "WHERE c.DNI = '" + usuarioDNI + "' AND hp.Cantidad > 0 " + // Añadido para excluir productos con cantidad 0
-                    "GROUP BY c.ID_Compra, c.Fecha";
+                    "JOIN Producto p ON hp.ID_Producto = p.ID_Producto " +
+                    "WHERE c.ID_Compra = " + idCompra;
 
             resultSet = statement.executeQuery(sql);
 
@@ -125,13 +109,17 @@ public class HistorialCompras extends JFrame {
             };
             tableModel.addColumn("ID Compra");
             tableModel.addColumn("Fecha");
-            tableModel.addColumn("Cantidad Total");
+            tableModel.addColumn("Producto");
+            tableModel.addColumn("Cantidad");
+            tableModel.addColumn("Precio Total");
 
             while (resultSet.next()) {
-                Object[] row = new Object[3];
+                Object[] row = new Object[5];
                 row[0] = resultSet.getInt("ID_Compra");
                 row[1] = resultSet.getDate("Fecha");
-                row[2] = resultSet.getDouble("Cantidad_Total");
+                row[2] = resultSet.getString("Producto");
+                row[3] = resultSet.getInt("Cantidad");
+                row[4] = resultSet.getDouble("Precio_Total");
                 tableModel.addRow(row);
             }
 
@@ -161,12 +149,5 @@ public class HistorialCompras extends JFrame {
                 }
             }
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            HistorialCompras frame = new HistorialCompras("12345678A");
-            frame.setVisible(true);
-        });
     }
 }

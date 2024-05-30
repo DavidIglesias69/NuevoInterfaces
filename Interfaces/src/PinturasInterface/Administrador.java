@@ -87,7 +87,7 @@ public class Administrador extends JFrame {
         lblNuevoPrecio.setBounds(149, 335, 134, 20);
         despegableProductos.add(lblNuevoPrecio);
 
-        spinnerModificarProducto = new JSpinner(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spinnerModificarProducto = new JSpinner(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
         spinnerModificarProducto.setBounds(603, 334, 48, 26);
         despegableProductos.add(spinnerModificarProducto);
 
