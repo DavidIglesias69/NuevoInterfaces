@@ -97,7 +97,7 @@ public class DetalleCompraPanel extends JFrame {
                     "FROM Compra c " +
                     "JOIN Historial_Producto hp ON c.ID_Compra = hp.ID_Compra " +
                     "JOIN Producto p ON hp.ID_Producto = p.ID_Producto " +
-                    "WHERE c.ID_Compra = " + idCompra;
+                    "WHERE c.ID_Compra = " + idCompra + " AND hp.Cantidad > 0";
 
             resultSet = statement.executeQuery(sql);
 
